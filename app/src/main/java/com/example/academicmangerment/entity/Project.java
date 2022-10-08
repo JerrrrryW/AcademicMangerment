@@ -1,17 +1,20 @@
 package com.example.academicmangerment.entity;
 
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.PrimaryKey;
+
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import java.util.Date;
 
 @Entity
 public class Project {
+    @NonNull
     @PrimaryKey
     public String pid;
     public String achievementType;
-    public Date beginTime;
-    public Date endTime;
+    public String beginTime;
+    public String endTime;
     public int state;
     public String college;
     public String createUser;

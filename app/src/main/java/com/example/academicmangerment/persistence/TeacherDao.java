@@ -1,9 +1,6 @@
 package com.example.academicmangerment.persistence;
 
-import android.arch.persistence.room.Dao;
-import android.arch.persistence.room.Insert;
-import android.arch.persistence.room.Query;
-
+import androidx.room.*;
 import com.example.academicmangerment.entity.Teacher;
 
 import java.util.List;

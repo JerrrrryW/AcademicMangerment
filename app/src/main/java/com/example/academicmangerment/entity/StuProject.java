@@ -1,11 +1,14 @@
 package com.example.academicmangerment.entity;
 
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.PrimaryKey;
+
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
 
 @Entity(primaryKeys = {"sid","pid"})
 public class StuProject {
+    @NonNull
     public String sid;
+    @NonNull
     public String pid;
     public String rank;
 }
