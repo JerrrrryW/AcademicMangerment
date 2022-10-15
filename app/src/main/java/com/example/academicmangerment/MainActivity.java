@@ -58,18 +58,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         llbtn3=findViewById(R.id.management_btn);
         llbtn4=findViewById(R.id.logout_btn);
 
+        btn.setOnClickListener(this);
+        llbtn1.setOnClickListener(this);
+        llbtn2.setOnClickListener(this);
+        llbtn3.setOnClickListener(this);
+        llbtn4.setOnClickListener(this);
 
-        mSlidingPaneLayout.forbidSlide(false);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(mSlidingPaneLayout.isOpen()){
-                    mSlidingPaneLayout.closePane();
-                }else{
-                    mSlidingPaneLayout.openPane();
-                }
-            }
-        });
+
+//        mSlidingPaneLayout.forbidSlide(false);
+//        btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if(mSlidingPaneLayout.isOpen()){
+//                    mSlidingPaneLayout.closePane();
+//                }else{
+//                    mSlidingPaneLayout.openPane();
+//                }
+//            }
+//        });
     }
 
     private void initFragment() {
@@ -87,7 +93,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         transaction.commit();
 
     }
-
 
     private void initSlidingPaneLayout() {//初始化侧滑面板
         final LinearLayout container = findViewById(R.id.main_container);
@@ -144,19 +149,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()){
             case R.id.profile_btn:
                 transaction.replace(R.id.main_fragments,stu02);
-                Toast.makeText(this,"Stu02 clicked！",Toast.LENGTH_SHORT).show();
+                transaction.commit();
+                //Toast.makeText(this,"Stu02 clicked！",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.submit_btn:
                 transaction.replace(R.id.main_fragments,stu03);
-                Toast.makeText(this,"Stu03 clicked！",Toast.LENGTH_SHORT).show();
+                transaction.commit();
+                //Toast.makeText(this,"Stu03 clicked！",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.management_btn:
                 transaction.replace(R.id.main_fragments,stu04);
-                Toast.makeText(this,"Stu04 clicked！",Toast.LENGTH_SHORT).show();
+                transaction.commit();
+                //Toast.makeText(this,"Stu04 clicked！",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.logout_btn:
                 //跳回登陆界面
                 Toast.makeText(this,"登出功能尚未开发！",Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.btn_pop:
+                if(mSlidingPaneLayout.isOpen()){
+                    mSlidingPaneLayout.closePane();
+                }else{
+                    mSlidingPaneLayout.openPane();
+                }
                 break;
             default:
                 break;
