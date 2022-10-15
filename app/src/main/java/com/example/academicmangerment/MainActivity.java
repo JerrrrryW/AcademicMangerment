@@ -46,6 +46,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         initView();
         initSlidingPaneLayout();
         initFragment();
+
+        test();
     }
 
     private void initView() {
@@ -77,7 +79,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //            }
 //        });
     }
-
     private void initFragment() {
         //获得FragmentManager对象
         fragmentManager = getSupportFragmentManager();
@@ -131,16 +132,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         });
-//        test();
+
     }
     public void test(){
-        db = Room.inMemoryDatabaseBuilder(getApplicationContext(), AppDatabase.class).build();
-        Student student=new Student("2220192757","1055689557888","2019/09/01","123456","18307050360","熊迪","无","本科生","大连海事大学","09/22","本科生","China",1,"25567.9932@qq.com");
+     //需要在线程中访问数据库
+        new Thread(()->{
+            db = Room.inMemoryDatabaseBuilder(getApplicationContext(), AppDatabase.class).build();
+            Student student=new Student("2220192757","1055689557888","2019/09/01","123456","18307050360","熊迪","无","本科生","大连海事大学","09/22","本科生","China",1,"25567.9932@qq.com");
 
-        studentDao=db.studentDao();
-        studentDao.insert(student);
-
-        db.close();
+            studentDao=db.studentDao();
+            studentDao.insert(student);
+            System.out.println("成功插入");
+//            db.close();
+        }).start();
     }
 
     @Override
