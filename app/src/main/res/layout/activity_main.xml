@@ -7,7 +7,7 @@
     tools:context=".MainActivity"
     android:background="@color/bk_slide">
 
-
+    <!-- 侧边栏在前 -->
     <LinearLayout
         android:layout_width="180dp"
         android:layout_height="match_parent"
@@ -26,12 +26,14 @@
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:elevation="1dp"
+                android:src="@mipmap/test"
                 />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Barry"
+                android:id="@+id/username"
+                android:text="Jerry"
                 android:layout_marginStart="5dp"
                 android:textSize="24sp"
                 android:layout_gravity="center_vertical"
@@ -39,14 +41,16 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/major_and_class"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
-            android:text="该用户很懒，啥也没写...."/>
+            android:text="软件工程2019级1班"/>
 
 
         <LinearLayout
+            android:id="@+id/profile_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="70dp"
@@ -54,20 +58,21 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/theme"/>
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@mipmap/profile"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="主题"
+                android:text="个人信息"
                 android:textSize="20sp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="20dp"/>
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/submit_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
@@ -75,20 +80,21 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/shop"/>
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@mipmap/project_submit"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="商店"
+                android:text="项目上报"
                 android:textSize="20sp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="20dp"/>
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/management_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
@@ -96,20 +102,21 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/friends"/>
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@mipmap/project_management"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="好友"
+                android:text="项目管理"
                 android:textSize="20sp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="20dp"/>
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/logout_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
@@ -133,6 +140,7 @@
 
     </LinearLayout>
 
+    <!-- 主界面在后 -->
     <LinearLayout
         android:id="@+id/main_container"
         android:layout_width="match_parent"
@@ -150,11 +158,11 @@
                 android:id="@+id/btn_pop"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
                 android:layout_marginStart="15dp"
+                android:layout_marginTop="20dp"
                 android:src="@mipmap/menu"
-                android:text="弹出"/>
+                android:text="弹出" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -165,11 +173,13 @@
                 android:textSize="20sp" />
         </RelativeLayout>
 
+        <!-- layout + fragment -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/main_fragments" />
 
     </LinearLayout>
-
-
-
 
 
 </com.example.academicmangerment.custom.CusSlidingPaneLayout>
