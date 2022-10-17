@@ -65,14 +65,14 @@
                 android:background="@color/horizontal_line" />
         </LinearLayout>
 
-        <RelativeLayout
+<!--        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="23dp"
             android:layout_marginRight="23dp"
             android:orientation="horizontal">
 
-            <!--<Button
+            <Button
                 android:id="@+id/tv_find_pwd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -83,8 +83,8 @@
                 android:gravity="right"
                 android:padding="15dp"
                 android:text="忘记密码?"
-                android:textColor="@color/greens" />-->
-        </RelativeLayout>
+                android:textColor="@color/greens" />
+        </RelativeLayout>-->
 
         <Button
             android:id="@+id/btn_enter"
