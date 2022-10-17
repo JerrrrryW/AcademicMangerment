@@ -32,8 +32,8 @@
                 android:maxLength="11"
                 android:maxLines="1"
                 android:paddingLeft="5dp"
-                android:textColor="@android:color/white"
-                android:textColorHint="@android:color/white"
+                android:textColor="@android:color/black"
+                android:textColorHint="@android:color/black"
                 android:textSize="18sp" />
 
             <View
@@ -54,8 +54,8 @@
                 android:maxLength="11"
                 android:maxLines="1"
                 android:paddingLeft="5dp"
-                android:textColor="@android:color/white"
-                android:textColorHint="@android:color/white"
+                android:textColor="@android:color/black"
+                android:textColorHint="@android:color/black"
                 android:textSize="18sp" />
 
             <View
@@ -65,14 +65,14 @@
                 android:background="@color/horizontal_line" />
         </LinearLayout>
 
-        <RelativeLayout
+<!--        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="23dp"
             android:layout_marginRight="23dp"
             android:orientation="horizontal">
 
-            <!--<Button
+            <Button
                 android:id="@+id/tv_find_pwd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -83,8 +83,8 @@
                 android:gravity="right"
                 android:padding="15dp"
                 android:text="忘记密码?"
-                android:textColor="@color/greens" />-->
-        </RelativeLayout>
+                android:textColor="@color/greens" />
+        </RelativeLayout>-->
 
         <Button
             android:id="@+id/btn_enter"
@@ -95,7 +95,7 @@
             android:layout_marginLeft="30dp"
             android:layout_marginTop="20dp"
             android:layout_marginRight="30dp"
-            android:background="@drawable/shape_green_content_normal"
+            android:background="@color/greens"
             android:text="学生登录"
             android:textColor="@color/white"
             android:textSize="18dp" />
