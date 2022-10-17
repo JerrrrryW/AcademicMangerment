@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.academicmangerment.MainActivity;
 import com.example.academicmangerment.R;
 import com.example.academicmangerment.entity.Student;
 
@@ -31,20 +30,22 @@ public class LoginActivity extends AppCompatActivity {
         btn_enter = (Button) findViewById(R.id.btn_enter);
         username = findViewById(R.id.et_name);
         password = findViewById(R.id.et_pwd);
+        login();
     }
 
+    //学生登录
     public void login(){
         btn_enter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String name = username.getText().toString().trim();
-                String password = password.getText().toString().trim();
-                if(!TextUtils.isEmpty(name) && !TextUtils.isEmpty(password)){
+                String pwd = password.getText().toString().trim();
+               /* if(!TextUtils.isEmpty(name) && !TextUtils.isEmpty(pwd)){
                     ArrayList<Student> data = mSQlite.getAllDATA();
                     boolean user = false;
                     for(int i = 0; i < data.size(); i++){
                         Student userdata = data.get(i);
-                        if(name.equals(userdata.getName()) && password.equals(userdata.getPassword())){
+                        if(name.equals(userdata.getName()) && pwd.equals(userdata.getPassword())){
                             user = true;
                             break;
                         } else{
@@ -53,9 +54,9 @@ public class LoginActivity extends AppCompatActivity {
                     }
                     if(user){
                         Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
-                        Intent intent_l = new Intent(LoginActivity.this, MainActivity.class);
+                        Intent intent_l = new Intent(LoginActivity.this, StuActivity.class);
                         intent_l.putExtra("username", username.getText().toString());
-                        intent_l.putExtra("password", password);
+                        intent_l.putExtra("password", pwd);
                         startActivity(intent_l);
                         finish();
                     } else{
@@ -63,7 +64,9 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 } else{
                     Toast.makeText(LoginActivity.this, "用户名或密码不能为空！", Toast.LENGTH_SHORT).show();
-                }
+                }*/
+                Intent intent=new Intent(LoginActivity.this,StuActivity.class);
+                startActivity(intent);
             }
         });
     }
