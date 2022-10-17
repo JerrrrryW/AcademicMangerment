@@ -32,8 +32,8 @@
                 android:maxLength="11"
                 android:maxLines="1"
                 android:paddingLeft="5dp"
-                android:textColor="@android:color/white"
-                android:textColorHint="@android:color/white"
+                android:textColor="@android:color/black"
+                android:textColorHint="@android:color/black"
                 android:textSize="18sp" />
 
             <View
@@ -54,8 +54,8 @@
                 android:maxLength="11"
                 android:maxLines="1"
                 android:paddingLeft="5dp"
-                android:textColor="@android:color/white"
-                android:textColorHint="@android:color/white"
+                android:textColor="@android:color/black"
+                android:textColorHint="@android:color/black"
                 android:textSize="18sp" />
 
             <View
