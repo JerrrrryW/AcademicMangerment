@@ -89,7 +89,7 @@
         </RelativeLayout>-->
 
         <Button
-            android:id="@+id/btn_enter"
+            android:id="@+id/stu_btn_enter"
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="45dp"
@@ -99,6 +99,33 @@
             android:layout_marginRight="30dp"
             android:background="@color/greens"
             android:text="学生登录"
+            android:textColor="@color/white"
+            android:textSize="18dp" />
+        <Button
+            android:id="@+id/tec_btn_enter"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="30dp"
+            android:background="@color/greens"
+            android:text="教师登录"
+            android:textColor="@color/white"
+            android:textSize="18dp" />
+
+        <Button
+            android:id="@+id/adm_btn_enter"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="30dp"
+            android:background="@color/greens"
+            android:text="管理员登录"
             android:textColor="@color/white"
             android:textSize="18dp" />
     </LinearLayout>
