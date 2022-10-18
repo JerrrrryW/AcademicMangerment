@@ -6,98 +6,71 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.slidingpanelayout.widget.SlidingPaneLayout;
-import androidx.room.Room;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-
 import com.example.academicmangerment.R;
 import com.example.academicmangerment.custom.CusSlidingPaneLayout;
+import com.example.academicmangerment.fragment.Tec02;
+import com.example.academicmangerment.fragment.Tec03;
 
-import com.example.academicmangerment.entity.Student;
-import com.example.academicmangerment.fragment.Stu02;
-import com.example.academicmangerment.fragment.Stu03;
-import com.example.academicmangerment.fragment.Stu04;
-import com.example.academicmangerment.persistence.AppDatabase;
-import com.example.academicmangerment.persistence.StudentDao;
+public class TecActivity extends AppCompatActivity implements View.OnClickListener{
 
-public class StuActivity extends AppCompatActivity implements View.OnClickListener{
-    private StudentDao studentDao;
-    private AppDatabase db;
-    private FrameLayout frameLayout;
-    private Fragment stu02,stu03,stu04;
+    private Fragment tec02,tec03;
     private FragmentManager fragmentManager;
     private FragmentTransaction transaction;
-    private LinearLayout llbtn1, llbtn2, llbtn3, llbtn4;
+    private LinearLayout llbtn1, llbtn2, llbtn3;
 
     private static final String TAG = "StuActivity";
     private CusSlidingPaneLayout mSlidingPaneLayout;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_stu);
+        setContentView(R.layout.activity_tec);
 
         initView();
         initSlidingPaneLayout();
         initFragment();
-        /*数据库测试*/
-       /* test();*/
+
     }
 
-    private void initView() {
-        ImageView head = findViewById(R.id.img_head);
+    public void initView(){
+        ImageView head = findViewById(R.id.tec_img_head);
         Glide.with(getBaseContext()).load(R.mipmap.test).into(head);
-        mSlidingPaneLayout = findViewById(R.id.slide_layout);
-        ImageView btn = findViewById(R.id.btn_pop);
-        llbtn1=findViewById(R.id.profile_btn);
-        llbtn2=findViewById(R.id.submit_btn);
-        llbtn3=findViewById(R.id.management_btn);
-        llbtn4=findViewById(R.id.logout_btn);
+        mSlidingPaneLayout = findViewById(R.id.tec_slide_layout);
+        ImageView btn = findViewById(R.id.tec_btn_pop);
+        llbtn1=findViewById(R.id.tec_profile_btn);
+        llbtn2=findViewById(R.id.tec_examine_btn);
+        llbtn3=findViewById(R.id.tec_logout_btn);
 
         btn.setOnClickListener(this);
         llbtn1.setOnClickListener(this);
         llbtn2.setOnClickListener(this);
         llbtn3.setOnClickListener(this);
-        llbtn4.setOnClickListener(this);
 
-
-//        mSlidingPaneLayout.forbidSlide(false);
-//        btn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if(mSlidingPaneLayout.isOpen()){
-//                    mSlidingPaneLayout.closePane();
-//                }else{
-//                    mSlidingPaneLayout.openPane();
-//                }
-//            }
-//        });
     }
-    private void initFragment() {
+
+    public void initFragment(){
         //获得FragmentManager对象
         fragmentManager = getSupportFragmentManager();
         //开启事务，获得FragmentTransaction对象
         transaction = fragmentManager.beginTransaction();
         //创建需要添加的Fragment
-        stu02 = new Stu02();
-        stu03 = new Stu03();
-        stu04 = new Stu04();
+        tec02=new Tec02();
+        tec03=new Tec03();
         //向容器内添加或替换碎片，默认情况下为个人信息管理模块
-        transaction.replace(R.id.stu_fragments,stu02);
+        transaction.replace(R.id.tec_fragments,tec02);
         //提交事务
         transaction.commit();
-
     }
 
     private void initSlidingPaneLayout() {//初始化侧滑面板
-        final LinearLayout container = findViewById(R.id.stu_container);
+        final LinearLayout container = findViewById(R.id.tec_container);
         final View leftView = mSlidingPaneLayout.getChildAt(0);
         mSlidingPaneLayout.setPanelSlideListener(new SlidingPaneLayout.PanelSlideListener() {
             @Override
@@ -135,43 +108,27 @@ public class StuActivity extends AppCompatActivity implements View.OnClickListen
         });
 
     }
-    public void test(){
-     //需要在线程中访问数据库
-        new Thread(()->{
-            db = Room.inMemoryDatabaseBuilder(getApplicationContext(), AppDatabase.class).build();
-            Student student=new Student("2220192757","1055689557888","2019/09/01","123456","18307050360","熊迪","无","本科生","大连海事大学","09/22","本科生","China",1,"25567.9932@qq.com");
-
-            studentDao=db.studentDao();
-            studentDao.insert(student);
-            System.out.println("成功插入");
-//            db.close();
-        }).start();
-    }
-
+    
+    
     @Override
     public void onClick(View v) {
         transaction=fragmentManager.beginTransaction();
         switch (v.getId()){
-            case R.id.profile_btn:
-                transaction.replace(R.id.stu_fragments,stu02);
+            case R.id.tec_profile_btn:
+                transaction.replace(R.id.tec_fragments,tec02);
                 transaction.commit();
                 //Toast.makeText(this,"Stu02 clicked！",Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.submit_btn:
-                transaction.replace(R.id.stu_fragments,stu03);
+            case R.id.tec_examine_btn:
+                transaction.replace(R.id.tec_fragments,tec03);
                 transaction.commit();
                 //Toast.makeText(this,"Stu03 clicked！",Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.management_btn:
-                transaction.replace(R.id.stu_fragments,stu04);
-                transaction.commit();
-                //Toast.makeText(this,"Stu04 clicked！",Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.logout_btn:
+            case R.id.tec_logout_btn:
                 //跳回登陆界面
                 Toast.makeText(this,"登出功能尚未开发！",Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.btn_pop:
+            case R.id.tec_btn_pop:
                 if(mSlidingPaneLayout.isOpen()){
                     mSlidingPaneLayout.closePane();
                 }else{
