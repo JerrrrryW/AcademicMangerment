@@ -12,5 +12,5 @@ public interface TeacherDao {
     @Insert
     void insertTeachers(List<Teacher> teachers);
     @Query("select * from teacher")
-    List<Teacher> loadAllStudent();
+    List<Teacher> loadAllTeacher();
 }

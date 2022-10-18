@@ -26,13 +26,10 @@ public class MainActivity extends AppCompatActivity {
     }
     public void test(){
         //需要在线程中访问数据库
-        new Thread(()->{
+       /* new Thread(()->{
             db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class,"dataBase").build();
-            Student student=new Student("2220192769","1055689557888","2019/09/01","258912","18307050360","潘建树","无","本科生","大连海事大学","09/22","本科生","China",1,"255679932@qq.com");
-//
-            studentDao=db.studentDao();
-            studentDao.insert(student);
-//            db.close();
-        }).start();
+
+            db.close();
+        }).start();*/
     }
 }
