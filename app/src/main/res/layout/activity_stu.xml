@@ -142,7 +142,7 @@
 
     <!-- 主界面在后 -->
     <LinearLayout
-        android:id="@+id/main_container"
+        android:id="@+id/stu_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/white"
@@ -177,7 +177,7 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/main_fragments" />
+            android:id="@+id/stu_fragments" />
 
     </LinearLayout>
 

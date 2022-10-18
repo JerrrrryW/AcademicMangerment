@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.example.academicmangerment.custom.CusSlidingPaneLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/adm_slide_layout"
+    android:id="@+id/tec_slide_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.AdminActivity"
+    tools:context=".activity.TecActivity"
     android:background="@color/bk_slide">
 
     <!-- 侧边栏在前 -->
@@ -21,7 +21,7 @@
             android:orientation="horizontal">
 
             <com.example.academicmangerment.util.CircleImageView
-                android:id="@+id/adm_img_head"
+                android:id="@+id/tec_img_head"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:elevation="1dp"
@@ -31,8 +31,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/adm_username"
-                android:text="admin"
+                android:id="@+id/tec_username"
+                android:text="zhang"
                 android:layout_marginStart="5dp"
                 android:textSize="24sp"
                 android:layout_gravity="center_vertical"
@@ -40,16 +40,16 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/adm_major_and_class"
+            android:id="@+id/tec_major_and_class"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
-            android:text="管理员"/>
+            android:text="软件工程系"/>
 
 
         <LinearLayout
-            android:id="@+id/stu_manger_btn"
+            android:id="@+id/tec_profile_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="70dp"
@@ -64,14 +64,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="学生管理"
+                android:text="个人信息"
                 android:textSize="20sp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="20dp"/>
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/tec_manger_btn"
+            android:id="@+id/tec_examine_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
@@ -86,55 +86,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="教师管理"
+                android:text="科研信息审核"
                 android:textSize="20sp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="20dp"/>
         </LinearLayout>
+
         <LinearLayout
-            android:id="@+id/project_manger_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:layout_marginStart="30dp"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:src="@mipmap/project_submit"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="项目管理"
-                android:textSize="20sp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="20dp"/>
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/project_class_manger_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:layout_marginStart="30dp"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:src="@mipmap/project_submit"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="项目类别管理"
-                android:textSize="20sp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="20dp"/>
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/adm_logout_btn"
+            android:id="@+id/tec_logout_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
@@ -158,7 +117,7 @@
 
     <!-- 主界面在后 -->
     <LinearLayout
-        android:id="@+id/adm_container"
+        android:id="@+id/tec_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/white"
@@ -171,7 +130,7 @@
             android:background="@color/colorPrimary">
 
             <ImageView
-                android:id="@+id/adm_btn_pop"
+                android:id="@+id/tec_btn_pop"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
@@ -193,7 +152,7 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/adm_fragments" />
+            android:id="@+id/tec_fragments" />
 
     </LinearLayout>
 </com.example.academicmangerment.custom.CusSlidingPaneLayout>
