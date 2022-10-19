@@ -106,7 +106,10 @@
             <Spinner
                 style="@style/itemMessageInter"
                 android:id="@+id/level"
+                android:entries="@array/projectLevelList"
+                android:theme="@style/spinner_style"
                 android:layout_width="290dp"
+
                 android:spinnerMode="dropdown"/>
             <TextView
                 android:id="@+id/proAchievementType"
@@ -115,12 +118,14 @@
             <Spinner
                 style="@style/itemMessageInter"
                 android:id="@+id/achievement_type"
+                android:theme="@style/spinner_style"
                 android:layout_width="290dp"
+                android:entries="@array/projectTypeList"
                 android:spinnerMode="dropdown"/>
             <TextView
                 style="@style/itemMessage"
                 android:id="@+id/proSubject"
-                android:textColor="项目所属学科："/>
+                android:text="项目所属学科："/>
             <EditText
                 style="@style/itemMessageInter"
                 android:id="@+id/subject"

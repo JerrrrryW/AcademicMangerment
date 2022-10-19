@@ -29,4 +29,8 @@
         <item name="android:background">@drawable/edit_bg</item>
 
     </style>
+
+    <style name="spinner_style"  parent="@android:style/Widget.TextView.SpinnerItem">
+        <item name="android:textSize">20sp</item><!--可以按照自己的情况在里面设定-->
+    </style>
 </resources>
