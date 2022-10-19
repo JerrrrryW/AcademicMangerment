@@ -51,6 +51,20 @@ public class Admin01Adapter extends RecyclerView.Adapter<Admin01Adapter.ViewHold
             editSid = (EditText) view.findViewById(R.id.edit_stu_sid);
 
         }
+        //设置属性
+        public void setAttribute(Student student){
+            editName.setText(student.getRealName());
+            editSex.setText(student.getSex()==1?"男":"女");
+            editPhone.setText(student.getPhone());
+            editCard.setText(student.getCard());
+            editState.setText(student.getState());
+            editDegree.setText(student.getDegree());
+            editType.setText(student.getType());
+            editEmail.setText(student.getEmail());
+            editBirth.setText(student.getBirthday());
+            editCollege.setText(student.getCollege());
+            editSid.setText(student.getSid());
+        }
     }
 
     public Admin01Adapter(List<Student> studentList) {
@@ -66,7 +80,7 @@ public class Admin01Adapter extends RecyclerView.Adapter<Admin01Adapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull Admin01Adapter.ViewHolder holder, int position) {
-
+        holder.setAttribute(studentList.get(position));
     }
 
     @Override

@@ -3,12 +3,21 @@ package com.example.academicmangerment.fragment;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.academicmangerment.R;
+import com.example.academicmangerment.adapter.Admin01Adapter;
+import com.example.academicmangerment.entity.Student;
+import com.example.academicmangerment.persistence.AppDatabase;
+import com.example.academicmangerment.persistence.StudentDao;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -17,15 +26,14 @@ import com.example.academicmangerment.R;
  */
 public class Admin01 extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private AppDatabase db;
+    private StudentDao studentDao;
+    //学生信息数据
+    private List<Student> studentList;
+    private RecyclerView mRecyclerView;
+    private Admin01Adapter admin01Adapter;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
+    private View view;
     public Admin01() {
         // Required empty public constructor
     }
@@ -34,16 +42,12 @@ public class Admin01 extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
      * @return A new instance of fragment Admin01.
      */
     // TODO: Rename and change types and number of parameters
-    public static Admin01 newInstance(String param1, String param2) {
+    public static Admin01 newInstance() {
         Admin01 fragment = new Admin01();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -51,16 +55,26 @@ public class Admin01 extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_admin01, container, false);
+        view=inflater.inflate(R.layout.fragment_admin01, container, false);
+        mRecyclerView=view.findViewById(R.id.adm01_recyclerview);
+        //设置线性布局
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        initData();
+        return view;
+    }
+    public void initData(){
+        db = Room.databaseBuilder(getContext(), AppDatabase.class,"dataBase").build();
+        studentDao=db.studentDao();
+        new Thread(()->{
+            studentList=studentDao.loadAllStudent();
+            admin01Adapter=new Admin01Adapter(studentList);
+            mRecyclerView.setAdapter(admin01Adapter);
+        }).start();
     }
 }

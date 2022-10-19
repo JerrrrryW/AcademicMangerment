@@ -27,9 +27,10 @@ public class MainActivity extends AppCompatActivity {
     }
     public void test(){
         //需要在线程中访问数据库
-       /* new Thread(()->{
+   /*     new Thread(()->{
             db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class,"dataBase").build();
-
+            studentDao=db.studentDao();
+            studentDao.insert(new Student());
             db.close();
         }).start();*/
     }
