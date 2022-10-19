@@ -3,6 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/#J.Wang/DMUUUU/Code/academicMangement/app/src/main/res/layout/activity_main.xml" value="0.375" />
+        <entry key="..\:/Users/86183/AndroidStudioProjects/AcademicMangerment/app/src/main/res/drawable/shape_green_content_normal.xml" value="0.255" />
+        <entry key="..\:/Users/86183/AndroidStudioProjects/AcademicMangerment/app/src/main/res/layout/activity_admin.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/86183/AndroidStudioProjects/AcademicMangerment/app/src/main/res/layout/activity_login.xml" value="0.2" />
+        <entry key="..\:/Users/86183/AndroidStudioProjects/AcademicMangerment/app/src/main/res/layout/activity_login2.xml" value="0.25364583333333335" />
         <entry key="..\:/#J.Wang/DMUUUU/Code/academicMangement/app/src/main/res/layout/activity_main.xml" value="0.4202476329206118" />
         <entry key="..\:/#J.Wang/DMUUUU/Code/academicMangement/app/src/main/res/layout/fragment_stu02.xml" value="0.335" />
         <entry key="..\:/#J.Wang/DMUUUU/Code/academicMangement/app/src/main/res/layout/fragment_stu03.xml" value="0.371875" />
@@ -28,9 +33,21 @@
         <entry key="..\:/Learn/AndroidProject/academicMangement/app/src/main/res/layout/item_project_brief.xml" value="0.1" />
         <entry key="..\:/Learn/AndroidProject/academicMangement/app/src/main/res/layout/my_project_name.xml" value="0.2" />
         <entry key="..\:/Users/86183/AndroidStudioProjects/AcademicMangerment/app/src/main/res/layout/activity_main.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/86183/AndroidStudioProjects/AcademicMangerment/app/src/main/res/layout/activity_main2.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/86183/AndroidStudioProjects/AcademicMangerment/app/src/main/res/layout/activity_stu.xml" value="0.1" />
+        <entry key="..\:/Users/86183/AndroidStudioProjects/AcademicMangerment/app/src/main/res/layout/activity_tea.xml" value="0.12335359675785208" />
+        <entry key="..\:/Users/86183/AndroidStudioProjects/AcademicMangerment/app/src/main/res/layout/activity_tec.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/86183/AndroidStudioProjects/AcademicMangerment/app/src/main/res/layout/fragment_admin01.xml" value="0.4" />
+        <entry key="..\:/Users/86183/AndroidStudioProjects/AcademicMangerment/app/src/main/res/layout/fragment_admin02.xml" value="0.1390625" />
+        <entry key="..\:/Users/86183/AndroidStudioProjects/AcademicMangerment/app/src/main/res/layout/fragment_admin03.xml" value="0.12335359675785208" />
+        <entry key="..\:/Users/86183/AndroidStudioProjects/AcademicMangerment/app/src/main/res/layout/fragment_admin04.xml" value="0.12335359675785208" />
+        <entry key="..\:/Users/86183/AndroidStudioProjects/AcademicMangerment/app/src/main/res/layout/fragment_stu02.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/86183/AndroidStudioProjects/AcademicMangerment/app/src/main/res/layout/item_adm01.xml" value="0.1" />
+        <entry key="..\:/Users/86183/AndroidStudioProjects/AcademicMangerment/app/src/main/res/layout/item_project_brief.xml" value="0.264" />
       </map>
     </option>
   </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
