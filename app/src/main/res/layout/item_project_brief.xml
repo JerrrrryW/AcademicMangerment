@@ -182,7 +182,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:gravity="center_horizontal"
-                android:text="项目流程"
+                android:text="状态"
                 android:textSize="20dp"/>
         </TableRow>
         <TableRow
