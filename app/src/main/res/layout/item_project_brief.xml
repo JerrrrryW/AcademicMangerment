@@ -4,9 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/corner_card"
+    android:padding="20dp"
     tools:ignore="MissingDefaultResource">
 
+<!--    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/corner_card"/>-->
     <LinearLayout
         android:id="@+id/top_bar"
         app:layout_constraintTop_toTopOf="parent"

@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -75,6 +76,8 @@ public class Stu04 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(),2);
+
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_stu04, container, false);
         mRecyclerView =(RecyclerView) view.findViewById(R.id.projectsRecyclerView);
@@ -82,9 +85,9 @@ public class Stu04 extends Fragment {
         adapter = new Stu04Adapter(getActivity());
         adapter.setData(mProjectList);
         mRecyclerView.setAdapter(adapter);
-        DividerItemDecoration mDivider = new DividerItemDecoration(getActivity(),DividerItemDecoration.VERTICAL);
+        DividerItemDecoration mDivider = new DividerItemDecoration(getActivity(),DividerItemDecoration.HORIZONTAL);
         mRecyclerView.addItemDecoration(mDivider);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
+        mRecyclerView.setLayoutManager(gridLayoutManager);
         adapter.setOnItemClickListener(new Stu04Adapter.OnItemClickListener() {
             @Override
             public void OnItemClick(View view, Project project) {

@@ -72,16 +72,16 @@ public class LoginActivity extends AppCompatActivity {
                             user = false;
                         }
                     }
-                    if (user) {
+//                    if (user) {
                         Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
                         Intent intent_l = new Intent(LoginActivity.this, StuActivity.class);
                         intent_l.putExtra("username", username.getText().toString());
                         intent_l.putExtra("password", pwd);
                         startActivity(intent_l);
                         finish();
-                    } else {
-                        Toast.makeText(LoginActivity.this, "用户名或密码错误！", Toast.LENGTH_SHORT).show();
-                    }
+//                    } else {
+//                        Toast.makeText(LoginActivity.this, "用户名或密码错误！", Toast.LENGTH_SHORT).show();
+//                    }
                 } else {
                     Toast.makeText(LoginActivity.this, "用户名或密码不能为空！", Toast.LENGTH_SHORT).show();
                 }
