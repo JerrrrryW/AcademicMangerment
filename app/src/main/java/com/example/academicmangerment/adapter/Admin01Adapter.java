@@ -66,7 +66,7 @@ public class Admin01Adapter extends RecyclerView.Adapter<Admin01Adapter.ViewHold
             editSid.setText(student.getSid());
         }
     }
-
+    public Admin01Adapter(){}
     public Admin01Adapter(List<Student> studentList) {
         this.studentList = studentList;
     }

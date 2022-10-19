@@ -47,8 +47,6 @@ public class Admin01 extends Fragment {
     // TODO: Rename and change types and number of parameters
     public static Admin01 newInstance() {
         Admin01 fragment = new Admin01();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
         return fragment;
     }
 
