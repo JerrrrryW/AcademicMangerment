@@ -47,6 +47,7 @@ public class StuActivity extends AppCompatActivity implements View.OnClickListen
         initView();
         initSlidingPaneLayout();
         initFragment();
+        test();
         /*数据库测试*/
        /* test();*/
     }

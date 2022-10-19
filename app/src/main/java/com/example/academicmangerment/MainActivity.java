@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.academicmangerment.activity.LoginActivity;
+import com.example.academicmangerment.activity.StuActivity;
 import com.example.academicmangerment.entity.Student;
 import com.example.academicmangerment.persistence.AppDatabase;
 import com.example.academicmangerment.persistence.StudentDao;
