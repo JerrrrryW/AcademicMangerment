@@ -3,25 +3,22 @@ package com.example.academicmangerment.adapter;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.academicmangerment.R;
 import com.example.academicmangerment.entity.Project;
-import com.example.academicmangerment.fragment.Stu04;
 
 import java.util.List;
 
 
 
-public class MyProjectAdapter extends RecyclerView.Adapter<MyProjectAdapter.myViewHolder> {
+public class Stu04Adapter extends RecyclerView.Adapter<Stu04Adapter.myViewHolder> {
     private Context mContext;
     private List<Project> pjt;
-    public MyProjectAdapter(Context context) {mContext = context;}
+    public Stu04Adapter(Context context) {mContext = context;}
 
     /***
      * 设置数据更新界面

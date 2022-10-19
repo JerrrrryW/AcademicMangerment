@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.academicmangerment.R;
-import com.example.academicmangerment.adapter.MyProjectAdapter;
+import com.example.academicmangerment.adapter.Stu04Adapter;
 import com.example.academicmangerment.entity.Project;
 
 import java.util.ArrayList;
@@ -38,7 +38,7 @@ public class Stu04 extends Fragment {
     private View view;
     public RecyclerView mRecyclerView;
     private List<Project> mProjectList = new ArrayList<>();
-    private MyProjectAdapter adapter;
+    private Stu04Adapter adapter;
 
     public Stu04() {
         // Required empty public constructor
@@ -79,13 +79,13 @@ public class Stu04 extends Fragment {
         view = inflater.inflate(R.layout.fragment_stu04, container, false);
         mRecyclerView =(RecyclerView) view.findViewById(R.id.projectsRecyclerView);
         getData();
-        adapter = new MyProjectAdapter(getActivity());
+        adapter = new Stu04Adapter(getActivity());
         adapter.setData(mProjectList);
         mRecyclerView.setAdapter(adapter);
         DividerItemDecoration mDivider = new DividerItemDecoration(getActivity(),DividerItemDecoration.VERTICAL);
         mRecyclerView.addItemDecoration(mDivider);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
-        adapter.setOnItemClickListener(new MyProjectAdapter.OnItemClickListener() {
+        adapter.setOnItemClickListener(new Stu04Adapter.OnItemClickListener() {
             @Override
             public void OnItemClick(View view, Project project) {
                 Toast.makeText(getActivity(), "一个项目", Toast.LENGTH_SHORT).show();
