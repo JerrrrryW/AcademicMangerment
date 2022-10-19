@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        card_view:cardCornerRadius="4dp">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="553dp"
+                android:layout_marginBottom="259dp"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <TextView
+                android:id="@+id/stu_name"
+                android:layout_width="70dp"
+                android:layout_height="34dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="460dp"
+                android:layout_marginBottom="345dp"
+                android:text="姓名" />
+
+            <EditText
+                android:id="@+id/edit_stu_name"
+                android:layout_width="100dp"
+                android:layout_height="48dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="345dp"
+                android:layout_marginBottom="345dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="edit_stu_name" />
+
+            <TextView
+                android:id="@+id/stu_sex"
+                android:layout_width="70dp"
+                android:layout_height="34dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="459dp"
+                android:layout_marginBottom="298dp"
+                android:text="性别" />
+
+            <TextView
+                android:id="@+id/stu_phone"
+                android:layout_width="70dp"
+                android:layout_height="34dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="459dp"
+                android:layout_marginBottom="255dp"
+                android:text="电话" />
+
+            <TextView
+                android:id="@+id/stu_college"
+                android:layout_width="70dp"
+                android:layout_height="34dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="610dp"
+                android:layout_marginBottom="199dp"
+                android:text="大学" />
+
+            <TextView
+                android:id="@+id/stu_card"
+                android:layout_width="70dp"
+                android:layout_height="34dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="610dp"
+                android:layout_marginBottom="158dp"
+                android:text="银行卡号" />
+
+            <TextView
+                android:id="@+id/stu_state"
+                android:layout_width="70dp"
+                android:layout_height="34dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="610dp"
+                android:layout_marginBottom="114dp"
+                android:text="学生备注" />
+
+            <TextView
+                android:id="@+id/stu_degree"
+                android:layout_width="70dp"
+                android:layout_height="34dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="402dp"
+                android:layout_marginBottom="201dp"
+                android:text="学历" />
+
+            <TextView
+                android:id="@+id/stu_type"
+                android:layout_width="70dp"
+                android:layout_height="34dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="199dp"
+                android:layout_marginBottom="201dp"
+                android:text="职务" />
+
+            <TextView
+                android:id="@+id/stu_email"
+                android:layout_width="70dp"
+                android:layout_height="34dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="254dp"
+                android:layout_marginBottom="248dp"
+                android:text="邮件" />
+
+            <TextView
+                android:id="@+id/stu_birth"
+                android:layout_width="70dp"
+                android:layout_height="34dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="253dp"
+                android:layout_marginBottom="299dp"
+                android:text="生日" />
+
+            <EditText
+                android:id="@+id/edit_stu_sex"
+                android:layout_width="100dp"
+                android:layout_height="48dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="348dp"
+                android:layout_marginBottom="292dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="edit_stu_sex" />
+
+            <EditText
+                android:id="@+id/edit_stu_phone"
+                android:layout_width="100dp"
+                android:layout_height="48dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="348dp"
+                android:layout_marginBottom="243dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="edit_stu_phone" />
+
+            <EditText
+                android:id="@+id/edit_stu_college"
+                android:layout_width="136dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="484dp"
+                android:layout_marginBottom="198dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="edit_stu_college" />
+
+            <EditText
+                android:id="@+id/edit_stu_state"
+                android:layout_width="568dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="105dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="edit_stu_state" />
+
+            <EditText
+                android:id="@+id/edit_stu_card"
+                android:layout_width="568dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="154dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="edit_stu_card" />
+
+            <EditText
+                android:id="@+id/edit_stu_degree"
+                android:layout_width="136dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="286dp"
+                android:layout_marginBottom="198dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="edit_stu_college" />
+
+            <EditText
+                android:id="@+id/edit_stu_type"
+                android:layout_width="136dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="80dp"
+                android:layout_marginBottom="203dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="edit_stu_type" />
+
+            <EditText
+                android:id="@+id/edit_stu_email"
+                android:layout_width="100dp"
+                android:layout_height="48dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="116dp"
+                android:layout_marginBottom="241dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="edit_stu_email" />
+
+            <EditText
+                android:id="@+id/edit_stu_sid"
+                android:layout_width="100dp"
+                android:layout_height="48dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="117dp"
+                android:layout_marginBottom="345dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="edit_stu_sid" />
+
+            <TextView
+                android:id="@+id/stu_sid"
+                android:layout_width="100dp"
+                android:layout_height="34dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="224dp"
+                android:layout_marginBottom="344dp"
+                android:text="学号" />
+
+            <EditText
+                android:id="@+id/edit_stu_birth"
+                android:layout_width="100dp"
+                android:layout_height="48dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="116dp"
+                android:layout_marginBottom="296dp"
+                android:ems="10"
+                android:inputType="date" />
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>
