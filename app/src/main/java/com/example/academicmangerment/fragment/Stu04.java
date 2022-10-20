@@ -1,5 +1,6 @@
 package com.example.academicmangerment.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.academicmangerment.R;
+import com.example.academicmangerment.activity.ProMessageActivity;
 import com.example.academicmangerment.adapter.Stu04Adapter;
 import com.example.academicmangerment.entity.Project;
 
@@ -91,6 +93,7 @@ public class Stu04 extends Fragment {
         adapter.setOnItemClickListener(new Stu04Adapter.OnItemClickListener() {
             @Override
             public void OnItemClick(View view, Project project) {
+                startActivity(new Intent(getActivity(), ProMessageActivity.class));
                 Toast.makeText(getActivity(), "一个项目", Toast.LENGTH_SHORT).show();
             }
         });

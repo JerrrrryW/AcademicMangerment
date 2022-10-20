@@ -21,7 +21,6 @@
         <item name="android:layout_width">470dp</item>
         <item name="android:layout_height">48dp</item>
         <item name="android:layout_marginLeft">15dp</item>
-        <item name="android:gravity">center_vertical</item>
         <item name="android:textSize">20dp</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:layout_marginBottom">20dp</item>
