@@ -1,5 +1,6 @@
 package com.example.academicmangerment.fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -93,12 +94,30 @@ public class Stu04 extends Fragment {
         adapter.setOnItemClickListener(new Stu04Adapter.OnItemClickListener() {
             @Override
             public void OnItemClick(View view, Project project) {
-                startActivity(new Intent(getActivity(), ProMessageActivity.class));
-                Toast.makeText(getActivity(), "一个项目", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(),ProMessageActivity.class);
+//                sendProject.send(project);
+                Bundle bundle = new Bundle();
+                bundle.putString("Pid",project.pid);
+                bundle.putString("Name",project.name);
+                intent.putExtras(bundle);
+                startActivity(intent);
+                Toast.makeText(getActivity(), "一个项目"+project.pid, Toast.LENGTH_SHORT).show();
             }
         });
         return view;
     }
+
+//    //数据回调接口
+//    public interface SendProject {void send(Project project);}
+//    SendProject sendProject;
+//    @Override
+//    public void onAttach(Context context) {
+//        super.onAttach(context);
+//        sendProject = (SendProject) getActivity();
+//    }
+
+
+
     public void getData() {
         for(int i = 0; i < 10; i++) {
             Project project = new Project();
