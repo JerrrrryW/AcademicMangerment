@@ -187,6 +187,8 @@ public class StuActivity extends AppCompatActivity implements View.OnClickListen
             case R.id.logout_btn:
                 //跳回登陆界面
                 Toast.makeText(this,"登出功能尚未开发！",Toast.LENGTH_SHORT).show();
+                //TODO 跳转回登录
+                finish();
                 break;
             case R.id.btn_pop:
                 if(mSlidingPaneLayout.isOpen()){
