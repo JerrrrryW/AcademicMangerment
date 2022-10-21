@@ -74,6 +74,7 @@ public class Admin01Adapter extends RecyclerView.Adapter<Admin01Adapter.ViewHold
     @NonNull
     @Override
     public Admin01Adapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        //记住加false属性
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_adm01, parent, false);
         return new ViewHolder(view);
     }

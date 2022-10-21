@@ -1,16 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="20dp"
+    android:background="@drawable/corner_card"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ImageView
+        android:id="@+id/adm_tec_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/adm02_recycleView"
-        android:layout_width="409dp"
-        android:layout_height="729dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:id="@+id/adm02_line1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/adm_tec_img"
+        android:layout_marginLeft="20dp"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <TextView
+            android:id="@+id/tec_name"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:text="教师姓名" />
+
+        <EditText
+            android:id="@+id/edit_tec_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1"
+            android:inputType="textPersonName"
+            android:text="edit_tec_name" />
+
+        <TextView
+            android:id="@+id/tec_sid"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:text="教工号" />
+
+        <EditText
+            android:id="@+id/edit_tec_tid"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:inputType="textPersonName"
+            android:text="edit_tec_tid" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/adm02_line3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/adm02_line1"
+        app:layout_constraintLeft_toRightOf="@id/adm_tec_img"
+        android:layout_marginLeft="20dp"
+        app:layout_constraintRight_toRightOf="parent">
+        <TextView
+            android:id="@+id/tec_phone"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:text="电话" />
+        <EditText
+            android:id="@+id/edit_tec_phone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:layout_weight="1"
+            android:layout_marginRight="20dp"
+            android:text="edit_tec_phone" />
+        <TextView
+            android:id="@+id/tec_email"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:text="邮件" />
+        <EditText
+            android:id="@+id/edit_tec_email"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:layout_weight="1"
+            android:text="edit_tec_email" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

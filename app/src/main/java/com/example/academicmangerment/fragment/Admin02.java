@@ -1,12 +1,16 @@
 package com.example.academicmangerment.fragment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
+import android.os.Handler;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +21,7 @@ import com.example.academicmangerment.entity.Teacher;
 import com.example.academicmangerment.persistence.AppDatabase;
 import com.example.academicmangerment.persistence.TeacherDao;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 /**
@@ -34,7 +39,6 @@ public class Admin02 extends Fragment {
     private Admin02Adapter admin02Adapter;
 
     private View view;
-
     public Admin02() {
         // Required empty public constructor
     }
@@ -61,17 +65,46 @@ public class Admin02 extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view=inflater.inflate(R.layout.fragment_admin02, container, false);
-        mRecycleView=view.findViewById(R.id.adm02_recycleView);
-        mRecycleView.setLayoutManager(new LinearLayoutManager(getContext()));
-        return view;
-    }
-    public void initData(){
+
+        /*initData();*/
+        @SuppressLint("HandlerLeak")
+        final Handler handler=new Handler(){
+            @Override
+            public void handleMessage(@NonNull Message msg) {
+                super.handleMessage(msg);
+                teacherList=(List<Teacher>) msg.obj;
+                admin02Adapter=new Admin02Adapter(teacherList);
+                mRecycleView=(RecyclerView) view.findViewById(R.id.adm02_recycleView);
+                mRecycleView.setLayoutManager(new LinearLayoutManager(getContext()));
+                mRecycleView.setAdapter(admin02Adapter);
+            }
+        };
         db= Room.databaseBuilder(getContext(),AppDatabase.class,"dataBase").build();
         teacherDao=db.teacherDao();
-        new Thread(()->{
-            teacherList= teacherDao.loadAllTeacher();
-            admin02Adapter=new Admin02Adapter(teacherList);
-            mRecycleView.setAdapter(admin02Adapter);
-        }).start();
+        new Thread(){
+            @Override
+            public void run() {
+                super.run();
+                teacherList= teacherDao.loadAllTeacher();
+                Message message=Message.obtain();
+                message.obj=teacherList;
+                handler.sendMessage(message);
+            }
+        }.start();
+        return view;
     }
+/*    public void initData(){
+        db= Room.databaseBuilder(getContext(),AppDatabase.class,"dataBase").build();
+        teacherDao=db.teacherDao();
+        new Thread(){
+            @Override
+            public void run() {
+                super.run();
+                teacherList= teacherDao.loadAllTeacher();
+                Message message=Message.obtain();
+                message.obj=teacherList;
+                handler.sendMessage(message);
+            }
+        }.start();
+    }*/
 }
