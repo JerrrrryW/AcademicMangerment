@@ -1,19 +1,25 @@
 package com.example.academicmangerment.fragment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
+import android.os.Handler;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.academicmangerment.R;
 import com.example.academicmangerment.adapter.Admin01Adapter;
+import com.example.academicmangerment.adapter.Admin02Adapter;
 import com.example.academicmangerment.entity.Student;
+import com.example.academicmangerment.entity.Teacher;
 import com.example.academicmangerment.persistence.AppDatabase;
 import com.example.academicmangerment.persistence.StudentDao;
 
@@ -60,13 +66,34 @@ public class Admin01 extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view=inflater.inflate(R.layout.fragment_admin01, container, false);
-        mRecyclerView=view.findViewById(R.id.adm01_recyclerview);
-        //设置线性布局
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        initData();
+        /*initData();*/
+        @SuppressLint("HandlerLeak")
+        final Handler handler=new Handler(){
+            @Override
+            public void handleMessage(@NonNull Message msg) {
+                super.handleMessage(msg);
+                studentList=(List<Student>) msg.obj;
+                admin01Adapter=new Admin01Adapter(studentList);
+                mRecyclerView = (RecyclerView) view.findViewById(R.id.adm01_recyclerview);
+                mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                mRecyclerView.setAdapter(admin01Adapter);
+            }
+        };
+        db= Room.databaseBuilder(getContext(),AppDatabase.class,"dataBase").build();
+        studentDao=db.studentDao();
+        new Thread(){
+            @Override
+            public void run() {
+                super.run();
+                studentList= studentDao.loadAllStudent();
+                Message message=Message.obtain();
+                message.obj=studentList;
+                handler.sendMessage(message);
+            }
+        }.start();
         return view;
     }
-    public void initData(){
+/*    public void initData(){
         db = Room.databaseBuilder(getContext(), AppDatabase.class,"dataBase").build();
         studentDao=db.studentDao();
         new Thread(()->{
@@ -74,5 +101,5 @@ public class Admin01 extends Fragment {
             admin01Adapter=new Admin01Adapter(studentList);
             mRecyclerView.setAdapter(admin01Adapter);
         }).start();
-    }
+    }*/
 }

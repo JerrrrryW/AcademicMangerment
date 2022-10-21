@@ -4,20 +4,27 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Adapter;
+import android.widget.ArrayAdapter;
 import android.util.TypedValue;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
+import com.example.academicmangerment.activity.StuActivity;
 import com.example.academicmangerment.R;
 import com.example.academicmangerment.entity.Project;
+import com.example.academicmangerment.entity.Student;
 import com.example.academicmangerment.fragment.Stu04;
+import com.example.academicmangerment.persistence.ProjectDao;
+
+import java.util.List;
 
 public class ProMessageActivity extends AppCompatActivity /*implements Stu04.SendProject*/{
     Project project;//接收Stu04的数据
@@ -41,7 +48,7 @@ public class ProMessageActivity extends AppCompatActivity /*implements Stu04.Sen
         stu_sid = (EditText) findViewById(R.id.stu_sid);
         stu_name = (EditText) findViewById(R.id.stu_name);
         stu_phone = (EditText) findViewById(R.id.stu_phone);
-        stu_member = (EditText) findViewById(R.id.stu_member);
+        stu_member = (EditText) findViewById(R.id.stu_member);//参与成员
         name = (EditText) findViewById(R.id.name);
         level = (Spinner) findViewById(R.id.level);
         achievement_type = (Spinner) findViewById(R.id.achievement_type);
@@ -72,12 +79,48 @@ public class ProMessageActivity extends AppCompatActivity /*implements Stu04.Sen
             super.onConfigurationChanged(newConfig);
     }
 
-    public void setData() {
+public void setData() {
         String pid;
         Intent intent = getIntent();
         pid = intent.getStringExtra("Pid");//用于数据库中查询相应Project
-        String Name = intent.getStringExtra("Name");
-        name.setText(Name);
-        name.setKeyListener(null);
+        Project project = new Project();
+        List<Project> projects = new StuActivity().projectList;
+        Student student = new StuActivity().student;
+        for(Project pro : projects) {
+            if(pro.pid == pid) {
+                project = pro;
+                break;
+            }
+        }
+        setData(stu_sid,student.sid);
+        setData(stu_name,student.realName);
+        setData(stu_phone,student.phone);
+        setData(name,project.getName());
+
+        setSpinnerData(level,project.getLevel());
+        setSpinnerData(achievement_type,project.getAchievementType());
+
+        setData(subject,project.getSubject());
+        setData(budget,Double.toString(project.getBudget()));
+        setData(economic_analysis,project.getEconomicAnalysis());
+        setData(purpose,project.getPurpose());
+        setData(viable_analysis,project.getViableAnalysis());
+
+        submit.setText("更改");
+}
+public void setData(EditText editText,String s) {
+        editText.setText(s);
+        editText.setKeyListener(null);
+}
+public void setSpinnerData(Spinner spinner,String s) {
+        SpinnerAdapter adapter = spinner.getAdapter();
+        int k = adapter.getCount();
+    for (int i = 0; i < k; i++) {
+        if(s.equals(adapter.getItem(i).toString())) {
+            spinner.setSelection(i,true);
+            break;
+        }
     }
+    spinner.setClickable(false);
+}
 }
