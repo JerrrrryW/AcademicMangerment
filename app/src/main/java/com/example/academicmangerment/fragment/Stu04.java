@@ -13,10 +13,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.academicmangerment.R;
 import com.example.academicmangerment.activity.ProMessageActivity;
+import com.example.academicmangerment.activity.StuActivity;
 import com.example.academicmangerment.adapter.Stu04Adapter;
 import com.example.academicmangerment.entity.Project;
 
@@ -44,6 +46,7 @@ public class Stu04 extends Fragment {
     private List<Project> mProjectList = new ArrayList<>();
     private Stu04Adapter adapter;
 
+    public TextView textView;
     public Stu04() {
         // Required empty public constructor
     }
@@ -95,7 +98,6 @@ public class Stu04 extends Fragment {
             @Override
             public void OnItemClick(View view, Project project) {
                 Intent intent = new Intent(getActivity(),ProMessageActivity.class);
-//                sendProject.send(project);
                 Bundle bundle = new Bundle();
                 bundle.putString("Pid",project.pid);
                 bundle.putString("Name",project.name);
@@ -107,25 +109,11 @@ public class Stu04 extends Fragment {
         return view;
     }
 
-//    //数据回调接口
-//    public interface SendProject {void send(Project project);}
-//    SendProject sendProject;
-//    @Override
-//    public void onAttach(Context context) {
-//        super.onAttach(context);
-//        sendProject = (SendProject) getActivity();
-//    }
-
-
-
     public void getData() {
-        for(int i = 0; i < 10; i++) {
-            Project project = new Project();
-            project.setAchievementType(new String("论"));
-            project.setName("开发软件" + (i +1));
-            project.setPid("No."+(i+1));
-            project.setBudget(20000+i);
-            mProjectList.add(project);
+        mProjectList = new StuActivity().projectList;
+        if(mProjectList.size() == 0) {
+            textView = (TextView) view.findViewById(R.id.NoProject);
+            textView.setText("您未参加过任何项目");
         }
     }
 }
