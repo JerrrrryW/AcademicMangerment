@@ -12,6 +12,7 @@ import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.academicmangerment.activity.StuActivity;
 import com.example.academicmangerment.R;
 import com.example.academicmangerment.entity.Project;
@@ -21,13 +22,14 @@ import com.example.academicmangerment.persistence.ProjectDao;
 
 import java.util.List;
 
-public class ProMessageActivity extends AppCompatActivity /*implements Stu04.SendProject*/{
+public class ProMessageActivity extends AppCompatActivity /*implements Stu04.SendProject*/ {
     Project project;//接收Stu04的数据
-    private EditText stu_sid,stu_name,stu_phone,stu_member;
+    private EditText stu_sid, stu_name, stu_phone, stu_member;
     private EditText name;
-    Spinner level,achievement_type;
-    private EditText subject,budget,economic_analysis,purpose,viable_analysis;
+    Spinner level, achievement_type;
+    private EditText subject, budget, economic_analysis, purpose, viable_analysis;
     private Button submit;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +38,7 @@ public class ProMessageActivity extends AppCompatActivity /*implements Stu04.Sen
         initView();
         setData();
     }
+
     public void initView() {
         stu_sid = (EditText) findViewById(R.id.stu_sid);
         stu_name = (EditText) findViewById(R.id.stu_name);
@@ -52,48 +55,50 @@ public class ProMessageActivity extends AppCompatActivity /*implements Stu04.Sen
         submit = (Button) findViewById(R.id.submit);
     }
 
-public void setData() {
+    public void setData() {
         String pid;
         Intent intent = getIntent();
         pid = intent.getStringExtra("Pid");//用于数据库中查询相应Project
         Project project = new Project();
         List<Project> projects = new StuActivity().projectList;
         Student student = new StuActivity().student;
-        for(Project pro : projects) {
-            if(pro.pid == pid) {
+        for (Project pro : projects) {
+            if (pro.pid == pid) {
                 project = pro;
                 break;
             }
         }
-        setData(stu_sid,student.sid);
-        setData(stu_name,student.realName);
-        setData(stu_phone,student.phone);
-        setData(name,project.getName());
+        setData(stu_sid, student.sid);
+        setData(stu_name, student.realName);
+        setData(stu_phone, student.phone);
+        setData(name, project.getName());
 
-        setSpinnerData(level,project.getLevel());
-        setSpinnerData(achievement_type,project.getAchievementType());
+        setSpinnerData(level, project.getLevel());
+        setSpinnerData(achievement_type, project.getAchievementType());
 
-        setData(subject,project.getSubject());
-        setData(budget,Double.toString(project.getBudget()));
-        setData(economic_analysis,project.getEconomicAnalysis());
-        setData(purpose,project.getPurpose());
-        setData(viable_analysis,project.getViableAnalysis());
+        setData(subject, project.getSubject());
+        setData(budget, Double.toString(project.getBudget()));
+        setData(economic_analysis, project.getEconomicAnalysis());
+        setData(purpose, project.getPurpose());
+        setData(viable_analysis, project.getViableAnalysis());
 
         submit.setText("更改");
-}
-public void setData(EditText editText,String s) {
+    }
+
+    public void setData(EditText editText, String s) {
         editText.setText(s);
         editText.setKeyListener(null);
-}
-public void setSpinnerData(Spinner spinner,String s) {
+    }
+
+    public void setSpinnerData(Spinner spinner, String s) {
         SpinnerAdapter adapter = spinner.getAdapter();
         int k = adapter.getCount();
-    for (int i = 0; i < k; i++) {
-        if(s.equals(adapter.getItem(i).toString())) {
-            spinner.setSelection(i,true);
-            break;
+        for (int i = 0; i < k; i++) {
+            if (s.equals(adapter.getItem(i).toString())) {
+                spinner.setSelection(i, true);
+                break;
+            }
         }
+        spinner.setClickable(false);
     }
-    spinner.setClickable(false);
-}
 }

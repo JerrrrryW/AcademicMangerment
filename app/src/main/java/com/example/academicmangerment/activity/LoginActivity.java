@@ -63,8 +63,9 @@ public class LoginActivity extends AppCompatActivity {
                 if (!TextUtils.isEmpty(sid) && !TextUtils.isEmpty(pwd)) {
 
                     boolean user = false;
+                    Student userdata = null;
                     for (int i = 0; i < studentList.size(); i++) {
-                        Student userdata = studentList.get(i);
+                        userdata = studentList.get(i);
                         if (sid.equals(userdata.getSid()) && pwd.equals(userdata.getPassword())) {
                             user = true;
                             break;
@@ -72,16 +73,17 @@ public class LoginActivity extends AppCompatActivity {
                             user = false;
                         }
                     }
-//                    if (user) {
+                    if (user) {
                         Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
                         Intent intent_l = new Intent(LoginActivity.this, StuActivity.class);
-                        intent_l.putExtra("username", username.getText().toString());
-                        intent_l.putExtra("password", pwd);
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("student", userdata);
+                        intent_l.putExtras(bundle);
                         startActivity(intent_l);
                         finish();
-//                    } else {
-//                        Toast.makeText(LoginActivity.this, "用户名或密码错误！", Toast.LENGTH_SHORT).show();
-//                    }
+                    } else {
+                        Toast.makeText(LoginActivity.this, "用户名或密码错误！", Toast.LENGTH_SHORT).show();
+                    }
                 } else {
                     Toast.makeText(LoginActivity.this, "用户名或密码不能为空！", Toast.LENGTH_SHORT).show();
                 }
@@ -100,8 +102,9 @@ public class LoginActivity extends AppCompatActivity {
                 if (!TextUtils.isEmpty(sid) && !TextUtils.isEmpty(pwd)) {
 
                     boolean user = false;
+                    Teacher userdata = null;
                     for (int i = 0; i < studentList.size(); i++) {
-                        Teacher userdata = teacherList.get(i);
+                        userdata = teacherList.get(i);
                         if (sid.equals(userdata.getTid()) && pwd.equals(userdata.getPassword())) {
                             user = true;
                             break;
@@ -112,8 +115,10 @@ public class LoginActivity extends AppCompatActivity {
                     if (user) {
                         Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
                         Intent intent_l = new Intent(LoginActivity.this, TecActivity.class);
-                        intent_l.putExtra("username", username.getText().toString());
-                        intent_l.putExtra("password", pwd);
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("teacher", userdata);
+                        /*System.out.println(userdata);*/
+                        intent_l.putExtras(bundle);
                         startActivity(intent_l);
                         finish();
                     } else {

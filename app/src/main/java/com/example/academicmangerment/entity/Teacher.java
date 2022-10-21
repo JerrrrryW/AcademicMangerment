@@ -4,8 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+
 @Entity
-public class Teacher {
+public class Teacher implements Serializable {
     @NonNull
     @PrimaryKey
     public String tid;
@@ -53,5 +55,16 @@ public class Teacher {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return "Teacher{" +
+                "tid='" + tid + '\'' +
+                ", realName='" + realName + '\'' +
+                ", password='" + password + '\'' +
+                ", tel='" + tel + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
 }
