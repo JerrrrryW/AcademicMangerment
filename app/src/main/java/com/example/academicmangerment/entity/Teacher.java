@@ -57,6 +57,14 @@ public class Teacher implements Serializable {
         this.email = email;
     }
 
+    public Teacher(@NonNull String tid, String realName, String password, String tel, String email) {
+        this.tid = tid;
+        this.realName = realName;
+        this.password = password;
+        this.tel = tel;
+        this.email = email;
+    }
+
     @Override
     public String toString() {
         return "Teacher{" +

@@ -35,7 +35,7 @@ public class TecActivity extends AppCompatActivity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tec);
-        Intent intent=new Intent();
+        Intent intent=getIntent();
         Bundle bundle=intent.getExtras();
         teacher=(Teacher) bundle.getSerializable("teacher");
         System.out.println(teacher);
