@@ -8,7 +8,9 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.slidingpanelayout.widget.SlidingPaneLayout;
 import androidx.room.Room;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -47,9 +49,23 @@ public class StuActivity extends AppCompatActivity implements View.OnClickListen
         initView();
         initSlidingPaneLayout();
         initFragment();
-        test();
+        //test();
         /*数据库测试*/
        /* test();*/
+    }
+
+    @Override //横竖屏切换时调用
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        if (newConfig.orientation==Configuration.ORIENTATION_LANDSCAPE){
+            //如果是横屏了，在这里设置横屏的UI
+            Log.println(Log.DEBUG,"StuActivity","onConfigurationChanged-Landscape");
+
+        }else {
+            //否则，在这里设置竖屏的UI
+            Log.println(Log.DEBUG,"StuActivity","onConfigurationChanged-Portrait");
+
+        }
+        super.onConfigurationChanged(newConfig);
     }
 
     private void initView() {

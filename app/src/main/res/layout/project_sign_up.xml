@@ -10,10 +10,11 @@
     <ScrollView
         android:id="@+id/scrollView1"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_width="match_parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_width="800dp"
         android:layout_height="wrap_content"
-        android:scrollbars="none"
-        >
+        android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -92,9 +93,8 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/member_list"
-                android:layout_width="470dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="15dp" />
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
             <TextView
                 style="@style/itemMessage"

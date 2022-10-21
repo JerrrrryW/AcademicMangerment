@@ -34,7 +34,9 @@
         <activity
             android:name=".activity.StuActivity"
             android:exported="true" />
-        <activity android:name=".activity.ProMessageActivity"/>
+        <activity
+            android:name=".activity.ProMessageActivity"
+            android:configChanges="keyboardHidden|screenSize|orientation"/>
     </application>
 
 </manifest>
