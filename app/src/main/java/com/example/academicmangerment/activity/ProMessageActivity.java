@@ -26,12 +26,12 @@ import com.example.academicmangerment.persistence.ProjectDao;
 
 import java.util.List;
 
-public class ProMessageActivity extends AppCompatActivity /*implements Stu04.SendProject*/{
+public class ProMessageActivity extends AppCompatActivity /*implements Stu04.SendProject*/ {
     Project project;//接收Stu04的数据
-    private EditText stu_sid,stu_name,stu_phone,stu_member;
+    private EditText stu_sid, stu_name, stu_phone, stu_member;
     private EditText name;
-    Spinner level,achievement_type;
-    private EditText subject,budget,economic_analysis,purpose,viable_analysis;
+    Spinner level, achievement_type;
+    private EditText subject, budget, economic_analysis, purpose, viable_analysis;
     private Button submit;
     private ScrollView scrollView;
     private ViewGroup.LayoutParams scrollViewParams;
@@ -44,6 +44,7 @@ public class ProMessageActivity extends AppCompatActivity /*implements Stu04.Sen
         initView();
         setData();
     }
+
     public void initView() {
         stu_sid = (EditText) findViewById(R.id.stu_sid);
         stu_name = (EditText) findViewById(R.id.stu_name);

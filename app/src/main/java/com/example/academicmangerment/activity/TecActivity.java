@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.slidingpanelayout.widget.SlidingPaneLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.academicmangerment.R;
 import com.example.academicmangerment.custom.CusSlidingPaneLayout;
+import com.example.academicmangerment.entity.Teacher;
 import com.example.academicmangerment.fragment.Tec02;
 import com.example.academicmangerment.fragment.Tec03;
 
@@ -25,6 +27,7 @@ public class TecActivity extends AppCompatActivity implements View.OnClickListen
     private FragmentManager fragmentManager;
     private FragmentTransaction transaction;
     private LinearLayout llbtn1, llbtn2, llbtn3;
+    private Teacher teacher;
 
     private static final String TAG = "StuActivity";
     private CusSlidingPaneLayout mSlidingPaneLayout;
@@ -32,7 +35,10 @@ public class TecActivity extends AppCompatActivity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tec);
-
+        Intent intent=getIntent();
+        Bundle bundle=intent.getExtras();
+        teacher=(Teacher) bundle.getSerializable("teacher");
+        System.out.println(teacher);
         initView();
         initSlidingPaneLayout();
         initFragment();
@@ -61,7 +67,7 @@ public class TecActivity extends AppCompatActivity implements View.OnClickListen
         //开启事务，获得FragmentTransaction对象
         transaction = fragmentManager.beginTransaction();
         //创建需要添加的Fragment
-        tec02=new Tec02();
+        tec02=Tec02.newInstance(teacher);
         tec03=new Tec03();
         //向容器内添加或替换碎片，默认情况下为个人信息管理模块
         transaction.replace(R.id.tec_fragments,tec02);

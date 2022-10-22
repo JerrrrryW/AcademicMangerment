@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.Stu02">
 
-    <TextView
+<!--    <TextView
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -14,6 +14,206 @@
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Module Stu02\n学生端-个人信息修改模块" />
+        android:text="Module Stu02\n学生端-个人信息修改模块" />-->
+    <ImageView
+        android:id="@+id/stu_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <LinearLayout
+        android:id="@+id/stu02_line1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/stu_img"
+        android:layout_marginLeft="20dp"
+        app:layout_constraintRight_toRightOf="parent">
+        <TextView
+            android:id="@+id/stu02_name"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:text="姓名" />
+        <EditText
+            android:id="@+id/edit_stu02_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:layout_weight="1"
+            android:layout_marginRight="20dp"
+            android:text="edit_stu02_name" />
+        <TextView
+            android:id="@+id/stu02_sid"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:text="学号" />
+        <EditText
+            android:id="@+id/edit_stu02_sid"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:layout_weight="1"
+            android:text="edit_stu02_sid" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/stu02_line2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/stu02_line1"
+        app:layout_constraintLeft_toRightOf="@id/stu_img"
+        android:layout_marginLeft="20dp"
+        app:layout_constraintRight_toRightOf="parent">
+        <TextView
+            android:id="@+id/stu02_sex"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:text="性别" />
+        <EditText
+            android:id="@+id/edit_stu02_sex"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:layout_weight="1"
+            android:layout_marginRight="20dp"
+            android:text="edit_stu02_sex" />
+        <TextView
+            android:id="@+id/stu02_birth"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:text="生日" />
+        <EditText
+            android:id="@+id/edit_stu02_birth"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:layout_weight="1"
+            android:text="edit_stu02_birth" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/stu02_line3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/stu02_line2"
+        app:layout_constraintLeft_toRightOf="@id/stu_img"
+        android:layout_marginLeft="20dp"
+        app:layout_constraintRight_toRightOf="parent">
+        <TextView
+            android:id="@+id/stu02_phone"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:text="电话" />
+        <EditText
+            android:id="@+id/edit_stu02_phone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:layout_weight="1"
+            android:layout_marginRight="20dp"
+            android:text="edit_stu02_phone" />
+        <TextView
+            android:id="@+id/stu02_email"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:text="邮件" />
+        <EditText
+            android:id="@+id/edit_stu02_email"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:layout_weight="1"
+            android:text="edit_stu02_email" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/stu02_line4"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/stu02_line3"
+        app:layout_constraintLeft_toLeftOf="@id/stu02_line3"
+        app:layout_constraintRight_toRightOf="parent">
+        <TextView
+            android:id="@+id/stu02_college"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:text="大学" />
+        <EditText
+            android:id="@+id/edit_stu02_college"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:layout_weight="1"
+            android:layout_marginRight="20dp"
+            android:text="edit_stu02_college" />
+        <TextView
+            android:id="@+id/stu02_degree"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="学历" />
+        <EditText
+            android:id="@+id/edit_stu02_degree"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:layout_weight="1"
+            android:layout_marginRight="20dp"
+            android:text="edit_stu02_degree" />
+        <TextView
+            android:id="@+id/stu02_type"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:text="职务" />
+        <EditText
+            android:id="@+id/edit_stu02_type"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:layout_weight="1"
+            android:text="edit_stu02_type" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/stu02_line5"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/stu02_line4"
+        app:layout_constraintLeft_toLeftOf="@id/stu02_line4"
+        app:layout_constraintRight_toRightOf="parent">
+        <TextView
+            android:id="@+id/stu02_card"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:text="银行卡号" />
+        <EditText
+            android:id="@+id/edit_stu02_card"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:layout_weight="1"
+            android:text="edit_stu02_card" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/stu02_line6"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/stu02_line5"
+        app:layout_constraintLeft_toLeftOf="@id/stu02_line4"
+        app:layout_constraintRight_toRightOf="parent">
+        <TextView
+            android:id="@+id/stu02_state"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:text="学生备注" />
+        <EditText
+            android:id="@+id/edit_stu02_state"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:layout_weight="1"
+            android:text="edit_stu02_state" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

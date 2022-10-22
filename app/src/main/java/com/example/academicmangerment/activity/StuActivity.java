@@ -9,6 +9,7 @@ import androidx.slidingpanelayout.widget.SlidingPaneLayout;
 import androidx.room.Room;
 
 import android.content.res.Configuration;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -54,11 +55,14 @@ public class StuActivity extends AppCompatActivity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stu);
-
+        //接收登录时传递的学生信息
+        Intent intent=getIntent();
+        Bundle bundle=intent.getExtras();
+        student=(Student) bundle.getSerializable("student");
         initView();
         initSlidingPaneLayout();
         initFragment();
-        //test();
+        /*test();*/
         /*数据库测试*/
        /* test();*/
     }
@@ -112,7 +116,7 @@ public class StuActivity extends AppCompatActivity implements View.OnClickListen
         //开启事务，获得FragmentTransaction对象
         transaction = fragmentManager.beginTransaction();
         //创建需要添加的Fragment
-        stu02 = new Stu02();
+        stu02 = Stu02.newInstance(student);
         stu03 = new Stu03();
         stu04 = new Stu04();
         //向容器内添加或替换碎片，默认情况下为个人信息管理模块
@@ -161,20 +165,7 @@ public class StuActivity extends AppCompatActivity implements View.OnClickListen
         });
 
     }
-    public void test(){
-     //需要在线程中访问数据库
-        new Thread(()->{
-            db = Room.inMemoryDatabaseBuilder(getApplicationContext(), AppDatabase.class).build();
-            Student student=new Student("2220192757","1055689557888","2019/09/01","123456","18307050360","熊迪","无","本科生","大连海事大学","09/22","本科生","China",1,"25567.9932@qq.com");
-            this.student = student;
-            projectDao=db.projectDao();
-            projectList=projectDao.StuProjects(student.sid);
-            studentDao=db.studentDao();
-            studentDao.insert(student);
-            System.out.println("成功插入");
-//            db.close();
-        }).start();
-    }
+
     @Override
     public void onClick(View v) {
         transaction=fragmentManager.beginTransaction();

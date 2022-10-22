@@ -15,7 +15,7 @@ import java.util.List;
 
 
 
-public class Stu04Adapter extends RecyclerView.Adapter<Stu04Adapter.myViewHolder> {
+public class Stu04Adapter extends RecyclerView.Adapter<Stu04Adapter.MyViewHolder> {
     private Context mContext;
     private List<Project> pjt;
     public Stu04Adapter(Context context) {mContext = context;}
@@ -32,15 +32,15 @@ public class Stu04Adapter extends RecyclerView.Adapter<Stu04Adapter.myViewHolder
 
     @NonNull
     @Override
-    public myViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = View.inflate(mContext, R.layout.item_project_brief, null);
-        myViewHolder myViewHolder = new myViewHolder(view);
+        MyViewHolder myViewHolder = new MyViewHolder(view);
         return myViewHolder;
     }
 
     @NonNull
     @Override
-    public void onBindViewHolder(@NonNull myViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Project project = pjt.get(position);
         holder.project_type.setText(project.getAchievementType());
         holder.project_name.setText(project.getName());
@@ -78,11 +78,11 @@ public class Stu04Adapter extends RecyclerView.Adapter<Stu04Adapter.myViewHolder
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
-    class myViewHolder extends RecyclerView.ViewHolder {
+    class MyViewHolder extends RecyclerView.ViewHolder {
         TextView project_type, project_name, project_num, project_level, project_budget, project_leader, project_member, project_teacher;
         TextView is_submitted, is_approved_college, is_midterm_checked, is_final_checked;
 
-        public myViewHolder(@NonNull View itemView) {
+        public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             project_type = itemView.findViewById(R.id.project_type);
             project_name = itemView.findViewById(R.id.project_name);
