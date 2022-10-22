@@ -5,10 +5,11 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-public class Project {
+public class Project implements Serializable {
     @NonNull
     @PrimaryKey
     public String pid;
