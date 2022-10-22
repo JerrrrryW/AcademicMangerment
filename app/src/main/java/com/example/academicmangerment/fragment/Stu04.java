@@ -155,11 +155,11 @@ public class Stu04 extends Fragment {
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
         if (newConfig.orientation==Configuration.ORIENTATION_LANDSCAPE){
             //如果是横屏了，在这里设置横屏的UI
-            Log.println(Log.DEBUG,"ProMessageActivity","onConfigurationChanged-Landscape");
+            Log.println(Log.DEBUG,"Stu04Fragment","onConfigurationChanged-Landscape");
             mRecyclerView.setLayoutManager(gridLayoutManager);
         }else {
             //否则，在这里设置竖屏的UI
-            Log.println(Log.DEBUG,"ProMessageActivity","onConfigurationChanged-Portrait");
+            Log.println(Log.DEBUG,"Stu04Fragment","onConfigurationChanged-Portrait");
             mRecyclerView.setLayoutManager(linearLayoutManager);
         }
         super.onConfigurationChanged(newConfig);
