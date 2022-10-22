@@ -2,6 +2,7 @@ package com.example.academicmangerment.entity;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
@@ -11,7 +12,7 @@ public class Teacher implements Serializable {
     @NonNull
     @PrimaryKey
     public String tid;
-    public String realName;
+    public String tecName;
     public String password;
     public String tel;
     public String email;
@@ -25,12 +26,12 @@ public class Teacher implements Serializable {
         this.tid = tid;
     }
 
-    public String getRealName() {
-        return realName;
+    public String getTecName() {
+        return tecName;
     }
 
-    public void setRealName(String realName) {
-        this.realName = realName;
+    public void setTecName(String tecName) {
+        this.tecName = tecName;
     }
 
     public String getPassword() {
@@ -57,9 +58,12 @@ public class Teacher implements Serializable {
         this.email = email;
     }
 
-    public Teacher(@NonNull String tid, String realName, String password, String tel, String email) {
+    public Teacher() {
+    }
+    @Ignore
+    public Teacher(@NonNull String tid, String tecName, String password, String tel, String email) {
         this.tid = tid;
-        this.realName = realName;
+        this.tecName = tecName;
         this.password = password;
         this.tel = tel;
         this.email = email;
@@ -69,7 +73,7 @@ public class Teacher implements Serializable {
     public String toString() {
         return "Teacher{" +
                 "tid='" + tid + '\'' +
-                ", realName='" + realName + '\'' +
+                ", realName='" + tecName + '\'' +
                 ", password='" + password + '\'' +
                 ", tel='" + tel + '\'' +
                 ", email='" + email + '\'' +

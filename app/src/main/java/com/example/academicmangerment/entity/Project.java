@@ -3,6 +3,7 @@ package com.example.academicmangerment.entity;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.util.Date;
@@ -25,6 +26,32 @@ public class Project {
     public String level;
     public String name;
     public String purpose;
+    public String subject;
+    public String userName;
+    public String viableAnalysis;
+
+    public Project() {
+    }
+    @Ignore
+    public Project(@NonNull String pid, String achievementType, String beginTime, String endTime, int state, String college, String createUser, double budget, String economicAnalysis, String existingCondition, String expectResult, String level, String name, String purpose, String subject, String userName, String viableAnalysis) {
+        this.pid = pid;
+        this.achievementType = achievementType;
+        this.beginTime = beginTime;
+        this.endTime = endTime;
+        this.state = state;
+        this.college = college;
+        this.createUser = createUser;
+        this.budget = budget;
+        this.economicAnalysis = economicAnalysis;
+        this.existingCondition = existingCondition;
+        this.expectResult = expectResult;
+        this.level = level;
+        this.name = name;
+        this.purpose = purpose;
+        this.subject = subject;
+        this.userName = userName;
+        this.viableAnalysis = viableAnalysis;
+    }
 
     @NonNull
     public String getPid() {
@@ -163,8 +190,6 @@ public class Project {
         this.viableAnalysis = viableAnalysis;
     }
 
-    public String subject;
-    public String userName;
-    public String viableAnalysis;
+
 
 }

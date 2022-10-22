@@ -44,7 +44,7 @@ public class Stu04Adapter extends RecyclerView.Adapter<Stu04Adapter.MyViewHolder
         Project project = pjt.get(position);
         holder.project_type.setText(project.getAchievementType());
         holder.project_name.setText(project.getName());
-        holder.project_num.setText(project.getPid());
+        holder.project_id.setText(project.getPid());
         holder.project_level.setText(project.getLevel());
         holder.project_budget.setText(String.valueOf(project.getBudget()));
 
@@ -79,14 +79,14 @@ public class Stu04Adapter extends RecyclerView.Adapter<Stu04Adapter.MyViewHolder
         this.onItemClickListener = onItemClickListener;
     }
     class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView project_type, project_name, project_num, project_level, project_budget, project_leader, project_member, project_teacher;
+        TextView project_type, project_name, project_id, project_level, project_budget, project_leader, project_member, project_teacher;
         TextView is_submitted, is_approved_college, is_midterm_checked, is_final_checked;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             project_type = itemView.findViewById(R.id.project_type);
             project_name = itemView.findViewById(R.id.project_name);
-            project_num = itemView.findViewById(R.id.project_num);
+            project_id = itemView.findViewById(R.id.project_id);
             project_level = itemView.findViewById(R.id.project_level);
             project_budget = itemView.findViewById(R.id.project_budget);
             project_leader = itemView.findViewById(R.id.project_leader);

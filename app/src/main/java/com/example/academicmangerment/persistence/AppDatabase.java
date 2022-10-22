@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase;
 
 import com.example.academicmangerment.entity.*;
 
-@Database(entities = {Student.class, Teacher.class, Project.class, StuProject.class, TeachProject.class}, version = 1)
+@Database(entities = {Student.class, Teacher.class, Project.class, StuProject.class, TeachProject.class,ProjectDetail.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract StudentDao studentDao();
     public abstract TeacherDao teacherDao();

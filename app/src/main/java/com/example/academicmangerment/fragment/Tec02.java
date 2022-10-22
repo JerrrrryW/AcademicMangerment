@@ -72,7 +72,7 @@ public class Tec02 extends Fragment {
         return view;
     }
     public void setAttribute(Teacher teacher) {
-        editName.setText(teacher.getRealName());
+        editName.setText(teacher.getTecName());
         editEmail.setText(teacher.getEmail());
         editPhone.setText(teacher.getTel());
         editTid.setText(teacher.getTid());

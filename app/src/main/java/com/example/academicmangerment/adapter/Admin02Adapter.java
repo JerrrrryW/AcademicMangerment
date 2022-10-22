@@ -34,7 +34,7 @@ public class Admin02Adapter extends RecyclerView.Adapter<Admin02Adapter.ViewHold
         }
 
         public void setAttribute(Teacher teacher) {
-            editName.setText(teacher.getRealName());
+            editName.setText(teacher.getTecName());
             editEmail.setText(teacher.getEmail());
             editPhone.setText(teacher.getTel());
             editTid.setText(teacher.getTid());
