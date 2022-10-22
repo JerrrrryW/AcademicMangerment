@@ -132,7 +132,10 @@ public class TecActivity extends AppCompatActivity implements View.OnClickListen
                 break;
             case R.id.tec_logout_btn:
                 //跳回登陆界面
-                Toast.makeText(this,"登出功能尚未开发！",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"登出成功！",Toast.LENGTH_SHORT).show();
+                Intent intent=new Intent(TecActivity.this,LoginActivity.class);
+                startActivity(intent);
+                finish();
                 break;
             case R.id.tec_btn_pop:
                 if(mSlidingPaneLayout.isOpen()){

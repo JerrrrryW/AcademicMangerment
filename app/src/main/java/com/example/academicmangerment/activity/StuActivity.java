@@ -187,7 +187,9 @@ public class StuActivity extends AppCompatActivity implements View.OnClickListen
                 break;
             case R.id.logout_btn:
                 //跳回登陆界面
-                Toast.makeText(this,"登出功能尚未开发！",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"登出成功！",Toast.LENGTH_SHORT).show();
+                Intent intent=new Intent(StuActivity.this,LoginActivity.class);
+                startActivity(intent);
                 //TODO 跳转回登录
                 finish();
                 break;

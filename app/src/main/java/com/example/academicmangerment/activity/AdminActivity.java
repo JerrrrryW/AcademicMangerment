@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.slidingpanelayout.widget.SlidingPaneLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -141,7 +142,10 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.adm_logout_btn:
                 //跳回登陆界面
-                Toast.makeText(this,"登出功能尚未开发！",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"登出成功！",Toast.LENGTH_SHORT).show();
+                Intent intent=new Intent(AdminActivity.this,LoginActivity.class);
+                startActivity(intent);
+                finish();
                 break;
             case R.id.adm_btn_pop:
                 if(mSlidingPaneLayout.isOpen()){
