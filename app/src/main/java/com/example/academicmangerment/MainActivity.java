@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void test() {
         //需要在线程中访问数据库
-    new Thread(()->{
+        new Thread(()->{
             db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class,"dataBase").build();
             Student student=new Student("123","1055689557888","2019/09/01","123","13332284652","熊迪","无","本科生","大连海事大学","09/22","本科生","中国",1,"2220192757xd@dlmu.edu.cn");
             Teacher teacher=new Teacher("19880003","赵正","12345678","402-12356","DMUzz@163.com");
@@ -55,5 +55,4 @@ public class MainActivity extends AppCompatActivity {
 //            db.close();
         }).start();
     }
-
 }
