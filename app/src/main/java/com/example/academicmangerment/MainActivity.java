@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
 //        test();
     }
 
-/*    public void test() {
+    public void test() {
         //需要在线程中访问数据库
     new Thread(()->{
             db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class,"dataBase").build();
@@ -54,6 +54,6 @@ public class MainActivity extends AppCompatActivity {
             System.out.println("成功插入");
 //            db.close();
         }).start();
-    }*/
+    }
 
 }
