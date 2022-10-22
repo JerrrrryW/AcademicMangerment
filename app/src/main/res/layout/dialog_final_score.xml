@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:minWidth="260dp"
+    android:layout_centerInParent="true"
+    android:paddingTop="16dp"
+    android:background="@drawable/corner_card"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:gravity="center"
+        tools:text="项目结题"
+        android:visibility="visible"
+        android:textColor="#333333"
+        android:textSize="18sp" />
+    <ImageView
+        android:id="@+id/image"
+        tools:src="@mipmap/teacher"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:visibility="visible"
+        android:layout_width="50dp"
+        android:layout_height="50dp" />
+    <EditText
+        android:id="@+id/score_editText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:lineSpacingExtra="3dp"
+        android:lineSpacingMultiplier="1.2"
+        android:textSize="20dp"
+        android:textColor="#999999"
+        android:inputType="numberDecimal"
+        tools:text="请输入答辩分数" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:lineSpacingExtra="3dp"
+        android:lineSpacingMultiplier="1.2"
+        android:textSize="14dp"
+        android:textColor="#999999"
+        android:inputType="numberDecimal"
+        tools:text="点击空白处返回上一界面" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3px"
+        android:layout_marginHorizontal="10dp"
+        android:background="#E4E4E4" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/negtive"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:gravity="center"
+            android:singleLine="true"
+            tools:text="答辩不通过"
+            android:textColor="@color/dark_red"
+            android:textSize="16sp" />
+
+        <View
+            android:id="@+id/column_line"
+            android:layout_width="3px"
+            android:layout_marginVertical="5dp"
+            android:layout_height="match_parent"
+            android:background="#E4E4E4" />
+
+        <Button
+            android:id="@+id/positive"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:background="@null"
+            android:gravity="center"
+            android:singleLine="true"
+            tools:text="答辩通过"
+            android:textColor="#38ADFF"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+</LinearLayout>
