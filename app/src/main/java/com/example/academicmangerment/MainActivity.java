@@ -1,10 +1,15 @@
 package com.example.academicmangerment;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.Log;
+import android.util.TypedValue;
+import android.view.ViewGroup;
 
 import com.example.academicmangerment.activity.LoginActivity;
 import com.example.academicmangerment.activity.StuActivity;

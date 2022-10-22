@@ -127,7 +127,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary">
+            android:background="@color/colorPrimaryDark">
 
             <ImageView
                 android:id="@+id/tec_btn_pop"
@@ -143,7 +143,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="侧滑栏"
+                android:text="教师管理平台"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp" />
         </RelativeLayout>
@@ -153,6 +153,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/tec_fragments" />
-
     </LinearLayout>
+
+
 </com.example.academicmangerment.custom.CusSlidingPaneLayout>

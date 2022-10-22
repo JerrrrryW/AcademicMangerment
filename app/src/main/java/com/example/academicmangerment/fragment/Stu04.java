@@ -2,14 +2,18 @@ package com.example.academicmangerment.fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,6 +49,8 @@ public class Stu04 extends Fragment {
     public RecyclerView mRecyclerView;
     private List<Project> mProjectList = new ArrayList<>();
     private Stu04Adapter adapter;
+    GridLayoutManager gridLayoutManager;
+    LinearLayoutManager linearLayoutManager;
 
     public TextView textView;
     public Stu04() {
@@ -82,7 +88,8 @@ public class Stu04 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(),2);
+        gridLayoutManager = new GridLayoutManager(getActivity(),2);
+        linearLayoutManager = new LinearLayoutManager(getActivity());
 
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_stu04, container, false);
@@ -107,6 +114,20 @@ public class Stu04 extends Fragment {
             }
         });
         return view;
+    }
+
+    @Override //横竖屏切换时调用
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        if (newConfig.orientation==Configuration.ORIENTATION_LANDSCAPE){
+            //如果是横屏了，在这里设置横屏的UI
+            Log.println(Log.DEBUG,"ProMessageActivity","onConfigurationChanged-Landscape");
+            mRecyclerView.setLayoutManager(gridLayoutManager);
+        }else {
+            //否则，在这里设置竖屏的UI
+            Log.println(Log.DEBUG,"ProMessageActivity","onConfigurationChanged-Portrait");
+            mRecyclerView.setLayoutManager(linearLayoutManager);
+        }
+        super.onConfigurationChanged(newConfig);
     }
 
     public void getData() {

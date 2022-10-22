@@ -168,7 +168,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary">
+            android:background="@color/colorPrimaryDark">
 
             <ImageView
                 android:id="@+id/adm_btn_pop"
@@ -184,7 +184,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="侧滑栏"
+                android:text="管理员权限已授权"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp" />
         </RelativeLayout>

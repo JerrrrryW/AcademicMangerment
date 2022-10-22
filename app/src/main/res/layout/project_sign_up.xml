@@ -10,24 +10,25 @@
     <ScrollView
         android:id="@+id/scrollView1"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_width="match_parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_width="800dp"
         android:layout_height="wrap_content"
-        android:scrollbars="none"
-        >
+        android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:paddingHorizontal="20dp"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
                 android:gravity="center"
-                android:text="大学生项目报名详细信息"
-                android:layout_marginBottom="50dp"
+                android:text="项目报名详细信息"
+                android:layout_marginBottom="10dp"
                 android:textSize="40dp"
                 android:textStyle="bold"
                 android:textColor="@color/black"
@@ -41,7 +42,6 @@
                 android:text="报名信息："
                 android:textSize="30dp"
                 android:textColor="@color/purple_500"
-                android:layout_marginLeft="15dp"
                 android:layout_marginBottom="20dp"
                 />
 
@@ -93,9 +93,8 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/member_list"
-                android:layout_width="470dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="15dp" />
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
             <TextView
                 style="@style/itemMessage"
@@ -116,7 +115,6 @@
                 android:entries="@array/projectLevelList"
                 android:theme="@style/spinner_style"
                 android:layout_width="290dp"
-
                 android:spinnerMode="dropdown"/>
             <TextView
                 android:id="@+id/proAchievementType"

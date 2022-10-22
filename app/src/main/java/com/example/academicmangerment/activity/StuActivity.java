@@ -8,8 +8,10 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.slidingpanelayout.widget.SlidingPaneLayout;
 import androidx.room.Room;
 
+import android.content.res.Configuration;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -63,6 +65,20 @@ public class StuActivity extends AppCompatActivity implements View.OnClickListen
         /*test();*/
         /*数据库测试*/
        /* test();*/
+    }
+
+    @Override //横竖屏切换时调用
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        if (newConfig.orientation==Configuration.ORIENTATION_LANDSCAPE){
+            //如果是横屏了，在这里设置横屏的UI
+            Log.println(Log.DEBUG,"StuActivity","onConfigurationChanged-Landscape");
+
+        }else {
+            //否则，在这里设置竖屏的UI
+            Log.println(Log.DEBUG,"StuActivity","onConfigurationChanged-Portrait");
+
+        }
+        super.onConfigurationChanged(newConfig);
     }
 
     private void initView() {
@@ -172,6 +188,8 @@ public class StuActivity extends AppCompatActivity implements View.OnClickListen
             case R.id.logout_btn:
                 //跳回登陆界面
                 Toast.makeText(this,"登出功能尚未开发！",Toast.LENGTH_SHORT).show();
+                //TODO 跳转回登录
+                finish();
                 break;
             case R.id.btn_pop:
                 if(mSlidingPaneLayout.isOpen()){
