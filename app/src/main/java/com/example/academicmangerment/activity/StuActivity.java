@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -47,7 +48,8 @@ public class StuActivity extends AppCompatActivity implements View.OnClickListen
     private FragmentManager fragmentManager;
     private FragmentTransaction transaction;
     private LinearLayout llbtn1, llbtn2, llbtn3, llbtn4;
-
+    private TextView name;
+    private TextView college;
     private static final String TAG = "StuActivity";
     private CusSlidingPaneLayout mSlidingPaneLayout;
 
@@ -84,6 +86,10 @@ public class StuActivity extends AppCompatActivity implements View.OnClickListen
         llbtn4.setOnClickListener(this);
 
 
+        name=findViewById(R.id.username);
+        college=findViewById(R.id.college);
+        name.setText(student.getRealName());
+        college.setText(student.getCollege());
 //        mSlidingPaneLayout.forbidSlide(false);
 //        btn.setOnClickListener(new View.OnClickListener() {
 //            @Override
