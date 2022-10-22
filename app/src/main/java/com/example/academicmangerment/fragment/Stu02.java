@@ -1,9 +1,12 @@
 package com.example.academicmangerment.fragment;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,6 +44,10 @@ public class Stu02 extends Fragment {
     EditText editCollege;
     EditText editSid;
 
+//    private LayoutInflater inflater_1;
+//    ViewGroup container_1;
+//    Bundle savedInstanceState_1;
+
     public Stu02() {
         // Required empty public constructor
     }
@@ -72,7 +79,7 @@ public class Stu02 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view=inflater.inflate(R.layout.fragment_stu02, container, false);
+        View view=inflater.inflate(R.layout.fragment_stu02_portrait, container, false);
         imageView = view.findViewById(R.id.stu_img);
         editName = (EditText) view.findViewById(R.id.edit_stu02_name);
         editSex = (EditText) view.findViewById(R.id.edit_stu02_sex);
@@ -100,5 +107,19 @@ public class Stu02 extends Fragment {
         editBirth.setText(student.getBirthday());
         editCollege.setText(student.getCollege());
         editSid.setText(student.getSid());
+    }
+
+    @Override //横竖屏切换时调用
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        if (newConfig.orientation==Configuration.ORIENTATION_LANDSCAPE){
+            //如果是横屏了，在这里设置横屏的UI
+            Log.println(Log.DEBUG,"Stu02Fragment","onConfigurationChanged-Landscape");
+
+        }else {
+            //否则，在这里设置竖屏的UI
+            Log.println(Log.DEBUG,"Stu02Fragment","onConfigurationChanged-Portrait");
+
+        }
+        super.onConfigurationChanged(newConfig);
     }
 }

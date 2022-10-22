@@ -97,7 +97,7 @@
             android:layout_marginLeft="30dp"
             android:layout_marginTop="20dp"
             android:layout_marginRight="30dp"
-            android:background="@color/greens"
+            android:background="@color/colorPrimary"
             android:text="学生登录"
             android:textColor="@color/white"
             android:textSize="18dp" />
@@ -124,7 +124,7 @@
             android:layout_marginLeft="30dp"
             android:layout_marginTop="20dp"
             android:layout_marginRight="30dp"
-            android:background="@color/greens"
+            android:background="@color/colorPrimaryDark"
             android:text="管理员登录"
             android:textColor="@color/white"
             android:textSize="18dp" />
