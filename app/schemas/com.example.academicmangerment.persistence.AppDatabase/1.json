@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "79845f5258f66ad245c776824922678c",
+    "identityHash": "4c7161f2462076e0ce595ba60b276d02",
     "entities": [
       {
         "tableName": "Student",
@@ -104,7 +104,7 @@
       },
       {
         "tableName": "Teacher",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`tid` TEXT NOT NULL, `realName` TEXT, `password` TEXT, `tel` TEXT, `email` TEXT, PRIMARY KEY(`tid`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`tid` TEXT NOT NULL, `tecName` TEXT, `password` TEXT, `tel` TEXT, `email` TEXT, PRIMARY KEY(`tid`))",
         "fields": [
           {
             "fieldPath": "tid",
@@ -113,8 +113,8 @@
             "notNull": true
           },
           {
-            "fieldPath": "realName",
-            "columnName": "realName",
+            "fieldPath": "tecName",
+            "columnName": "tecName",
             "affinity": "TEXT",
             "notNull": false
           },
@@ -327,12 +327,80 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "ProjectDetail",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`pid` TEXT NOT NULL, `achievementType` TEXT, `name` TEXT, `level` TEXT, `budget` REAL NOT NULL, `userName` TEXT, `state` INTEGER NOT NULL, `tecName` TEXT, `college` TEXT, PRIMARY KEY(`pid`))",
+        "fields": [
+          {
+            "fieldPath": "pid",
+            "columnName": "pid",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "achievementType",
+            "columnName": "achievementType",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "level",
+            "columnName": "level",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "budget",
+            "columnName": "budget",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "userName",
+            "columnName": "userName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "state",
+            "columnName": "state",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "tecName",
+            "columnName": "tecName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "college",
+            "columnName": "college",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "pid"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '79845f5258f66ad245c776824922678c')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '4c7161f2462076e0ce595ba60b276d02')"
     ]
   }
 }
