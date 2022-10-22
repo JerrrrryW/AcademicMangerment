@@ -35,6 +35,7 @@ import com.example.academicmangerment.persistence.AppDatabase;
 import com.example.academicmangerment.persistence.ProjectDao;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -137,7 +138,10 @@ public class Stu04 extends Fragment {
                 Intent intent = new Intent(getActivity(),ProMessageActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("Pid",project.getPid());
-                bundle.putString("Name",project.getName());
+                bundle.putString("Phone",project.getUserPhone());
+                bundle.putString("Sid",student.sid);
+                bundle.putString("Sname",project.getUserName());
+                bundle.putStringArrayList("Members", (ArrayList<String>) Arrays.asList(project.getMembers()));
                 intent.putExtras(bundle);
                 startActivity(intent);
                 Toast.makeText(getActivity(), "一个项目"+project.getPid(), Toast.LENGTH_SHORT).show();

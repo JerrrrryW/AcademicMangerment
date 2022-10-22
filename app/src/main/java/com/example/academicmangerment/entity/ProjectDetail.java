@@ -15,6 +15,18 @@ public class ProjectDetail {
     String name;
     String level;
     double budget;
+
+    public String getUserPhone() {
+        return userPhone;
+    }
+
+    public void setUserPhone(String userPhone) {
+        this.userPhone = userPhone;
+    }
+
+    //新增属性
+    String userPhone;
+
     String userName;
     int state;
 
