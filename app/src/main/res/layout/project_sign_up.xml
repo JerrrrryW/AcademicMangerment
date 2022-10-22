@@ -57,10 +57,11 @@
                 style="@style/itemMessageInter"
                 android:gravity="center_vertical"
                 android:inputType="text" />
+
             <TextView
                 android:id="@+id/stuPhone"
                 style="@style/itemMessage"
-                android:text="手机号："/>
+                android:text="手机号：" />
 
             <EditText
                 android:id="@+id/stu_phone"

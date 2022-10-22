@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -28,7 +29,7 @@ public class TecActivity extends AppCompatActivity implements View.OnClickListen
     private FragmentTransaction transaction;
     private LinearLayout llbtn1, llbtn2, llbtn3;
     private Teacher teacher;
-
+    private TextView tecName;
     private static final String TAG = "StuActivity";
     private CusSlidingPaneLayout mSlidingPaneLayout;
     @Override
@@ -58,6 +59,9 @@ public class TecActivity extends AppCompatActivity implements View.OnClickListen
         llbtn1.setOnClickListener(this);
         llbtn2.setOnClickListener(this);
         llbtn3.setOnClickListener(this);
+
+        tecName=findViewById(R.id.tec_username);
+        tecName.setText(teacher.getTecName());
 
     }
 

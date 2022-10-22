@@ -16,4 +16,8 @@ public interface StudentDao {
     @Query("select * from student")
     List<Student> loadAllStudent();
 
+    //根据学号修改学生信息
+    @Update
+    void updateStudent(Student student);
+
 }

@@ -222,4 +222,15 @@
             android:text="edit_stu02_state" />
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/stu02_line7"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/stu02_line6"
+        app:layout_constraintLeft_toLeftOf="@id/stu02_line4"
+        app:layout_constraintRight_toRightOf="parent"
+        android:orientation="vertical">
+
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

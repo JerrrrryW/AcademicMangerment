@@ -23,7 +23,7 @@ public interface ProjectDao {
     public List<Project> StuProjects(String stu_sid);*/
 
     //根据学号查询项目详细信息
-    @Query("select project.pid,project.achievementType,project.name,project.level,project.budget,project.userName,project.state,teacher.tecName,student.college" +
+    @Query("select project.pid,project.achievementType,project.name,project.level,project.budget,project.userName,project.state,teacher.tecName,student.college,student.phone as userPhone" +
             " from project,teacher,student,stuproject,teachproject" +
             " where stuproject.sid=:sid and stuproject.pid=project.pid " +
             "and project.pid=teachproject.pid and teachproject.tid=teacher.tid and stuproject.sid=student.sid")

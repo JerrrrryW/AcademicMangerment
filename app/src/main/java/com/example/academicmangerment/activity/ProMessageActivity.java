@@ -103,26 +103,30 @@ public class ProMessageActivity extends AppCompatActivity implements View.OnClic
     }
 
     public void setData() {
-        String pid;
+        String pid,sid,sname,userPhone;
+        List<String> members = new ArrayList<>();
+        List<Project> projects = new ArrayList<>();
+
         Intent intent = getIntent();
         pid = intent.getStringExtra("Pid");//用于数据库中查询相应Project
+        sid = intent.getStringExtra("Sid");
+        sname = intent.getStringExtra("Sname");
+        userPhone = intent.getStringExtra("Phone");
+
         Project project = new Project();
-        List<Project> projects = new StuActivity().projectList;
-        Student student = new StuActivity().student;
         for (Project pro : projects) {
             if (pro.pid == pid) {
                 project = pro;
                 break;
             }
         }
-        setData(stu_sid, student.sid);
-        setData(stu_name, student.realName);
-        setData(stu_phone, student.phone);
+        setData(stu_sid,sid);
+        setData(stu_name, sname);
+        setData(stu_phone, userPhone);
         setData(name, project.getName());
 
         setSpinnerData(level, project.getLevel());
         setSpinnerData(achievement_type, project.getAchievementType());
-
         setData(subject, project.getSubject());
         setData(budget, Double.toString(project.getBudget()));
         setData(economic_analysis, project.getEconomicAnalysis());
