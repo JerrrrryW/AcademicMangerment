@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "4c7161f2462076e0ce595ba60b276d02",
+    "identityHash": "e04ce22304401588c4c5c45bca3f9cc7",
     "entities": [
       {
         "tableName": "Student",
@@ -327,80 +327,12 @@
         },
         "indices": [],
         "foreignKeys": []
-      },
-      {
-        "tableName": "ProjectDetail",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`pid` TEXT NOT NULL, `achievementType` TEXT, `name` TEXT, `level` TEXT, `budget` REAL NOT NULL, `userName` TEXT, `state` INTEGER NOT NULL, `tecName` TEXT, `college` TEXT, PRIMARY KEY(`pid`))",
-        "fields": [
-          {
-            "fieldPath": "pid",
-            "columnName": "pid",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "achievementType",
-            "columnName": "achievementType",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "name",
-            "columnName": "name",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "level",
-            "columnName": "level",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "budget",
-            "columnName": "budget",
-            "affinity": "REAL",
-            "notNull": true
-          },
-          {
-            "fieldPath": "userName",
-            "columnName": "userName",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "state",
-            "columnName": "state",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "tecName",
-            "columnName": "tecName",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "college",
-            "columnName": "college",
-            "affinity": "TEXT",
-            "notNull": false
-          }
-        ],
-        "primaryKey": {
-          "columnNames": [
-            "pid"
-          ],
-          "autoGenerate": false
-        },
-        "indices": [],
-        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '4c7161f2462076e0ce595ba60b276d02')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'e04ce22304401588c4c5c45bca3f9cc7')"
     ]
   }
 }

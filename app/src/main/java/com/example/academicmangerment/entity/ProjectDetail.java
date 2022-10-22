@@ -1,35 +1,21 @@
 package com.example.academicmangerment.entity;
 
-import androidx.annotation.NonNull;
-import androidx.room.Entity;
 import androidx.room.Ignore;
-import androidx.room.PrimaryKey;
 
-import java.util.List;
-@Entity
 public class ProjectDetail {
-    @NonNull
-    @PrimaryKey
     String pid;
     String achievementType;
     String name;
     String level;
     double budget;
 
-    public String getUserPhone() {
-        return userPhone;
-    }
 
-    public void setUserPhone(String userPhone) {
-        this.userPhone = userPhone;
-    }
 
     //新增属性
     String userPhone;
 
     String userName;
     int state;
-
     @Ignore
     String[] members;
 
@@ -47,7 +33,13 @@ public class ProjectDetail {
         }
         return stringBuffer.toString();
     }
+    public String getUserPhone() {
+        return userPhone;
+    }
 
+    public void setUserPhone(String userPhone) {
+        this.userPhone = userPhone;
+    }
     public String getPid() {
         return pid;
     }
