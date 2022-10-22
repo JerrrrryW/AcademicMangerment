@@ -25,7 +25,12 @@ public interface ProjectDao {
     //根据学号查询项目详细信息
     @Query("select project.pid,project.achievementType,project.name,project.level,project.budget,project.userName,project.state,teacher.tecName,student.college" +
             " from project,teacher,student,stuproject,teachproject" +
-            " where stuproject.sid=:sid and stuproject.rank='1' and stuproject.pid=project.pid " +
+            " where stuproject.sid=:sid and stuproject.pid=project.pid " +
             "and project.pid=teachproject.pid and teachproject.tid=teacher.tid and stuproject.sid=student.sid")
     List<ProjectDetail> getProjectDetail(String sid);
+
+    //根据项目号找成员
+    @Query("select student.realName from student,stuproject where stuproject.pid=:pid " +
+            "and stuproject.sid=student.sid and stuproject.rank='2'")
+    String[] getMembers(String pid);
 }

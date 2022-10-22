@@ -117,8 +117,8 @@ public class StuActivity extends AppCompatActivity implements View.OnClickListen
         transaction = fragmentManager.beginTransaction();
         //创建需要添加的Fragment
         stu02 = Stu02.newInstance(student);
-        stu03 = new Stu03();
-        stu04 = new Stu04();
+        stu03 = Stu03.newInstance(student);
+        stu04 = Stu04.newInstance(student);
         //向容器内添加或替换碎片，默认情况下为个人信息管理模块
         transaction.replace(R.id.stu_fragments,stu02);
         //提交事务

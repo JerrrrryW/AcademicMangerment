@@ -1,5 +1,6 @@
 package com.example.academicmangerment.fragment;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -11,7 +12,10 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -25,6 +29,10 @@ import com.example.academicmangerment.activity.ProMessageActivity;
 import com.example.academicmangerment.activity.StuActivity;
 import com.example.academicmangerment.adapter.Stu04Adapter;
 import com.example.academicmangerment.entity.Project;
+import com.example.academicmangerment.entity.ProjectDetail;
+import com.example.academicmangerment.entity.Student;
+import com.example.academicmangerment.persistence.AppDatabase;
+import com.example.academicmangerment.persistence.ProjectDao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,16 +46,17 @@ public class Stu04 extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String ARG_PARAM1 = "student";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private Student student;
+
+    private ProjectDao projectDao;
+    private AppDatabase db;
 
     private View view;
     public RecyclerView mRecyclerView;
-    private List<Project> mProjectList = new ArrayList<>();
+    private List<ProjectDetail> mProjectList ;
     private Stu04Adapter adapter;
     GridLayoutManager gridLayoutManager;
     LinearLayoutManager linearLayoutManager;
@@ -60,17 +69,13 @@ public class Stu04 extends Fragment {
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
      * @return A new instance of fragment Stu04.
      */
     // TODO: Rename and change types and number of parameters
-    public static Stu04 newInstance(String param1, String param2) {
+    public static Stu04 newInstance(Student student) {
         Stu04 fragment = new Stu04();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putSerializable(ARG_PARAM1, student);
         fragment.setArguments(args);
         return fragment;
     }
@@ -79,8 +84,7 @@ public class Stu04 extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            student =(Student) getArguments().getSerializable(ARG_PARAM1);
         }
 
     }
@@ -94,25 +98,52 @@ public class Stu04 extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_stu04, container, false);
         mRecyclerView =(RecyclerView) view.findViewById(R.id.projectsRecyclerView);
-        getData();
-        adapter = new Stu04Adapter(getActivity());
-        adapter.setData(mProjectList);
-        mRecyclerView.setAdapter(adapter);
+        //设置RecyclerView布局
         DividerItemDecoration mDivider = new DividerItemDecoration(getActivity(),DividerItemDecoration.HORIZONTAL);
         mRecyclerView.addItemDecoration(mDivider);
         mRecyclerView.setLayoutManager(gridLayoutManager);
+        /*getData();*/
+        adapter = new Stu04Adapter(getActivity());
+        //从数据库中读取项目信息
+        @SuppressLint("HandlerLeak")
+        final Handler handler=new Handler(){
+            @Override
+            public void handleMessage(@NonNull Message msg) {
+                super.handleMessage(msg);
+                mProjectList=(List<ProjectDetail>) msg.obj;
+                adapter.setData(mProjectList);
+                mRecyclerView.setAdapter(adapter);
+
+            }
+        };
+        db= Room.databaseBuilder(getContext(), AppDatabase.class,"dataBase").build();
+        projectDao=db.projectDao();
+        new Thread(){
+            @Override
+            public void run() {
+                super.run();
+                mProjectList=projectDao.getProjectDetail(student.sid);
+                for(ProjectDetail p:mProjectList){
+                    p.setMembers(projectDao.getMembers(p.getPid()));
+                }
+                Message message=Message.obtain();
+                message.obj=mProjectList;
+                handler.sendMessage(message);
+            }
+        }.start();
         adapter.setOnItemClickListener(new Stu04Adapter.OnItemClickListener() {
             @Override
-            public void OnItemClick(View view, Project project) {
+            public void OnItemClick(View view, ProjectDetail project) {
                 Intent intent = new Intent(getActivity(),ProMessageActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putString("Pid",project.pid);
-                bundle.putString("Name",project.name);
+                bundle.putString("Pid",project.getPid());
+                bundle.putString("Name",project.getName());
                 intent.putExtras(bundle);
                 startActivity(intent);
-                Toast.makeText(getActivity(), "一个项目"+project.pid, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "一个项目"+project.getPid(), Toast.LENGTH_SHORT).show();
             }
         });
+
         return view;
     }
 
@@ -130,11 +161,11 @@ public class Stu04 extends Fragment {
         super.onConfigurationChanged(newConfig);
     }
 
-    public void getData() {
-        mProjectList = new StuActivity().projectList;
+/*    public void getData() {
+       *//* mProjectList = new StuActivity().projectList;*//*
         if(mProjectList.size() == 0) {
             textView = (TextView) view.findViewById(R.id.NoProject);
             textView.setText("您未参加过任何项目");
         }
-    }
+    }*/
 }

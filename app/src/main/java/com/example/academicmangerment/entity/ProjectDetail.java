@@ -19,7 +19,7 @@ public class ProjectDetail {
     int state;
 
     @Ignore
-    List<String> members;
+    String[] members;
 
     String tecName;
 
@@ -28,7 +28,13 @@ public class ProjectDetail {
     public ProjectDetail() {
     }
 
-
+    public String strMember(){
+        StringBuffer stringBuffer=new StringBuffer();
+        for(String c:members){
+            stringBuffer.append(c+" ");
+        }
+        return stringBuffer.toString();
+    }
 
     public String getPid() {
         return pid;
@@ -86,11 +92,11 @@ public class ProjectDetail {
         this.state = state;
     }
 
-    public List<String> getMembers() {
+    public String[] getMembers() {
         return members;
     }
 
-    public void setMembers(List<String> members) {
+    public void setMembers(String[] members) {
         this.members = members;
     }
 

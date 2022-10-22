@@ -7,9 +7,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.util.StringUtil;
 
 import com.example.academicmangerment.R;
 import com.example.academicmangerment.entity.Project;
+import com.example.academicmangerment.entity.ProjectDetail;
 
 import java.util.List;
 
@@ -17,14 +19,14 @@ import java.util.List;
 
 public class Stu04Adapter extends RecyclerView.Adapter<Stu04Adapter.MyViewHolder> {
     private Context mContext;
-    private List<Project> pjt;
+    private List<ProjectDetail> pjt;
     public Stu04Adapter(Context context) {mContext = context;}
 
     /***
      * 设置数据更新界面
      * @return
      */
-    public void setData(List<Project> pjt) {
+    public void setData(List<ProjectDetail> pjt) {
         this.pjt = pjt;
         notifyDataSetChanged();
     }
@@ -41,22 +43,21 @@ public class Stu04Adapter extends RecyclerView.Adapter<Stu04Adapter.MyViewHolder
     @NonNull
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        Project project = pjt.get(position);
+        ProjectDetail project = pjt.get(position);
         holder.project_type.setText(project.getAchievementType());
         holder.project_name.setText(project.getName());
         holder.project_id.setText(project.getPid());
         holder.project_level.setText(project.getLevel());
         holder.project_budget.setText(String.valueOf(project.getBudget()));
 
-        /**暂未开发
-         * holder.project_leader.setText(project.getLeader());
-         holder.project_member.setText(project.getMember());
-         * holder.project_teacher.setText(project.getTeacher());
-         * holder.is_submitted.setText(project.getSubmitted());
-         * holder.is_approved_college.setText(project.getCollege());
-         * holder.is_midterm_checked.setText(project.getMidtermChecked());
-         * holder.is_final_checked.setText(project.getFinalChecked());
-         */
+
+         holder.project_leader.setText(project.getUserName());
+         holder.project_member.setText(project.strMember());
+         holder.project_teacher.setText(project.getTecName());
+         //holder.is_submitted.setText(project.getSubmitted());
+         holder.is_approved_college.setText(project.getCollege());
+         //holder.is_midterm_checked.setText(project.getMidtermChecked());
+         //holder.is_final_checked.setText(project.getFinalChecked());
     }
 
     /**
@@ -72,7 +73,7 @@ public class Stu04Adapter extends RecyclerView.Adapter<Stu04Adapter.MyViewHolder
      * item监听事件的接口
      */
     public interface OnItemClickListener {
-        public void OnItemClick(View view,Project project);
+        public void OnItemClick(View view,ProjectDetail project);
     }
     private OnItemClickListener onItemClickListener;
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
