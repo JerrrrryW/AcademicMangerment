@@ -67,20 +67,6 @@ public class StuActivity extends AppCompatActivity implements View.OnClickListen
        /* test();*/
     }
 
-    @Override //横竖屏切换时调用
-    public void onConfigurationChanged(@NonNull Configuration newConfig) {
-        if (newConfig.orientation==Configuration.ORIENTATION_LANDSCAPE){
-            //如果是横屏了，在这里设置横屏的UI
-            Log.println(Log.DEBUG,"StuActivity","onConfigurationChanged-Landscape");
-
-        }else {
-            //否则，在这里设置竖屏的UI
-            Log.println(Log.DEBUG,"StuActivity","onConfigurationChanged-Portrait");
-
-        }
-        super.onConfigurationChanged(newConfig);
-    }
-
     private void initView() {
         ImageView head = findViewById(R.id.img_head);
         Glide.with(getBaseContext()).load(R.mipmap.test).into(head);
@@ -204,4 +190,6 @@ public class StuActivity extends AppCompatActivity implements View.OnClickListen
                 break;
         }
     }
+
+
 }
