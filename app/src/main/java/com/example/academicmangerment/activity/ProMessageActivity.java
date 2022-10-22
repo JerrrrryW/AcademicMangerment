@@ -79,48 +79,50 @@ public class ProMessageActivity extends AppCompatActivity /*implements Stu04.Sen
             super.onConfigurationChanged(newConfig);
     }
 
-public void setData() {
+    public void setData() {
         String pid;
         Intent intent = getIntent();
         pid = intent.getStringExtra("Pid");//用于数据库中查询相应Project
         Project project = new Project();
         List<Project> projects = new StuActivity().projectList;
         Student student = new StuActivity().student;
-        for(Project pro : projects) {
-            if(pro.pid == pid) {
+        for (Project pro : projects) {
+            if (pro.pid == pid) {
                 project = pro;
                 break;
             }
         }
-        setData(stu_sid,student.sid);
-        setData(stu_name,student.realName);
-        setData(stu_phone,student.phone);
-        setData(name,project.getName());
+        setData(stu_sid, student.sid);
+        setData(stu_name, student.realName);
+        setData(stu_phone, student.phone);
+        setData(name, project.getName());
 
-        setSpinnerData(level,project.getLevel());
-        setSpinnerData(achievement_type,project.getAchievementType());
+        setSpinnerData(level, project.getLevel());
+        setSpinnerData(achievement_type, project.getAchievementType());
 
-        setData(subject,project.getSubject());
-        setData(budget,Double.toString(project.getBudget()));
-        setData(economic_analysis,project.getEconomicAnalysis());
-        setData(purpose,project.getPurpose());
-        setData(viable_analysis,project.getViableAnalysis());
+        setData(subject, project.getSubject());
+        setData(budget, Double.toString(project.getBudget()));
+        setData(economic_analysis, project.getEconomicAnalysis());
+        setData(purpose, project.getPurpose());
+        setData(viable_analysis, project.getViableAnalysis());
 
         submit.setText("更改");
-}
-public void setData(EditText editText,String s) {
+    }
+
+    public void setData(EditText editText, String s) {
         editText.setText(s);
         editText.setKeyListener(null);
-}
-public void setSpinnerData(Spinner spinner,String s) {
+    }
+
+    public void setSpinnerData(Spinner spinner, String s) {
         SpinnerAdapter adapter = spinner.getAdapter();
         int k = adapter.getCount();
-    for (int i = 0; i < k; i++) {
-        if(s.equals(adapter.getItem(i).toString())) {
-            spinner.setSelection(i,true);
-            break;
+        for (int i = 0; i < k; i++) {
+            if (s.equals(adapter.getItem(i).toString())) {
+                spinner.setSelection(i, true);
+                break;
+            }
         }
+        spinner.setClickable(false);
     }
-    spinner.setClickable(false);
-}
 }
