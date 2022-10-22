@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     android:padding="20dp"
     android:background="@drawable/corner_card"
+    android:layout_margin="20dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageView
@@ -13,7 +14,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        android:src="@mipmap/student" />
 
     <LinearLayout
         android:id="@+id/adm01_line1"
