@@ -16,6 +16,7 @@ import android.widget.SpinnerAdapter;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -73,9 +74,9 @@ public class ProMessageActivity extends AppCompatActivity implements View.OnClic
         scrollView = (ScrollView) findViewById(R.id.scrollView1);
         member_list = (RecyclerView) findViewById(R.id.member_list);
 
-        DividerItemDecoration mDivider = new DividerItemDecoration(this,DividerItemDecoration.HORIZONTAL);
+        DividerItemDecoration mDivider = new DividerItemDecoration(this,DividerItemDecoration.VERTICAL);
         member_list.addItemDecoration(mDivider);
-        member_list.setLayoutManager(new LinearLayoutManager(this));
+        member_list.setLayoutManager(new GridLayoutManager(this,1));
         memberListAdapter = new MemberListAdapter(this);
         //member_list.setVisibility(View.GONE); //复用至上传一个全新项目时默认没有成员，取消此注释
         //TODO 在此处将项目成员放入studentList
