@@ -13,4 +13,7 @@ public interface TeacherDao {
     void insertTeachers(List<Teacher> teachers);
     @Query("select * from teacher")
     List<Teacher> loadAllTeacher();
+
+    @Update
+    void updateTeacher(Teacher teacher);
 }

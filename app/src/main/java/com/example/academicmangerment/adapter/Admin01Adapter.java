@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.academicmangerment.R;
+import com.example.academicmangerment.entity.ProjectDetail;
 import com.example.academicmangerment.entity.Student;
 
 import java.util.List;
@@ -50,6 +51,8 @@ public class Admin01Adapter extends RecyclerView.Adapter<Admin01Adapter.ViewHold
             editCollege = (EditText) view.findViewById(R.id.edit_stu_college);
             editSid = (EditText) view.findViewById(R.id.edit_stu_sid);
 
+            //设置监听
+
         }
         //设置属性
         public void setAttribute(Student student){
@@ -88,4 +91,17 @@ public class Admin01Adapter extends RecyclerView.Adapter<Admin01Adapter.ViewHold
     public int getItemCount() {
         return studentList.size();
     }
+
+    /**
+     * item监听事件的接口
+     */
+    public interface OnItemClickListener {
+        public void OnItemClick(View view, Student student);
+    }
+    private OnItemClickListener onItemClickListener;
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
+
 }
