@@ -1,5 +1,6 @@
 package com.example.academicmangerment.adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,9 +10,13 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
 import com.example.academicmangerment.R;
 import com.example.academicmangerment.entity.Student;
+import com.example.academicmangerment.fragment.Admin01;
+import com.example.academicmangerment.persistence.AppDatabase;
+import com.example.academicmangerment.persistence.StudentDao;
 
 import java.util.List;
 
@@ -19,6 +24,10 @@ public class Admin01Adapter extends RecyclerView.Adapter<Admin01Adapter.ViewHold
     //所需数据
     private List<Student> studentList;
     private ButtonInterface buttonInterface;
+    private AppDatabase db;
+    private StudentDao studentDao;
+
+    private Context context;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
@@ -72,7 +81,8 @@ public class Admin01Adapter extends RecyclerView.Adapter<Admin01Adapter.ViewHold
         }
     }
     public Admin01Adapter(){}
-    public Admin01Adapter(List<Student> studentList) {
+    public Admin01Adapter(List<Student> studentList,Context context) {
+        this.context=context;
         this.studentList = studentList;
     }
 
@@ -87,14 +97,30 @@ public class Admin01Adapter extends RecyclerView.Adapter<Admin01Adapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull Admin01Adapter.ViewHolder holder, int position) {
         holder.setAttribute(studentList.get(position));
+        Admin01Adapter.ViewHolder mholder=holder;
         int p=position;
         //设置按钮监听
         holder.saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(buttonInterface!=null){
+                    Student student=studentList.get(p);
+                    student.setSid(mholder.editName.getText().toString());
+                    String sex = mholder.editSex.getText().toString();
+                    student.setSex(sex.equals("男") ? 1 : 0);
+                    student.setPhone(mholder.editPhone.getText().toString());
+                    student.setCard(mholder.editCard.getText().toString());
+                    student.setState(mholder.editState.getText().toString());
+                    student.setDegree(mholder.editDegree.getText().toString());
+                    student.setType(mholder.editType.getText().toString());
+                    student.setEmail(mholder.editEmail.getText().toString());
+                    student.setBirthday(mholder.editBirth.getText().toString());
+                    student.setCollege(mholder.editCollege.getText().toString());
+                    student.setSid(mholder.editSid.getText().toString());
+
+                    new MyThread(student).start();
                     //接口实例化后的而对象，调用重写后的方法
-                    buttonInterface.OnItemClick(view,p);
+                    /*buttonInterface.OnItemClick(view,p);*/
                 }
             }
         });
@@ -117,6 +143,21 @@ public class Admin01Adapter extends RecyclerView.Adapter<Admin01Adapter.ViewHold
     public void setButtonInterface(ButtonInterface buttonInterface) {
         this.buttonInterface = buttonInterface;
     }
+    class MyThread extends Thread {
+        Student student;
 
+        public MyThread() {
+        }
+        public MyThread(Student student){
+            this.student=student;
+        }
+        @Override
+        public void run() {
+            db = Room.databaseBuilder(context, AppDatabase.class, "dataBase").build();
+            studentDao = db.studentDao();
+            studentDao.updateStudent(student);
+            super.run();
+        }
+    }
 
 }

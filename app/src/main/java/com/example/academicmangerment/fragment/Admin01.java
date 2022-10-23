@@ -76,13 +76,14 @@ public class Admin01 extends Fragment {
             public void handleMessage(@NonNull Message msg) {
                 super.handleMessage(msg);
                 studentList = (List<Student>) msg.obj;
-                admin01Adapter = new Admin01Adapter(studentList);
+                admin01Adapter = new Admin01Adapter(studentList,getContext());
                 mRecyclerView = (RecyclerView) view.findViewById(R.id.adm01_recyclerview);
                 mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                 mRecyclerView.setAdapter(admin01Adapter);
-                admin01Adapter.setButtonInterface(new Admin01Adapter.ButtonInterface() {
+                /*admin01Adapter.setButtonInterface(new Admin01Adapter.ButtonInterface() {
                     @Override
                     public void OnItemClick(View view, int position) {
+
                         EditText editName = (EditText) view.findViewById(R.id.edit_stu_name);
                         EditText editSex = (EditText) view.findViewById(R.id.edit_stu_sex);
                         EditText editPhone = (EditText) view.findViewById(R.id.edit_stu_phone);
@@ -109,7 +110,7 @@ public class Admin01 extends Fragment {
                         student.setSid(editSid.getText().toString());
                         new MyThread(student).run();
                     }
-                });
+                });*/
             }
         };
 
