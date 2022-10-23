@@ -3,15 +3,14 @@ package com.example.academicmangerment.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.academicmangerment.R;
-import com.example.academicmangerment.entity.ProjectDetail;
 import com.example.academicmangerment.entity.Student;
 
 import java.util.List;
@@ -19,6 +18,7 @@ import java.util.List;
 public class Admin01Adapter extends RecyclerView.Adapter<Admin01Adapter.ViewHolder> {
     //所需数据
     private List<Student> studentList;
+    private ButtonInterface buttonInterface;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
@@ -33,7 +33,7 @@ public class Admin01Adapter extends RecyclerView.Adapter<Admin01Adapter.ViewHold
         EditText editBirth;
         EditText editCollege;
         EditText editSid;
-
+        Button saveButton;
 
         public ViewHolder(View view) {
             super(view);
@@ -51,7 +51,9 @@ public class Admin01Adapter extends RecyclerView.Adapter<Admin01Adapter.ViewHold
             editCollege = (EditText) view.findViewById(R.id.edit_stu_college);
             editSid = (EditText) view.findViewById(R.id.edit_stu_sid);
 
-            //设置监听
+
+            //按钮
+            saveButton=(Button) view.findViewById(R.id.save_btn_adm01);
 
         }
         //设置属性
@@ -85,6 +87,17 @@ public class Admin01Adapter extends RecyclerView.Adapter<Admin01Adapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull Admin01Adapter.ViewHolder holder, int position) {
         holder.setAttribute(studentList.get(position));
+        int p=position;
+        //设置按钮监听
+        holder.saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(buttonInterface!=null){
+                    //接口实例化后的而对象，调用重写后的方法
+                    buttonInterface.OnItemClick(view,p);
+                }
+            }
+        });
     }
 
     @Override
@@ -95,12 +108,14 @@ public class Admin01Adapter extends RecyclerView.Adapter<Admin01Adapter.ViewHold
     /**
      * item监听事件的接口
      */
-    public interface OnItemClickListener {
-        public void OnItemClick(View view, Student student);
+    public interface ButtonInterface {
+        public void OnItemClick(View view, int position);
     }
-    private OnItemClickListener onItemClickListener;
-    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
-        this.onItemClickListener = onItemClickListener;
+    /**
+     *按钮点击事件需要的方法
+     */
+    public void setButtonInterface(ButtonInterface buttonInterface) {
+        this.buttonInterface = buttonInterface;
     }
 
 
