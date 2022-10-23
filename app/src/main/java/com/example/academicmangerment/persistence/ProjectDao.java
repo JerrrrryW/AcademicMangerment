@@ -53,4 +53,13 @@ public interface ProjectDao {
     @Query("select student.sid from student,stuproject where stuproject.pid=:pid " +
             "and stuproject.rank='1' and stuproject.sid=student.sid")
     String getLeaderSid(String pid);
+
+    @Query("select distinct project.pid,project.achievementType,project.name,project.level,project.budget," +
+            "project.subject,project.economicAnalysis,project.purpose,project.viableAnalysis," +
+            "project.state,teacher.tecName,student.college" +
+            " from project,teacher,student,stuproject,teachproject" +
+            " where stuproject.pid=project.pid " +
+            "and project.pid=teachproject.pid and teachproject.tid=teacher.tid " +
+            "and stuproject.sid=student.sid")
+    List<ProjectDetail> getProjectDetail();
 }
