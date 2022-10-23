@@ -1,7 +1,6 @@
 package com.example.academicmangerment.fragment;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -17,7 +16,6 @@ import androidx.room.Room;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,9 +24,7 @@ import android.widget.Toast;
 
 import com.example.academicmangerment.R;
 import com.example.academicmangerment.activity.ProMessageActivity;
-import com.example.academicmangerment.activity.StuActivity;
 import com.example.academicmangerment.adapter.Stu04Adapter;
-import com.example.academicmangerment.entity.Project;
 import com.example.academicmangerment.entity.ProjectDetail;
 import com.example.academicmangerment.entity.Student;
 import com.example.academicmangerment.persistence.AppDatabase;
@@ -126,6 +122,10 @@ public class Stu04 extends Fragment {
                 mProjectList=projectDao.getProjectDetail(student.sid);
                 for(ProjectDetail p:mProjectList){
                     p.setMembers(projectDao.getMembers(p.getPid()));
+                    p.setStudentList(projectDao.getMemberStudents(p.getPid()));
+                    p.setRealName(projectDao.getLeader(p.getPid()));
+                    p.setPhone(projectDao.getLeaderPhone(p.getPid()));
+                    p.setSid(projectDao.getLeaderSid(p.getPid()));
                 }
                 Message message=Message.obtain();
                 message.obj=mProjectList;
@@ -137,11 +137,7 @@ public class Stu04 extends Fragment {
             public void OnItemClick(View view, ProjectDetail project) {
                 Intent intent = new Intent(getActivity(),ProMessageActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putString("Pid",project.getPid());
-                bundle.putString("Phone",project.getUserPhone());
-                bundle.putString("Sid",student.sid);
-                bundle.putString("Sname",project.getUserName());
-                bundle.putStringArrayList("Members", (ArrayList<String>) Arrays.asList(project.getMembers()));
+                bundle.putSerializable("projectDetail",project);
                 intent.putExtras(bundle);
                 startActivity(intent);
                 Toast.makeText(getActivity(), "一个项目"+project.getPid(), Toast.LENGTH_SHORT).show();

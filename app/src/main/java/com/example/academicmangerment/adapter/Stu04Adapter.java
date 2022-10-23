@@ -7,10 +7,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.util.StringUtil;
 
 import com.example.academicmangerment.R;
-import com.example.academicmangerment.entity.Project;
 import com.example.academicmangerment.entity.ProjectDetail;
 
 import java.util.List;
@@ -44,14 +42,14 @@ public class Stu04Adapter extends RecyclerView.Adapter<Stu04Adapter.MyViewHolder
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         ProjectDetail project = pjt.get(position);
-        holder.project_type.setText(project.getAchievementType());
+        holder.project_type.setText(""+project.getAchievementType().charAt(0));
         holder.project_name.setText(project.getName());
         holder.project_id.setText(project.getPid());
         holder.project_level.setText(project.getLevel());
         holder.project_budget.setText(String.valueOf(project.getBudget()));
 
 
-         holder.project_leader.setText(project.getUserName());
+         holder.project_leader.setText(project.getRealName());
          holder.project_member.setText(project.strMember());
          holder.project_teacher.setText(project.getTecName());
          //holder.is_submitted.setText(project.getSubmitted());

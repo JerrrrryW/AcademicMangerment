@@ -2,27 +2,37 @@ package com.example.academicmangerment.entity;
 
 import androidx.room.Ignore;
 
-public class ProjectDetail {
+import java.io.Serializable;
+import java.util.List;
+
+public class ProjectDetail implements Serializable {
     String pid;
     String achievementType;
     String name;
     String level;
     double budget;
 
-
-
     //新增属性
-    String userPhone;
-
-    String userName;
+    @Ignore
+    String phone;
+    @Ignore
+    String sid;
+    @Ignore
+    String realName;
     int state;
+    //成员姓名列表
     @Ignore
     String[] members;
 
     String tecName;
 
     String college;
-
+    String subject;
+    String economicAnalysis;
+    String purpose;
+    String viableAnalysis;
+    @Ignore
+    List<Student> studentList;
     public ProjectDetail() {
     }
 
@@ -33,12 +43,61 @@ public class ProjectDetail {
         }
         return stringBuffer.toString();
     }
-    public String getUserPhone() {
-        return userPhone;
+
+    public String getSid() {
+        return sid;
     }
 
-    public void setUserPhone(String userPhone) {
-        this.userPhone = userPhone;
+    public void setSid(String sid) {
+        this.sid = sid;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    public String getEconomicAnalysis() {
+        return economicAnalysis;
+    }
+
+    public void setEconomicAnalysis(String economicAnalysis) {
+        this.economicAnalysis = economicAnalysis;
+    }
+
+    public String getPurpose() {
+        return purpose;
+    }
+
+    public void setPurpose(String purpose) {
+        this.purpose = purpose;
+    }
+
+    public String getViableAnalysis() {
+        return viableAnalysis;
+    }
+
+    public void setViableAnalysis(String viableAnalysis) {
+        this.viableAnalysis = viableAnalysis;
+    }
+
+    public List<Student> getStudentList() {
+        return studentList;
+    }
+
+    public void setStudentList(List<Student> studentList) {
+        this.studentList = studentList;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
     public String getPid() {
         return pid;
@@ -80,12 +139,12 @@ public class ProjectDetail {
         this.budget = budget;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getRealName() {
+        return realName;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setRealName(String realName) {
+        this.realName = realName;
     }
 
     public int getState() {
