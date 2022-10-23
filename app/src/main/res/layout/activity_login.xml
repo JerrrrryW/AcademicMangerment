@@ -36,6 +36,7 @@
                 android:paddingLeft="5dp"
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/black"
+                android:text="2220192757"
                 android:textSize="18sp" />
 
             <View
@@ -58,7 +59,8 @@
                 android:paddingLeft="5dp"
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/black"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:text="123456"/>
 
             <View
                 android:layout_width="match_parent"
