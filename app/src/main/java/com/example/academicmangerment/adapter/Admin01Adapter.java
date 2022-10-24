@@ -1,6 +1,7 @@
 package com.example.academicmangerment.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,7 +43,7 @@ public class Admin01Adapter extends RecyclerView.Adapter<Admin01Adapter.ViewHold
         EditText editBirth;
         EditText editCollege;
         EditText editSid;
-        Button saveButton;
+        Button  saveButton;
 
         public ViewHolder(View view) {
             super(view);
@@ -59,7 +60,6 @@ public class Admin01Adapter extends RecyclerView.Adapter<Admin01Adapter.ViewHold
             editBirth = (EditText) view.findViewById(R.id.edit_stu_birth);
             editCollege = (EditText) view.findViewById(R.id.edit_stu_college);
             editSid = (EditText) view.findViewById(R.id.edit_stu_sid);
-
 
             //按钮
             saveButton=(Button) view.findViewById(R.id.save_btn_adm01);
@@ -97,28 +97,28 @@ public class Admin01Adapter extends RecyclerView.Adapter<Admin01Adapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull Admin01Adapter.ViewHolder holder, int position) {
         holder.setAttribute(studentList.get(position));
-        Admin01Adapter.ViewHolder mholder=holder;
-        int p=position;
-        //设置按钮监听
-        holder.saveButton.setOnClickListener(new View.OnClickListener() {
+        Button mSaveBtn = holder.itemView.findViewById(R.id.save_btn_adm01);
+        mSaveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                if(buttonInterface!=null){
-                    Student student=studentList.get(p);
-                    student.setSid(mholder.editName.getText().toString());
-                    String sex = mholder.editSex.getText().toString();
+            public void onClick(View v) {
+                if (buttonInterface != null) {
+                    Log.println(Log.DEBUG, "Admin01: ", "save button clicked!");
+                    Student student = studentList.get(holder.getAdapterPosition());
+                    student.setSid(holder.editName.getText().toString());
+                    String sex = holder.editSex.getText().toString();
                     student.setSex(sex.equals("男") ? 1 : 0);
-                    student.setPhone(mholder.editPhone.getText().toString());
-                    student.setCard(mholder.editCard.getText().toString());
-                    student.setState(mholder.editState.getText().toString());
-                    student.setDegree(mholder.editDegree.getText().toString());
-                    student.setType(mholder.editType.getText().toString());
-                    student.setEmail(mholder.editEmail.getText().toString());
-                    student.setBirthday(mholder.editBirth.getText().toString());
-                    student.setCollege(mholder.editCollege.getText().toString());
-                    student.setSid(mholder.editSid.getText().toString());
+                    student.setPhone(holder.editPhone.getText().toString());
+                    student.setCard(holder.editCard.getText().toString());
+                    student.setState(holder.editState.getText().toString());
+                    student.setDegree(holder.editDegree.getText().toString());
+                    student.setType(holder.editType.getText().toString());
+                    student.setEmail(holder.editEmail.getText().toString());
+                    student.setBirthday(holder.editBirth.getText().toString());
+                    student.setCollege(holder.editCollege.getText().toString());
+                    student.setSid(holder.editSid.getText().toString());
 
-                    new MyThread(student).start();
+
+//                    this.MyThread(student).start();
                     //接口实例化后的而对象，调用重写后的方法
                     /*buttonInterface.OnItemClick(view,p);*/
                 }

@@ -139,7 +139,9 @@ public class Stu03 extends Fragment implements View.OnClickListener{
                 break;
             case R.id.stu03_save_btn:
                 //TODO
-
+                break;
+            case R.id.stu03_submit_btn:
+                //TODO
                 break;
             default:
                 break;
