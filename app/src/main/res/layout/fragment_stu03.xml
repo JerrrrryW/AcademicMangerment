@@ -7,22 +7,221 @@
     tools:context=".fragment.Stu03">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="Module Stu03\n学生端-科研信息上报模块"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+    <ScrollView
+        android:id="@+id/stu03_scrollView"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.831" />
+        android:layout_width="800dp"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/stu03_title"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:gravity="center"
+                android:text="项目报名详细信息"
+                android:layout_marginBottom="10dp"
+                android:textSize="40dp"
+                android:textStyle="bold"
+                android:textColor="@color/space_blue"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
 
+            <TextView
+                android:id="@+id/stu03_sid"
+                style="@style/itemMessage"
+                android:text="学号:"
+                app:layout_constraintTop_toBottomOf="@id/stu03_title" />
+
+            <EditText
+                android:id="@+id/edit_stu03_sid"
+                style="@style/itemMessageInter"
+                android:gravity="center_vertical"
+                android:inputType="number" />
+
+            <TextView
+                style="@style/itemMessage"
+                android:id="@+id/stu03_Name"
+                android:text="姓名："
+                app:layout_constraintTop_toBottomOf="@id/edit_stu03_sid"
+                />
+            <EditText
+                android:id="@+id/edit_stu03_name"
+                style="@style/itemMessageInter"
+                android:gravity="center_vertical"
+                android:inputType="text" />
+
+            <TextView
+                android:id="@+id/stu03_stuPhone"
+                style="@style/itemMessage"
+                android:text="手机号：" />
+
+            <EditText
+                android:id="@+id/edit_stu03_phone"
+                style="@style/itemMessageInter"
+                android:gravity="center_vertical"
+                android:inputType="number"/>
+
+            <TextView
+                style="@style/itemMessage"
+                android:id="@+id/stu03_Member"
+                android:text="参与成员："/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <EditText
+                    android:id="@+id/edit_stu03_member"
+                    android:layout_height="48dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:textSize="20dp"
+                    android:textColor="@color/black"
+                    android:paddingLeft="10dp"
+                    android:background="@drawable/edit_bg"
+                    android:gravity="center_vertical"
+                    android:hint="请输入学号添加成员"
+                    android:inputType="number"/>
+                <Button
+                    android:id="@+id/stu03_member_add_btn"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:background="@color/greens"
+                    android:textSize="25dp"
+                    android:text="+"/>
+            </LinearLayout>
 
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/stu03_member_list"
+                android:layout_width="600dp"
+                android:layout_height="match_parent" />
+
+            <TextView
+                style="@style/itemMessage"
+                android:id="@+id/stu03_proName"
+                android:text="项目名称："/>
+            <EditText
+                style="@style/itemMessageInter"
+                android:gravity="center_vertical"
+                android:id="@+id/edit_stu03_proName"
+                android:inputType="text"/>
+            <TextView
+                style="@style/itemMessage"
+                android:id="@+id/stu03_proLevel"
+                android:text="项目等级："/>
+            <Spinner
+                style="@style/itemMessageInter"
+                android:id="@+id/stu03_level"
+                android:entries="@array/projectLevelList"
+                android:theme="@style/spinner_style"
+                android:layout_width="290dp"
+                android:spinnerMode="dropdown"/>
+            <TextView
+                android:id="@+id/stu03_proAchievementType"
+                style="@style/itemMessage"
+                android:text="项目类型：" />
+            <Spinner
+                style="@style/itemMessageInter"
+                android:id="@+id/stu03_achievement_type"
+                android:theme="@style/spinner_style"
+                android:layout_width="290dp"
+                android:entries="@array/projectTypeList"
+                android:spinnerMode="dropdown"/>
+            <TextView
+                style="@style/itemMessage"
+                android:id="@+id/stu03_proSubject"
+                android:text="项目所属学科："/>
+            <EditText
+                style="@style/itemMessageInter"
+                android:id="@+id/edit_stu03_subject"
+                android:gravity="center_vertical"
+                android:inputType="text"/>
+            <TextView
+                android:id="@+id/stu03_proBudget"
+                style="@style/itemMessage"
+                android:text="资金预算：" />
+
+            <EditText
+                style="@style/itemMessageInter"
+                android:id="@+id/edit_stu03_budget"
+                android:gravity="center_vertical"
+                android:inputType="number"/>
+            <TextView
+                style="@style/itemMessage"
+                android:id="@+id/stu03_proEconomicAnalysis"
+                android:text="资金分析："/>
+            <EditText
+                style="@style/itemMessageInter"
+                android:id="@+id/edit_stu03_economic_analysis"
+                android:gravity="top"
+                android:layout_height="200dp"
+                android:inputType="textMultiLine"/>
+            <TextView
+                style="@style/itemMessage"
+                android:id="@+id/stu03_proPurpose"
+                android:text="项目目标：" />
+            <EditText
+                style="@style/itemMessageInter"
+                android:id="@+id/edit_stu03_purpose"
+                android:layout_height="100dp"
+                android:gravity="center_vertical"
+                android:inputType="textMultiLine"/>
+            <TextView
+                style="@style/itemMessage"
+                android:id="@+id/edit_stu03_viableAnalysis"
+                android:text="可行性分析："/>
+            <EditText
+                style="@style/itemMessageInter"
+                android:id="@+id/edit_stu03_viable_analysis"
+                android:gravity="top"
+                android:layout_height="200dp"
+                android:inputType="textMultiLine"/>
+            <Button
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/stu03_submit"
+                android:background="@color/purple_500"
+                android:textSize="30dp"
+                android:textColor="@color/white"
+                android:contextClickable="true"
+                android:text="提交"
+                android:layout_marginBottom="30dp"/>
 
 
+        </LinearLayout>
 
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:orientation="vertical"
+        android:layout_margin="20dp">
+
+        <Button
+            android:id="@+id/stu03_save_btn"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:text="保存"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/white_round"
+            android:backgroundTint="@color/space_blue"
+            android:textColor="@color/white"/>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
