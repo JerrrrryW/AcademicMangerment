@@ -92,15 +92,14 @@ public class ProMessageActivity extends AppCompatActivity implements View.OnClic
             Log.println(Log.DEBUG,"ProMessageActivity","onConfigurationChanged-Landscape");
             scrollViewParams = scrollView.getLayoutParams();
             scrollViewParams.width = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 700, getResources().getDisplayMetrics());
-            scrollView.setLayoutParams(scrollViewParams);
         }else {
             //否则，在这里设置竖屏的UI
             Log.println(Log.DEBUG,"ProMessageActivity","onConfigurationChanged-Portrait");
             scrollViewParams = scrollView.getLayoutParams();
             scrollViewParams.width=ViewGroup.LayoutParams.MATCH_PARENT;
-            scrollView.setLayoutParams(scrollViewParams);
         }
-            super.onConfigurationChanged(newConfig);
+        scrollView.setLayoutParams(scrollViewParams);
+        super.onConfigurationChanged(newConfig);
     }
 
     public void initData() {

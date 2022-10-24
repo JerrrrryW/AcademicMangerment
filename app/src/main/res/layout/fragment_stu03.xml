@@ -6,12 +6,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.Stu03">
 
+    <!-- TODO: Update blank fragment layout -->
     <ScrollView
-        android:id="@+id/scrollView1"
+        android:id="@+id/stu03_scrollView"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_width="match_parent"
+        android:layout_width="800dp"
         android:layout_height="wrap_content"
         android:scrollbars="none">
 
@@ -22,7 +23,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/title"
+                android:id="@+id/stu03_title"
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
                 android:gravity="center"
@@ -36,50 +37,50 @@
 
 
             <TextView
-                android:id="@+id/stuSid"
+                android:id="@+id/stu03_sid"
                 style="@style/itemMessage"
                 android:text="学号:"
-                app:layout_constraintTop_toBottomOf="@id/title" />
+                app:layout_constraintTop_toBottomOf="@id/stu03_title" />
 
             <EditText
-                android:id="@+id/stu_sid"
+                android:id="@+id/edit_stu03_sid"
                 style="@style/itemMessageInter"
                 android:gravity="center_vertical"
                 android:inputType="number" />
 
             <TextView
                 style="@style/itemMessage"
-                android:id="@+id/stuName"
+                android:id="@+id/stu03_Name"
                 android:text="姓名："
-                app:layout_constraintTop_toBottomOf="@id/stu_sid"
+                app:layout_constraintTop_toBottomOf="@id/edit_stu03_sid"
                 />
             <EditText
-                android:id="@+id/stu_name"
+                android:id="@+id/edit_stu03_name"
                 style="@style/itemMessageInter"
                 android:gravity="center_vertical"
                 android:inputType="text" />
 
             <TextView
-                android:id="@+id/stuPhone"
+                android:id="@+id/stu03_stuPhone"
                 style="@style/itemMessage"
                 android:text="手机号：" />
 
             <EditText
-                android:id="@+id/stu_phone"
+                android:id="@+id/edit_stu03_phone"
                 style="@style/itemMessageInter"
                 android:gravity="center_vertical"
                 android:inputType="number"/>
 
             <TextView
                 style="@style/itemMessage"
-                android:id="@+id/stuMember"
+                android:id="@+id/stu03_Member"
                 android:text="参与成员："/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <EditText
-                    android:id="@+id/stu_member"
+                    android:id="@+id/edit_stu03_member"
                     android:layout_height="48dp"
                     android:layout_width="0dp"
                     android:layout_weight="1"
@@ -91,100 +92,98 @@
                     android:hint="请输入学号添加成员"
                     android:inputType="number"/>
                 <Button
-                    android:id="@+id/member_add_btn"
+                    android:id="@+id/stu03_member_add_btn"
                     android:layout_marginLeft="10dp"
-                    android:layout_width="48dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="48dp"
-                    android:background="@drawable/white_round"
-                    android:backgroundTint="@color/greens"
+                    android:background="@color/greens"
                     android:textSize="25dp"
-                    android:textColor="@color/white"
                     android:text="+"/>
             </LinearLayout>
 
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/member_list"
-                android:layout_width="match_parent"
+                android:id="@+id/stu03_member_list"
+                android:layout_width="600dp"
                 android:layout_height="match_parent" />
 
             <TextView
                 style="@style/itemMessage"
-                android:id="@+id/proName"
+                android:id="@+id/stu03_proName"
                 android:text="项目名称："/>
             <EditText
                 style="@style/itemMessageInter"
                 android:gravity="center_vertical"
-                android:id="@+id/name"
+                android:id="@+id/edit_stu03_proName"
                 android:inputType="text"/>
             <TextView
                 style="@style/itemMessage"
-                android:id="@+id/proLevel"
+                android:id="@+id/stu03_proLevel"
                 android:text="项目等级："/>
             <Spinner
                 style="@style/itemMessageInter"
-                android:id="@+id/level"
+                android:id="@+id/stu03_level"
                 android:entries="@array/projectLevelList"
                 android:theme="@style/spinner_style"
                 android:layout_width="290dp"
                 android:spinnerMode="dropdown"/>
             <TextView
-                android:id="@+id/proAchievementType"
+                android:id="@+id/stu03_proAchievementType"
                 style="@style/itemMessage"
                 android:text="项目类型：" />
             <Spinner
                 style="@style/itemMessageInter"
-                android:id="@+id/achievement_type"
+                android:id="@+id/stu03_achievement_type"
                 android:theme="@style/spinner_style"
                 android:layout_width="290dp"
                 android:entries="@array/projectTypeList"
                 android:spinnerMode="dropdown"/>
             <TextView
                 style="@style/itemMessage"
-                android:id="@+id/proSubject"
+                android:id="@+id/stu03_proSubject"
                 android:text="项目所属学科："/>
             <EditText
                 style="@style/itemMessageInter"
-                android:id="@+id/subject"
+                android:id="@+id/edit_stu03_subject"
                 android:gravity="center_vertical"
                 android:inputType="text"/>
             <TextView
-                android:id="@+id/proBudget"
+                android:id="@+id/stu03_proBudget"
                 style="@style/itemMessage"
                 android:text="资金预算：" />
 
             <EditText
                 style="@style/itemMessageInter"
-                android:id="@+id/budget"
+                android:id="@+id/edit_stu03_budget"
                 android:gravity="center_vertical"
                 android:inputType="number"/>
             <TextView
                 style="@style/itemMessage"
-                android:id="@+id/proEconomicAnalysis"
+                android:id="@+id/stu03_proEconomicAnalysis"
                 android:text="资金分析："/>
             <EditText
                 style="@style/itemMessageInter"
-                android:id="@+id/economic_analysis"
+                android:id="@+id/edit_stu03_economic_analysis"
                 android:gravity="top"
                 android:layout_height="200dp"
                 android:inputType="textMultiLine"/>
             <TextView
                 style="@style/itemMessage"
-                android:id="@+id/proPurpose"
+                android:id="@+id/stu03_proPurpose"
                 android:text="项目目标：" />
             <EditText
                 style="@style/itemMessageInter"
-                android:id="@+id/purpose"
+                android:id="@+id/edit_stu03_purpose"
                 android:layout_height="100dp"
                 android:gravity="center_vertical"
                 android:inputType="textMultiLine"/>
             <TextView
                 style="@style/itemMessage"
-                android:id="@+id/viableAnalysis"
+                android:id="@+id/edit_stu03_viableAnalysis"
                 android:text="可行性分析："/>
             <EditText
                 style="@style/itemMessageInter"
-                android:id="@+id/viable_analysis"
+                android:id="@+id/edit_stu03_viable_analysis"
                 android:gravity="top"
                 android:layout_height="200dp"
                 android:inputType="textMultiLine"/>
@@ -192,7 +191,7 @@
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/submit"
+                android:id="@+id/stu03_submit"
                 android:background="@color/purple_500"
                 android:textSize="30dp"
                 android:textColor="@color/white"
@@ -212,6 +211,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:orientation="vertical"
         android:layout_margin="20dp">
+
         <Button
             android:id="@+id/stu03_submit_btn"
             android:layout_width="70dp"
@@ -223,7 +223,9 @@
             android:background="@drawable/white_round"
             android:backgroundTint="@color/greens"
             android:textColor="@color/white"/>
+
         <Button
+            android:id="@+id/stu03_save_btn"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:text="保存"
@@ -234,5 +236,4 @@
             android:backgroundTint="@color/space_blue"
             android:textColor="@color/white"/>
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
