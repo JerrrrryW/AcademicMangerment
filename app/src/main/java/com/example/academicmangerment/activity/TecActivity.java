@@ -72,7 +72,7 @@ public class TecActivity extends AppCompatActivity implements View.OnClickListen
         transaction = fragmentManager.beginTransaction();
         //创建需要添加的Fragment
         tec02=Tec02.newInstance(teacher);
-        tec03=new Tec03();
+        tec03=Tec03.newInstance(teacher);
         //向容器内添加或替换碎片，默认情况下为个人信息管理模块
         transaction.replace(R.id.tec_fragments,tec02);
         //提交事务
