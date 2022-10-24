@@ -73,7 +73,7 @@ public class Admin02 extends Fragment {
             public void handleMessage(@NonNull Message msg) {
                 super.handleMessage(msg);
                 teacherList=(List<Teacher>) msg.obj;
-                admin02Adapter=new Admin02Adapter(teacherList);
+                admin02Adapter=new Admin02Adapter(teacherList,getContext());
                 mRecycleView=(RecyclerView) view.findViewById(R.id.adm02_recycleView);
                 mRecycleView.setLayoutManager(new LinearLayoutManager(getContext()));
                 mRecycleView.setAdapter(admin02Adapter);

@@ -103,7 +103,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     boolean user = false;
                     Teacher userdata = null;
-                    for (int i = 0; i < studentList.size(); i++) {
+                    for (int i = 0; i < teacherList.size(); i++) {
                         userdata = teacherList.get(i);
                         if (sid.equals(userdata.getTid()) && pwd.equals(userdata.getPassword())) {
                             user = true;
