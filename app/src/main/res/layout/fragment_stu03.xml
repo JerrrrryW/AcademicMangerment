@@ -213,6 +213,18 @@
         android:layout_margin="20dp">
 
         <Button
+            android:id="@+id/stu03_submit_btn"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:text="提交"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/white_round"
+            android:backgroundTint="@color/greens"
+            android:textColor="@color/white"/>
+
+        <Button
             android:id="@+id/stu03_save_btn"
             android:layout_width="70dp"
             android:layout_height="70dp"

@@ -59,7 +59,7 @@ public class ProMessageActivity extends AppCompatActivity implements View.OnClic
         stu_sid = (EditText) findViewById(R.id.stu_sid);
         stu_name = (EditText) findViewById(R.id.stu_name);
         stu_phone = (EditText) findViewById(R.id.stu_phone);
-        stu_member = (EditText) findViewById(R.id.stu_member);//参与成员
+        //stu_member = (EditText) findViewById(R.id.stu_member);//参与成员
         name = (EditText) findViewById(R.id.name);
         level = (Spinner) findViewById(R.id.level);
         achievement_type = (Spinner) findViewById(R.id.achievement_type);
@@ -70,7 +70,7 @@ public class ProMessageActivity extends AppCompatActivity implements View.OnClic
         viable_analysis = (EditText) findViewById(R.id.viable_analysis);
 
         submit = (Button) findViewById(R.id.submit);
-        member_add = (Button) findViewById(R.id.member_add_btn);
+        //member_add = (Button) findViewById(R.id.member_add_btn);
         scrollView = (ScrollView) findViewById(R.id.scrollView1);
         member_list = (RecyclerView) findViewById(R.id.member_list);
 
@@ -136,9 +136,9 @@ public class ProMessageActivity extends AppCompatActivity implements View.OnClic
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.member_add_btn:
-                //TODO
-                break;
+//            case R.id.member_add_btn:
+//                //TODO
+//                break;
             default:
                 break;
         }
