@@ -16,6 +16,8 @@ public interface StudentDao {
     @Query("select * from student")
     List<Student> loadAllStudent();
 
+    @Query("select * from student where sid=:sid")
+    Student getStudent(String sid);
     //根据学号修改学生信息
     @Update
     void updateStudent(Student student);

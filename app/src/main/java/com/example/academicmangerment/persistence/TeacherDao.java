@@ -13,7 +13,8 @@ public interface TeacherDao {
     void insertTeachers(List<Teacher> teachers);
     @Query("select * from teacher")
     List<Teacher> loadAllTeacher();
-
+    @Query("select * from teacher where tid=:tid")
+    Teacher getTeacher(String tid);
     @Update
     void updateTeacher(Teacher teacher);
 }
