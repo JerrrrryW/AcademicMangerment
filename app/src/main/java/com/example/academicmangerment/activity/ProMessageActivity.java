@@ -39,7 +39,7 @@ public class ProMessageActivity extends AppCompatActivity implements View.OnClic
     private Button submit,member_add;
     private ScrollView scrollView;
     private ViewGroup.LayoutParams scrollViewParams;
-
+    private int queryType;
     MemberListAdapter memberListAdapter;
 
     private List<Student> studentList;
@@ -51,6 +51,7 @@ public class ProMessageActivity extends AppCompatActivity implements View.OnClic
         //获取传输来数据
         Intent intent=getIntent();
         projectDetail=(ProjectDetail) intent.getExtras().getSerializable("projectDetail");
+        queryType=intent.getExtras().getInt("queryType");
         initView();
         initData();
     }

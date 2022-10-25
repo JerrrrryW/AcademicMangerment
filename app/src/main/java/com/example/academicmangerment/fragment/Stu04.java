@@ -138,6 +138,7 @@ public class Stu04 extends Fragment {
                 Intent intent = new Intent(getActivity(),ProMessageActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("projectDetail",project);
+                bundle.putInt("queryType",0);
                 intent.putExtras(bundle);
                 startActivity(intent);
                 Toast.makeText(getActivity(), "一个项目"+project.getPid(), Toast.LENGTH_SHORT).show();

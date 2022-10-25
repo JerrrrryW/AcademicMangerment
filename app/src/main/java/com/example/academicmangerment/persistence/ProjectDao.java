@@ -70,4 +70,6 @@ public interface ProjectDao {
             "and project.pid=teachproject.pid and teachproject.tid=teacher.tid " +
             "and stuproject.sid=student.sid")
     List<ProjectDetail> getProjectDetail();
+
+
 }
