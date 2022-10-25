@@ -19,21 +19,28 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.academicmangerment.R;
 import com.example.academicmangerment.adapter.Admin02Adapter;
 import com.example.academicmangerment.adapter.MemberListAdapter;
 import com.example.academicmangerment.entity.Project;
+import com.example.academicmangerment.entity.StuProject;
 import com.example.academicmangerment.entity.Student;
+import com.example.academicmangerment.entity.TeachProject;
 import com.example.academicmangerment.entity.Teacher;
 import com.example.academicmangerment.persistence.AppDatabase;
 import com.example.academicmangerment.persistence.ProjectDao;
+import com.example.academicmangerment.persistence.StuProjectDao;
 import com.example.academicmangerment.persistence.StudentDao;
+import com.example.academicmangerment.persistence.TeachProjectDao;
+import com.example.academicmangerment.persistence.TeacherDao;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -52,13 +59,17 @@ public class Stu03 extends Fragment /*implements View.OnClickListener*/ {
 
     // TODO: Rename and change types of parameters
     private Student student;
+    private Teacher teacher;
+    private String selectType;
+    private String selectLevel;
 
-    private EditText stu_sid, stu_name, stu_phone, stu_member;
+    private TextView tec_name;
+    private EditText stu_sid, stu_name, stu_phone, stu_member,tec_tid;
     private EditText proName;
     private Spinner level, achievement_type;
     private EditText subject, budget, economic_analysis, purpose, viable_analysis;
     private RecyclerView member_list;
-    private Button submit, member_add;
+    private Button submit, member_add,tec_add;
     private ScrollView scrollView;
     private ViewGroup.LayoutParams scrollViewParams;
 
@@ -68,6 +79,9 @@ public class Stu03 extends Fragment /*implements View.OnClickListener*/ {
     private AppDatabase db;
     private StudentDao studentDao;
     private ProjectDao projectDao;
+    private TeacherDao teacherDao;
+    private StuProjectDao stuProjectDao;
+    private TeachProjectDao teachProjectDao;
 
     private View v;
 
@@ -115,6 +129,9 @@ public class Stu03 extends Fragment /*implements View.OnClickListener*/ {
         economic_analysis = (EditText) v.findViewById(R.id.edit_stu03_economic_analysis);
         purpose = (EditText) v.findViewById(R.id.edit_stu03_purpose);
         viable_analysis = (EditText) v.findViewById(R.id.edit_stu03_viable_analysis);
+        tec_name=(TextView) v.findViewById(R.id.stu03_tec_name);
+        tec_tid=(EditText) v.findViewById(R.id.edit_stu03_tec);
+        tec_add=(Button) v.findViewById(R.id.stu03_tec_add_btn);
 
         stu_sid.setFocusable(false);
         stu_sid.setFocusableInTouchMode(false);
@@ -147,30 +164,97 @@ public class Stu03 extends Fragment /*implements View.OnClickListener*/ {
         db = Room.databaseBuilder(getContext(), AppDatabase.class, "dataBase").build();
         studentDao = db.studentDao();
         projectDao = db.projectDao();
+        stuProjectDao=db.stuProjectDao();
+        teachProjectDao=db.teachProjectDao();
+        teacherDao=db.teacherDao();
+
+        //选择器监听
+        achievement_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                selectType=Stu03.this.getResources().getStringArray(R.array.projectTypeList)[i];
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        level.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                selectLevel=Stu03.this.getResources().getStringArray(R.array.projectLevelList)[i];
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        //添加指导老师监听
+        tec_add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String tid=tec_tid.getText().toString();
+                @SuppressLint("HandlerLeak") final Handler handler = new Handler() {
+                    @Override
+                    public void handleMessage(@NonNull Message msg) {
+                        super.handleMessage(msg);
+                       teacher=(Teacher) msg.obj;
+                        if(teacher!=null){
+                            tec_name.setText(teacher.getTecName());
+
+                        }else{
+                            Toast.makeText(getContext(),"此老师不存在",Toast.LENGTH_SHORT);
+                        }
+                    }
+                };
+                new Thread(){
+                    @Override
+                    public void run() {
+                        super.run();
+                        teacher=teacherDao.getTeacher(tid);
+                        Message message=Message.obtain();
+                        message.obj=teacher;
+                        handler.sendMessage(message);
+                    }
+                }.start();
+            }
+        });
         //提交
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Project project=new Project();
-                project.setPid(new Date().toString());
-                project.setAchievementType("");
+                project.setPid(new Date().getTime()+"");
+                project.setAchievementType(selectType);
                 project.setCreateUser(student.getRealName());
                 project.setBudget(Double.parseDouble(budget.getText().toString()));
                 project.setBeginTime(new Date().toString());
                 project.setCollege(student.getCollege());
                 project.setEconomicAnalysis(economic_analysis.getText().toString());
                 project.setExpectResult(purpose.getText().toString());
-                project.setLevel("");
+                project.setLevel(selectLevel);
                 project.setName(proName.getText().toString());
                 project.setSubject(subject.getText().toString());
                 project.setState(1);
                 project.setViableAnalysis(viable_analysis.getText().toString());
+
+                List<StuProject> stuProjectList=new ArrayList<>();
+                for(Student s:studentList){
+                    StuProject stuProject=new StuProject(s.getSid(),project.getPid(),"2");
+                    stuProjectList.add(stuProject);
+                }
+                stuProjectList.add(new StuProject(student.getSid(),project.getPid(),"1"));
+
                 new Thread(){
                     @Override
                     public void run() {
                         super.run();
                         projectDao.insertProject(project);
-                        Toast.makeText(getContext(),"提交成功",Toast.LENGTH_SHORT);
+                        /*Toast.makeText(getContext(),"提交成功",Toast.LENGTH_SHORT);*/
+                        teachProjectDao.insertTeachPro(new TeachProject(teacher.tid,project.getPid(),"0"));
+                        stuProjectDao.insertStuProjects(stuProjectList);
                     }
                 }.start();
             }
