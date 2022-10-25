@@ -50,10 +50,10 @@ public class Stu04Adapter extends RecyclerView.Adapter<Stu04Adapter.MyViewHolder
         holder.project_level.setText(project.getLevel());
         holder.project_budget.setText(String.valueOf(project.getBudget()));
 
-        int state = project.getState();
         holder.project_leader.setText(project.getRealName());
         holder.project_member.setText(project.strMember());
         holder.project_teacher.setText(project.getTecName());
+        int state = project.getState();
         examine(holder,state);
         //holder.is_submitted.setText(project.getSubmitted());
         //holder.is_approved_college.setText(project.getCollege());
