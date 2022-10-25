@@ -101,12 +101,43 @@
                     android:text="+"/>
             </LinearLayout>
 
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/stu03_member_list"
                 android:layout_width="600dp"
                 android:layout_height="match_parent" />
-
+            <TextView
+                style="@style/itemMessage"
+                android:id="@+id/st03_tec"
+                android:text="指导老师："/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <EditText
+                    android:id="@+id/edit_stu03_tec"
+                    android:layout_height="48dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:textSize="20dp"
+                    android:textColor="@color/black"
+                    android:paddingLeft="10dp"
+                    android:background="@drawable/edit_bg"
+                    android:gravity="center_vertical"
+                    android:hint="请输入教工号添加指导老师"
+                    android:inputType="number"/>
+                <Button
+                    android:id="@+id/stu03_tec_add_btn"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:background="@color/greens"
+                    android:textSize="25dp"
+                    android:text="+"/>
+            </LinearLayout>
+            <TextView
+                style="@style/itemMessage"
+                android:id="@+id/stu03_tec_name"
+                android:text=""/>
             <TextView
                 style="@style/itemMessage"
                 android:id="@+id/stu03_proName"
@@ -115,6 +146,7 @@
                 style="@style/itemMessageInter"
                 android:gravity="center_vertical"
                 android:id="@+id/edit_stu03_proName"
+                android:text=""
                 android:inputType="text"/>
             <TextView
                 style="@style/itemMessage"
@@ -145,6 +177,7 @@
             <EditText
                 style="@style/itemMessageInter"
                 android:id="@+id/edit_stu03_subject"
+                android:text=""
                 android:gravity="center_vertical"
                 android:inputType="text"/>
             <TextView
@@ -156,6 +189,7 @@
                 style="@style/itemMessageInter"
                 android:id="@+id/edit_stu03_budget"
                 android:gravity="center_vertical"
+                android:text="0"
                 android:inputType="number"/>
             <TextView
                 style="@style/itemMessage"
@@ -166,6 +200,7 @@
                 android:id="@+id/edit_stu03_economic_analysis"
                 android:gravity="top"
                 android:layout_height="200dp"
+                android:text=""
                 android:inputType="textMultiLine"/>
             <TextView
                 style="@style/itemMessage"
@@ -176,6 +211,7 @@
                 android:id="@+id/edit_stu03_purpose"
                 android:layout_height="100dp"
                 android:gravity="center_vertical"
+                android:text=""
                 android:inputType="textMultiLine"/>
             <TextView
                 style="@style/itemMessage"
@@ -185,6 +221,7 @@
                 style="@style/itemMessageInter"
                 android:id="@+id/edit_stu03_viable_analysis"
                 android:gravity="top"
+                android:text=""
                 android:layout_height="200dp"
                 android:inputType="textMultiLine"/>
             <Button
