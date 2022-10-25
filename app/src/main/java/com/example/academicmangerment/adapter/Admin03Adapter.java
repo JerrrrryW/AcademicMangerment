@@ -44,10 +44,106 @@ public class Admin03Adapter extends RecyclerView.Adapter<Admin03Adapter.MyViewHo
         holder.project_leader.setText(project.getRealName());
         holder.project_member.setText(project.strMember());
         holder.project_teacher.setText(project.getTecName());
-        //holder.is_submitted.setText(project.getSubmitted());
-        holder.is_approved_college.setText(project.getCollege());
-    }
 
+        int state = project.getState();
+        examine(holder,state);
+    }
+    //设置状态
+    public void examine(MyViewHolder holder, int state){
+        switch (state){
+            case 0:
+                holder.is_submitted.setText("未提交");
+                holder.is_approved_teacher.setText("待审核");
+                holder.is_approved_college.setText("待审核");
+                holder.is_midterm_checked.setText("未开启");
+                holder.is_final_checked.setText("未开启");
+                break;
+            case 1:
+                holder.is_submitted.setText("已提交");
+                holder.is_approved_teacher.setText("待审核");
+                holder.is_approved_college.setText("待审核");
+                holder.is_midterm_checked.setText("未开启");
+                holder.is_final_checked.setText("未开启");
+                break;
+            case 2:
+                holder.is_submitted.setText("已提交");
+                holder.is_approved_teacher.setText("待审核");
+                holder.is_approved_college.setText("待审核");
+                holder.is_midterm_checked.setText("未开启");
+                holder.is_final_checked.setText("未开启");
+                break;
+            case 3:
+                holder.is_submitted.setText("待修改");
+                holder.is_approved_teacher.setText("教师驳回");
+                holder.is_approved_college.setText("待审核");
+                holder.is_midterm_checked.setText("未开启");
+                holder.is_final_checked.setText("未开启");
+                break;
+            case 4:
+                holder.is_submitted.setText("已提交");
+                holder.is_approved_teacher.setText("审核通过");
+                holder.is_approved_college.setText("待审核");
+                holder.is_midterm_checked.setText("未开启");
+                holder.is_final_checked.setText("未开启");
+                break;
+            case 5:
+                holder.is_submitted.setText("待修改");
+                holder.is_approved_teacher.setText("审核通过");
+                holder.is_approved_college.setText("学院驳回");
+                holder.is_midterm_checked.setText("未开启");
+                holder.is_final_checked.setText("未开启");
+                break;
+            case 6:
+                holder.is_submitted.setText("已立项");
+                holder.is_approved_teacher.setText("审核通过");
+                holder.is_approved_college.setText("审核通过");
+                holder.is_midterm_checked.setText("未开启");
+                holder.is_final_checked.setText("未开启");
+                break;
+            case 7:
+                holder.is_submitted.setText("已立项");
+                holder.is_approved_teacher.setText("审核通过");
+                holder.is_approved_college.setText("审核通过");
+                holder.is_midterm_checked.setText("已开启");
+                holder.is_final_checked.setText("未开启");
+                break;
+            case 8:
+                holder.is_submitted.setText("已结项");
+                holder.is_approved_teacher.setText("审核通过");
+                holder.is_approved_college.setText("审核通过");
+                holder.is_midterm_checked.setText("未通过");
+                holder.is_final_checked.setText("未开启");
+                break;
+            case 9:
+                holder.is_submitted.setText("已立项");
+                holder.is_approved_teacher.setText("审核通过");
+                holder.is_approved_college.setText("审核通过");
+                holder.is_midterm_checked.setText("检查通过");
+                holder.is_final_checked.setText("未开启");
+                break;
+            case 10:
+                holder.is_submitted.setText("已立项");
+                holder.is_approved_teacher.setText("审核通过");
+                holder.is_approved_college.setText("审核通过");
+                holder.is_midterm_checked.setText("检查通过");
+                holder.is_final_checked.setText("已开启");
+                break;
+            case 11:
+                holder.is_submitted.setText("已结项");
+                holder.is_approved_teacher.setText("审核通过");
+                holder.is_approved_college.setText("审核通过");
+                holder.is_midterm_checked.setText("检查通过");
+                holder.is_final_checked.setText("答辩未通过");
+                break;
+            case 12:
+                holder.is_submitted.setText("已结项");
+                holder.is_approved_teacher.setText("审核通过");
+                holder.is_approved_college.setText("审核通过");
+                holder.is_midterm_checked.setText("检查通过");
+                holder.is_final_checked.setText("检查通过");
+                break;
+        }
+    }
     @Override
     public int getItemCount() {
         return pjt == null ? 0 : pjt.size();
@@ -64,7 +160,7 @@ public class Admin03Adapter extends RecyclerView.Adapter<Admin03Adapter.MyViewHo
     }
     class MyViewHolder extends RecyclerView.ViewHolder{
         TextView project_type, project_name, project_id, project_level, project_budget, project_leader, project_member, project_teacher;
-        TextView is_submitted, is_approved_college, is_midterm_checked, is_final_checked;
+        TextView is_submitted, is_approved_college, is_midterm_checked, is_final_checked,is_approved_teacher;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -77,6 +173,7 @@ public class Admin03Adapter extends RecyclerView.Adapter<Admin03Adapter.MyViewHo
             project_member = itemView.findViewById(R.id.adm03_project_member);
             project_teacher = itemView.findViewById(R.id.adm03_project_teacher);
             is_submitted = itemView.findViewById(R.id.adm03_is_submitted);
+            is_approved_teacher=itemView.findViewById(R.id.adm03_is_approved_teacher);
             is_approved_college = itemView.findViewById(R.id.adm03_is_approved_college);
             is_midterm_checked = itemView.findViewById(R.id.adm03_is_midterm_checked);
             is_final_checked = itemView.findViewById(R.id.adm03_is_final_checked);
