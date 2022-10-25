@@ -25,14 +25,13 @@
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:elevation="1dp"
-                android:src="@mipmap/test"
-                />
+                android:src="@mipmap/test" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/tec_username"
-                android:text="zhang"
+                android:text="Zhang"
                 android:layout_marginStart="5dp"
                 android:textSize="24sp"
                 android:layout_gravity="center_vertical"

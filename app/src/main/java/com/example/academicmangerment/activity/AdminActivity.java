@@ -135,9 +135,9 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
                 transaction.commit();
                 //Toast.makeText(this,"Stu03 clicked！",Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.project_class_manger_btn:
-                transaction.replace(R.id.adm_fragments,admin04);
-                transaction.commit();
+            case R.id.project_class_manger_btn://项目类别管理尚未开发
+//                transaction.replace(R.id.adm_fragments,admin04);
+//                transaction.commit();
                 //Toast.makeText(this,"Stu03 clicked！",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.adm_logout_btn:

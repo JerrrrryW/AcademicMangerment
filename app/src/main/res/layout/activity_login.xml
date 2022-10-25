@@ -99,9 +99,9 @@
             android:layout_marginLeft="30dp"
             android:layout_marginTop="20dp"
             android:layout_marginRight="30dp"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/corner_card"
             android:text="学生登录"
-            android:textColor="@color/white"
+            android:textColor="@color/space_blue"
             android:textSize="18dp" />
         <Button
             android:id="@+id/tec_btn_enter"
@@ -112,7 +112,8 @@
             android:layout_marginLeft="30dp"
             android:layout_marginTop="20dp"
             android:layout_marginRight="30dp"
-            android:background="@color/greens"
+            android:background="@drawable/corner_card"
+            android:backgroundTint="@color/greens"
             android:text="教师登录"
             android:textColor="@color/white"
             android:textSize="18dp" />
@@ -126,7 +127,8 @@
             android:layout_marginLeft="30dp"
             android:layout_marginTop="20dp"
             android:layout_marginRight="30dp"
-            android:background="@color/colorPrimaryDark"
+            android:background="@drawable/corner_card"
+            android:backgroundTint="@color/colorPrimaryDark"
             android:text="管理员登录"
             android:textColor="@color/white"
             android:textSize="18dp" />
