@@ -204,22 +204,106 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        app:layout_constraintRight_toLeftOf="@id/ll_btn_bar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@drawable/corner_card"
+        android:layout_margin="20dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="当前状态："
+            android:textSize="20dp"
+            android:gravity="center_vertical"
+            android:textColor="@color/space_blue"
+            android:paddingLeft="20dp"
+            android:textStyle="bold"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="通过教师审核"
+            android:textSize="20dp"
+            android:gravity="center_vertical"
+            android:textColor="@color/space_blue"
+            android:layout_marginRight="20dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_btn_bar"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:orientation="vertical"
         android:layout_margin="20dp">
-
         <Button
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:text="保存"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/white_round"
+            android:id="@+id/detail_FinalCheck_btn"
+            android:text="结题\n审查"
+            style="@style/detail_btn"
             android:backgroundTint="@color/space_blue"
             android:textColor="@color/white"/>
+        <Button
+            android:id="@+id/detail_midReviewCheck_btn"
+            android:text="中期\n审查"
+            style="@style/detail_btn"
+            android:backgroundTint="@color/space_blue"
+            android:textColor="@color/white"/>
+        <Button
+            android:id="@+id/detail_openFinal_btn"
+            android:text="开启\n结题"
+            style="@style/detail_btn"
+            android:backgroundTint="@color/space_blue"
+            android:textColor="@color/white"/>
+        <Button
+            android:id="@+id/detail_openMidReview_btn"
+            android:text="开启\n中期"
+            style="@style/detail_btn"
+            android:backgroundTint="@color/space_blue"
+            android:textColor="@color/white"/>
+        <Button
+            android:id="@+id/detail_approve_btn"
+            android:text="通过"
+            style="@style/detail_btn"
+            android:backgroundTint="@color/greens"
+            android:textColor="@color/white"/>
+        <Button
+            android:id="@+id/detail_reject_btn"
+            android:text="驳回"
+            android:textSize="20dp"
+            style="@style/detail_btn"
+            android:backgroundTint="@color/dark_red"
+            android:textColor="@color/white"/>
+        <Button
+            android:id="@+id/detail_submit_btn"
+            android:text="提交"
+            style="@style/detail_btn"
+            android:backgroundTint="@color/greens"
+            android:textColor="@color/white"/>
+        <Button
+            android:id="@+id/detail_modify_btn"
+            android:text="修改"
+            style="@style/detail_btn"
+            android:backgroundTint="@color/space_blue"
+            android:textColor="@color/white"/>
+        <Button
+            android:id="@+id/detail_delete_btn"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:text="删除"
+            style="@style/detail_btn"
+            android:backgroundTint="@color/dark_red"
+            android:textColor="@color/white"/>
+        <Button
+            android:id="@+id/detail_upload_btn"
+            android:text="上传"
+            style="@style/detail_btn"
+            android:backgroundTint="@color/space_blue"
+            android:textColor="@color/white"/>
+        <Button
+            android:id="@+id/detail_save_btn"
+            style="@style/detail_btn"
+            android:text="保存"
+            android:backgroundTint="@color/space_blue" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
