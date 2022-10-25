@@ -46,7 +46,7 @@
                 android:id="@+id/edit_stu03_sid"
                 style="@style/itemMessageInter"
                 android:gravity="center_vertical"
-                android:inputType="number" />
+                android:inputType="none" />
 
             <TextView
                 style="@style/itemMessage"
@@ -58,7 +58,7 @@
                 android:id="@+id/edit_stu03_name"
                 style="@style/itemMessageInter"
                 android:gravity="center_vertical"
-                android:inputType="text" />
+                android:inputType="none" />
 
             <TextView
                 android:id="@+id/stu03_stuPhone"
@@ -69,7 +69,7 @@
                 android:id="@+id/edit_stu03_phone"
                 style="@style/itemMessageInter"
                 android:gravity="center_vertical"
-                android:inputType="number"/>
+                android:inputType="none"/>
 
             <TextView
                 style="@style/itemMessage"

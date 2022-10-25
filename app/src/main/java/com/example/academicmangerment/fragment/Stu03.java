@@ -1,5 +1,6 @@
 package com.example.academicmangerment.fragment;
 
+import android.annotation.SuppressLint;
 import android.content.res.Configuration;
 import android.os.Bundle;
 
@@ -7,8 +8,12 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -18,12 +23,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.academicmangerment.R;
+import com.example.academicmangerment.adapter.Admin02Adapter;
 import com.example.academicmangerment.adapter.MemberListAdapter;
+import com.example.academicmangerment.entity.Project;
 import com.example.academicmangerment.entity.Student;
+import com.example.academicmangerment.entity.Teacher;
+import com.example.academicmangerment.persistence.AppDatabase;
+import com.example.academicmangerment.persistence.ProjectDao;
+import com.example.academicmangerment.persistence.StudentDao;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -31,7 +44,7 @@ import java.util.List;
  * Use the {@link Stu03#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Stu03 extends Fragment implements View.OnClickListener{
+public class Stu03 extends Fragment /*implements View.OnClickListener*/ {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -45,14 +58,19 @@ public class Stu03 extends Fragment implements View.OnClickListener{
     private Spinner level, achievement_type;
     private EditText subject, budget, economic_analysis, purpose, viable_analysis;
     private RecyclerView member_list;
-    private Button submit,member_add;
+    private Button submit, member_add;
     private ScrollView scrollView;
     private ViewGroup.LayoutParams scrollViewParams;
 
     MemberListAdapter memberListAdapter;
     private List<Student> studentList;
 
-    private  View v;
+    private AppDatabase db;
+    private StudentDao studentDao;
+    private ProjectDao projectDao;
+
+    private View v;
+
     public Stu03() {
         // Required empty public constructor
     }
@@ -60,6 +78,7 @@ public class Stu03 extends Fragment implements View.OnClickListener{
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
+     *
      * @return A new instance of fragment Stu03.
      */
     // TODO: Rename and change types and number of parameters
@@ -83,7 +102,7 @@ public class Stu03 extends Fragment implements View.OnClickListener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        v=inflater.inflate(R.layout.fragment_stu03, container, false);
+        v = inflater.inflate(R.layout.fragment_stu03, container, false);
         stu_sid = (EditText) v.findViewById(R.id.edit_stu03_sid);
         stu_name = (EditText) v.findViewById(R.id.edit_stu03_name);
         stu_phone = (EditText) v.findViewById(R.id.edit_stu03_phone);
@@ -97,45 +116,130 @@ public class Stu03 extends Fragment implements View.OnClickListener{
         purpose = (EditText) v.findViewById(R.id.edit_stu03_purpose);
         viable_analysis = (EditText) v.findViewById(R.id.edit_stu03_viable_analysis);
 
+        stu_sid.setFocusable(false);
+        stu_sid.setFocusableInTouchMode(false);
+        stu_sid.setText(student.getSid());
+
+        stu_name.setFocusable(false);
+        stu_name.setFocusableInTouchMode(false);
+        stu_name.setText(student.getRealName());
+
+        stu_phone.setFocusable(false);
+        stu_phone.setFocusableInTouchMode(false);
+        stu_phone.setText(student.getPhone());
+
         submit = (Button) v.findViewById(R.id.stu03_submit);
         member_add = (Button) v.findViewById(R.id.stu03_member_add_btn);
+
         scrollView = (ScrollView) v.findViewById(R.id.stu03_scrollView);
         member_list = (RecyclerView) v.findViewById(R.id.stu03_member_list);
 
-        DividerItemDecoration mDivider = new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL);
+        DividerItemDecoration mDivider = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
         member_list.addItemDecoration(mDivider);
-        member_list.setLayoutManager(new GridLayoutManager(getContext(),1));
+        member_list.setLayoutManager(new GridLayoutManager(getContext(), 1));
         memberListAdapter = new MemberListAdapter(getContext());
         //member_list.setVisibility(View.GONE); //复用至上传一个全新项目时默认没有成员，取消此注释
         //TODO 在此处将项目成员放入studentList
         studentList = new ArrayList<Student>();
         memberListAdapter.setData(studentList);
         member_list.setAdapter(memberListAdapter);
+
+        db = Room.databaseBuilder(getContext(), AppDatabase.class, "dataBase").build();
+        studentDao = db.studentDao();
+        projectDao = db.projectDao();
+        //提交
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Project project=new Project();
+                project.setPid(new Date().toString());
+                project.setAchievementType("");
+                project.setCreateUser(student.getRealName());
+                project.setBudget(Double.parseDouble(budget.getText().toString()));
+                project.setBeginTime(new Date().toString());
+                project.setCollege(student.getCollege());
+                project.setEconomicAnalysis(economic_analysis.getText().toString());
+                project.setExpectResult(purpose.getText().toString());
+                project.setLevel("");
+                project.setName(proName.getText().toString());
+                project.setSubject(subject.getText().toString());
+                project.setState(1);
+                project.setViableAnalysis(viable_analysis.getText().toString());
+                new Thread(){
+                    @Override
+                    public void run() {
+                        super.run();
+                        projectDao.insertProject(project);
+                        Toast.makeText(getContext(),"提交成功",Toast.LENGTH_SHORT);
+                    }
+                }.start();
+            }
+        });
+        member_add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                /*System.out.println("点击");*/
+                String sid = stu_member.getText().toString();
+                @SuppressLint("HandlerLeak") final Handler handler = new Handler() {
+                    @Override
+                    public void handleMessage(@NonNull Message msg) {
+                        super.handleMessage(msg);
+                        Student student=(Student) msg.obj;
+                        if(student!=null){
+                            studentList.add(student);
+                            memberListAdapter.setData(studentList);
+                        }else{
+                            Toast.makeText(getContext(),"此学生不存在",Toast.LENGTH_SHORT);
+                        }
+                    }
+                };
+                new Thread() {
+                    @Override
+                    public void run() {
+                        super.run();
+                        Student student = studentDao.getStudent(sid);
+                        Message message=Message.obtain();
+                        message.obj=student;
+                        handler.sendMessage(message);
+                    }
+                }.start();
+
+            }
+        });
         return v;
     }
 
     @Override //横竖屏切换时调用
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
-        if (newConfig.orientation==Configuration.ORIENTATION_LANDSCAPE){
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             //如果是横屏了，在这里设置横屏的UI
-            Log.println(Log.DEBUG,"stu03","onConfigurationChanged-Landscape");
+            Log.println(Log.DEBUG, "stu03", "onConfigurationChanged-Landscape");
             scrollViewParams = scrollView.getLayoutParams();
             scrollViewParams.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 700, getResources().getDisplayMetrics());
-        }else {
+        } else {
             //否则，在这里设置竖屏的UI
-            Log.println(Log.DEBUG,"stu03","onConfigurationChanged-Portrait");
+            Log.println(Log.DEBUG, "stu03", "onConfigurationChanged-Portrait");
             scrollViewParams = scrollView.getLayoutParams();
-            scrollViewParams.width=ViewGroup.LayoutParams.MATCH_PARENT;
+            scrollViewParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
         }
         scrollView.setLayoutParams(scrollViewParams);
         super.onConfigurationChanged(newConfig);
     }
 
-    @Override
+    /*@Override
     public void onClick(View v) {
+        System.out.println("点击");
         switch (v.getId()){
             case R.id.stu03_member_add_btn:
                 //TODO
+                String sid=stu_member.getText().toString();
+                Student student=studentDao.getStudent(sid);
+                if(student!=null){
+                    studentList.add(student);
+                    memberListAdapter.setData(studentList);
+                }else{
+                    Toast.makeText(getContext(),"此学生不存在",Toast.LENGTH_SHORT);
+                }
                 break;
             case R.id.stu03_save_btn:
                 //TODO
@@ -146,5 +250,5 @@ public class Stu03 extends Fragment implements View.OnClickListener{
             default:
                 break;
         }
-    }
+    }*/
 }

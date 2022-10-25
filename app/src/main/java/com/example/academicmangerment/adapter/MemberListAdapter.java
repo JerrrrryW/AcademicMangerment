@@ -74,14 +74,22 @@ public class MemberListAdapter extends RecyclerView.Adapter<MemberListAdapter.My
             member_name = itemView.findViewById(R.id.member_item_name);
             delete_btn = itemView.findViewById(R.id.member_delete_btn);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
+            //删除按钮监听事件
+            delete_btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    stu.remove(getLayoutPosition());
+                    setData(stu);
+                }
+            });
+            /*itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if(onItemClickListener != null) {
                         onItemClickListener.OnItemClick(v,stu.get(getLayoutPosition()));
                     }
                 }
-            });
+            });*/
         }
     }
 }
