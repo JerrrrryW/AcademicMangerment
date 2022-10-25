@@ -19,24 +19,27 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
 import com.example.academicmangerment.R;
 import com.example.academicmangerment.adapter.MemberListAdapter;
 import com.example.academicmangerment.entity.Project;
 import com.example.academicmangerment.entity.ProjectDetail;
 import com.example.academicmangerment.entity.Student;
+import com.example.academicmangerment.persistence.AppDatabase;
+import com.example.academicmangerment.persistence.ProjectDao;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProMessageActivity extends AppCompatActivity implements View.OnClickListener/*implements Stu04.SendProject*/ {
+public class ProMessageActivity extends AppCompatActivity /*implements View.OnClickListener implements Stu04.SendProject*/ {
     Project project;//接收Stu04的数据
     private EditText stu_sid, stu_name, stu_phone, stu_member;
     private EditText name;
     private Spinner level, achievement_type;
     private EditText subject, budget, economic_analysis, purpose, viable_analysis;
     private RecyclerView member_list;
-    private Button submit,member_add;
+    private Button submit,member_add,detail_approve_btn,detail_reject_btn;
     private ScrollView scrollView;
     private ViewGroup.LayoutParams scrollViewParams;
     private int queryType;
@@ -44,6 +47,10 @@ public class ProMessageActivity extends AppCompatActivity implements View.OnClic
 
     private List<Student> studentList;
     private ProjectDetail projectDetail;
+
+    private AppDatabase db;
+    private ProjectDao projectDao;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,10 +78,61 @@ public class ProMessageActivity extends AppCompatActivity implements View.OnClic
         viable_analysis = (EditText) findViewById(R.id.viable_analysis);
 
         submit = (Button) findViewById(R.id.submit);
+        detail_approve_btn=(Button) findViewById(R.id.detail_approve_btn);
+        detail_reject_btn=(Button) findViewById(R.id.detail_reject_btn);
+
         //member_add = (Button) findViewById(R.id.member_add_btn);
         scrollView = (ScrollView) findViewById(R.id.scrollView1);
         member_list = (RecyclerView) findViewById(R.id.member_list);
 
+        db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class,"dataBase").build();
+        projectDao=db.projectDao();
+        //审核通过按钮
+        detail_approve_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+               new Thread(){
+                   @Override
+                   public void run() {
+                       super.run();
+                       Project project=projectDao.getProject(projectDetail.getPid());
+                       //教师审核
+                       if(queryType==1){
+                           project.setState(4);
+                           projectDetail.setState(4);
+
+                       }else{
+                           project.setState(6);
+                           projectDetail.setState(6);
+                       }
+                       projectDao.updateProject(project);
+                   }
+               }.start();
+            }
+        });
+        //驳回按钮监听
+        detail_reject_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new Thread(){
+                    @Override
+                    public void run() {
+                        super.run();
+                        Project project=projectDao.getProject(projectDetail.getPid());
+                        //教师审核
+                        if(queryType==1){
+                            project.setState(3);
+                            projectDetail.setState(3);
+                        }else{
+                            project.setState(5);
+                            projectDetail.setState(5);
+                        }
+                        projectDao.updateProject(project);
+                    }
+                }.start();
+            }
+        });
         DividerItemDecoration mDivider = new DividerItemDecoration(this,DividerItemDecoration.VERTICAL);
         member_list.addItemDecoration(mDivider);
         member_list.setLayoutManager(new GridLayoutManager(this,1));
@@ -134,7 +192,7 @@ public class ProMessageActivity extends AppCompatActivity implements View.OnClic
         spinner.setClickable(false);
     }
 
-    @Override
+/*    @Override
     public void onClick(View v) {
         switch (v.getId()){
 //            case R.id.member_add_btn:
@@ -143,5 +201,5 @@ public class ProMessageActivity extends AppCompatActivity implements View.OnClic
             default:
                 break;
         }
-    }
+    }*/
 }

@@ -4,6 +4,7 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.example.academicmangerment.entity.Project;
 import com.example.academicmangerment.entity.ProjectDetail;
@@ -71,5 +72,9 @@ public interface ProjectDao {
             "and stuproject.sid=student.sid")
     List<ProjectDetail> getProjectDetail();
 
+    @Query("select * from project where pid=:pid")
+    Project getProject(String pid);
 
+    @Update
+    void updateProject(Project project);
 }
