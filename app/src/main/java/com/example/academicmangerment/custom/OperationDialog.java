@@ -16,14 +16,14 @@ import com.example.academicmangerment.R;
  * description:自定义dialog
  */
 
-public class FinalScoreDialog extends Dialog {
+public class OperationDialog extends Dialog {
 
     private ImageView imageIv ;
     private TextView titleTv ;
     private EditText editText ;
     private Button negtiveBn ,positiveBn;
     private View columnLineView ;
-    public FinalScoreDialog(Context context) {
+    public OperationDialog(Context context) {
         super(context, R.style.CustomDialog);
     }
 
@@ -140,7 +140,7 @@ public class FinalScoreDialog extends Dialog {
         negtiveBn = (Button) findViewById(R.id.negtive);
         positiveBn = (Button) findViewById(R.id.positive);
         titleTv = (TextView) findViewById(R.id.title);
-        editText = (EditText) findViewById(R.id.editText);
+        editText = (EditText) findViewById(R.id.dialogEditText);
         imageIv = (ImageView) findViewById(R.id.image);
         columnLineView = findViewById(R.id.column_line);
     }
@@ -149,7 +149,7 @@ public class FinalScoreDialog extends Dialog {
      * 设置确定取消按钮的回调
      */
     public OnClickBottomListener onClickBottomListener;
-    public FinalScoreDialog setOnClickBottomListener(OnClickBottomListener onClickBottomListener) {
+    public OperationDialog setOnClickBottomListener(OnClickBottomListener onClickBottomListener) {
         this.onClickBottomListener = onClickBottomListener;
         return this;
     }
@@ -168,7 +168,7 @@ public class FinalScoreDialog extends Dialog {
         return message;
     }
 
-    public FinalScoreDialog setMessage(String message) {
+    public OperationDialog setMessage(String message) {
         this.message = message;
         return this ;
     }
@@ -177,7 +177,7 @@ public class FinalScoreDialog extends Dialog {
         return title;
     }
 
-    public FinalScoreDialog setTitle(String title) {
+    public OperationDialog setTitle(String title) {
         this.title = title;
         return this ;
     }
@@ -186,7 +186,7 @@ public class FinalScoreDialog extends Dialog {
         return positive;
     }
 
-    public FinalScoreDialog setPositive(String positive) {
+    public OperationDialog setPositive(String positive) {
         this.positive = positive;
         return this ;
     }
@@ -195,7 +195,7 @@ public class FinalScoreDialog extends Dialog {
         return negtive;
     }
 
-    public FinalScoreDialog setNegtive(String negtive) {
+    public OperationDialog setNegtive(String negtive) {
         this.negtive = negtive;
         return this ;
     }
@@ -208,17 +208,17 @@ public class FinalScoreDialog extends Dialog {
         return isSingle;
     }
 
-    public FinalScoreDialog setSingle(boolean single) {
+    public OperationDialog setSingle(boolean single) {
         isSingle = single;
         return this ;
     }
 
-    public FinalScoreDialog setImageResId(int imageResId) {
+    public OperationDialog setImageResId(int imageResId) {
         this.imageResId = imageResId;
         return this ;
     }
 
-    public FinalScoreDialog setEditText(boolean haveEditView){
+    public OperationDialog setEditText(boolean haveEditView){
         this.haveEditView=haveEditView;
         return this;
     }

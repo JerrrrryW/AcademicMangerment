@@ -28,7 +28,7 @@ public interface ProjectDao {
     //根据学号查询项目详细信息
     @Query("select project.pid,project.achievementType,project.name,project.level,project.budget," +
             "project.subject,project.economicAnalysis,project.purpose,project.viableAnalysis," +
-            "project.state,teacher.tecName,student.college" +
+            "project.state,project.existingCondition,teacher.tecName,student.college" +
             " from project,teacher,student,stuproject,teachproject" +
             " where stuproject.sid=:sid and stuproject.pid=project.pid " +
             "and project.pid=teachproject.pid and teachproject.tid=teacher.tid " +
@@ -37,7 +37,7 @@ public interface ProjectDao {
 
     //根据教師查询项目详细信息
     @Query("select distinct project.pid,project.achievementType,project.name,project.level,project.budget," +
-            "project.subject,project.economicAnalysis,project.purpose,project.viableAnalysis," +
+            "project.subject,project.economicAnalysis,project.existingCondition,project.purpose,project.viableAnalysis," +
             "project.state,teacher.tecName,student.college" +
             " from project,teacher,student,stuproject,teachproject" +
             " where teachproject.tid=:tid and teachproject.pid=project.pid " +

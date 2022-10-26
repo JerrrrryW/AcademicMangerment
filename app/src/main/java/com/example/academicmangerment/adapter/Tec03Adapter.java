@@ -51,10 +51,10 @@ public class Tec03Adapter extends RecyclerView.Adapter<Tec03Adapter.MyViewHolder
         holder.project_member.setText(project.strMember());
         holder.project_teacher.setText(project.getTecName());
         int state = project.getState();
-        examine(holder,state);
+        examine(holder,state,position);
     }
     //设置状态
-    public void examine(MyViewHolder holder, int state){
+    public void examine(MyViewHolder holder, int state, int position){
         switch (state){
             case 0:
                 holder.is_submitted.setText("未提交");
@@ -145,7 +145,8 @@ public class Tec03Adapter extends RecyclerView.Adapter<Tec03Adapter.MyViewHolder
                 holder.is_approved_teacher.setText("审核通过");
                 holder.is_approved_college.setText("审核通过");
                 holder.is_midterm_checked.setText("检查通过");
-                holder.is_final_checked.setText("检查通过");
+                if(pjt.get(position).getExistingCondition()==null) holder.is_final_checked.setText("检查通过");
+                else holder.is_final_checked.setText("检查通过："+pjt.get(position).getExistingCondition()+" 分");
                 break;
         }
     }
