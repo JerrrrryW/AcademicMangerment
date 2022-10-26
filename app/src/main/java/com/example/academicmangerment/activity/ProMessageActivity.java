@@ -394,13 +394,14 @@ public class ProMessageActivity extends AppCompatActivity implements View.OnClic
             case R.id.detail_modify_btn:
                 Log.println(Log.DEBUG,"detail","modify button clicked!");
                 for (EditText et : editTexts) { et.setEnabled(true);}//编辑框设置为可编辑
-                //TODO 配置成员列表和Adapter 切换按钮可用状态
+                //TODO 配置成员列表和 Adapter 切换按钮可用状态
                 break;
             case R.id.detail_delete_btn:
                 Log.println(Log.DEBUG,"detail","delete button clicked!");
                 break;
             case R.id.detail_upload_btn:
                 Log.println(Log.DEBUG,"detail","upload button clicked!");
+                
                 break;
             case R.id.detail_save_btn:
                 Log.println(Log.DEBUG,"detail","detail button clicked!");
