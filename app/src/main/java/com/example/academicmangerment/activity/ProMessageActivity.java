@@ -253,12 +253,13 @@ public class ProMessageActivity extends AppCompatActivity implements View.OnClic
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.detail_FinalCheck_btn:
-
+                Log.println(Log.DEBUG,"detail","final-check button clicked!");
                 break;
             case R.id.detail_midReviewCheck_btn:
-
+                Log.println(Log.DEBUG,"detail","midterm review button clicked!");
                 break;
             case R.id.detail_approve_btn:
+                Log.println(Log.DEBUG,"detail","approve button clicked!");
                 new Thread(){
                     @Override
                     public void run() {
@@ -278,6 +279,7 @@ public class ProMessageActivity extends AppCompatActivity implements View.OnClic
                 }.start();
                 break;
             case R.id.detail_reject_btn:
+                Log.println(Log.DEBUG,"detail","reject button clicked!");
                 new Thread(){
                     @Override
                     public void run() {
@@ -295,19 +297,19 @@ public class ProMessageActivity extends AppCompatActivity implements View.OnClic
                     }
                 }.start();
             case R.id.detail_submit_btn:
-
+                Log.println(Log.DEBUG,"detail","submit button clicked!");
                 break;
             case R.id.detail_modify_btn:
-
+                Log.println(Log.DEBUG,"detail","modify button clicked!");
                 break;
             case R.id.detail_delete_btn:
-
+                Log.println(Log.DEBUG,"detail","delete button clicked!");
                 break;
             case R.id.detail_upload_btn:
-
+                Log.println(Log.DEBUG,"detail","upload button clicked!");
                 break;
             case R.id.detail_save_btn:
-
+                Log.println(Log.DEBUG,"detail","detail button clicked!");
                 break;
             default:
                 break;
