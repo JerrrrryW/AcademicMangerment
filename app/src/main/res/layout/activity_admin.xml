@@ -9,7 +9,7 @@
 
     <!-- 侧边栏在前 -->
     <LinearLayout
-        android:layout_width="180dp"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:text="left">
@@ -32,7 +32,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/adm_username"
-                android:text="admin"
+                android:text="Admin01"
                 android:layout_marginStart="5dp"
                 android:textSize="24sp"
                 android:layout_gravity="center_vertical"
@@ -114,7 +114,7 @@
         </LinearLayout>
         <LinearLayout
             android:id="@+id/project_class_manger_btn"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:layout_marginStart="30dp"
@@ -129,7 +129,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="项目类别管理"
-                android:textSize="20sp"
+                android:textSize="20dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="20dp"/>
         </LinearLayout>
