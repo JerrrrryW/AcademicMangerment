@@ -164,6 +164,7 @@ public class StuActivity extends AppCompatActivity implements View.OnClickListen
         switch (v.getId()){
             case R.id.profile_btn:
                 transaction.replace(R.id.stu_fragments,stu02);
+                transaction.addToBackStack(null);
                 transaction.commit();
                 //Toast.makeText(this,"Stu02 clicked！",Toast.LENGTH_SHORT).show();
                 break;
