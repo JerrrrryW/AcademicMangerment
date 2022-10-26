@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.util.TypedValue;
 import android.view.ViewGroup;
@@ -23,11 +24,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
 import com.example.academicmangerment.R;
 import com.example.academicmangerment.adapter.MemberListAdapter;
+import com.example.academicmangerment.custom.OperationDialog;
 import com.example.academicmangerment.entity.Project;
 import com.example.academicmangerment.entity.ProjectDetail;
 import com.example.academicmangerment.entity.StuProject;
@@ -44,8 +47,12 @@ public class ProMessageActivity extends AppCompatActivity implements View.OnClic
     Project project;//接收Stu04的数据
     private EditText stu_sid, stu_name, stu_phone, proName;
     private TextView stateText,tec_name;
+
+    private EditText  name, subject, budget, economic_analysis, purpose, viable_analysis,dialogEditView;
+    private EditText[] editTexts;
+
     private Spinner level, achievement_type;
-    private EditText subject, budget, economic_analysis, purpose, viable_analysis,tec_tid;
+    private EditText  tec_tid;
     private RecyclerView member_list;
     private Button submit,member_add,approve,reject,midReview,finalCheck,modify,delete,upload,save,tec_add;
     private Button[] btnBar;
@@ -95,6 +102,13 @@ public class ProMessageActivity extends AppCompatActivity implements View.OnClic
         tec_tid=findViewById(R.id.edit_ProMsg_tec_tid);
         tec_name=findViewById(R.id.ProMsg_tec_name);
         tec_add=findViewById(R.id.ProMsg_tec_add_btn);
+        editTexts = new EditText[]{stu_sid, stu_name, stu_phone, name, subject, budget, economic_analysis, purpose, viable_analysis};
+        for (EditText et : editTexts) { et.setEnabled(false);}//编辑框设置为不可编辑
+
+        //绑定弹窗中的EditView组件
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.dialog_final_score,null);
+        dialogEditView = dialogView.findViewById(R.id.dialogEditText);
 
         //member_add = (Button) findViewById(R.id.member_add_btn);
         scrollView = (ScrollView) findViewById(R.id.scrollView1);
@@ -113,6 +127,7 @@ public class ProMessageActivity extends AppCompatActivity implements View.OnClic
         upload = findViewById(R.id.detail_upload_btn);
         save = findViewById(R.id.detail_save_btn);
         btnBar = new Button[]{submit,approve,reject,midReview,finalCheck,modify,delete,upload,save};
+
         //按钮监听
         finalCheck.setOnClickListener(this);
         midReview.setOnClickListener(this);
@@ -240,22 +255,7 @@ public class ProMessageActivity extends AppCompatActivity implements View.OnClic
         }
     }
 
-    @Override //横竖屏切换时调用
-    public void onConfigurationChanged(@NonNull Configuration newConfig) {
-        if (newConfig.orientation==Configuration.ORIENTATION_LANDSCAPE){
-            //如果是横屏了，在这里设置横屏的UI
-            Log.println(Log.DEBUG,"ProMessageActivity","onConfigurationChanged-Landscape");
-            scrollViewParams = scrollView.getLayoutParams();
-            scrollViewParams.width = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 700, getResources().getDisplayMetrics());
-        }else {
-            //否则，在这里设置竖屏的UI
-            Log.println(Log.DEBUG,"ProMessageActivity","onConfigurationChanged-Portrait");
-            scrollViewParams = scrollView.getLayoutParams();
-            scrollViewParams.width=ViewGroup.LayoutParams.MATCH_PARENT;
-        }
-        scrollView.setLayoutParams(scrollViewParams);
-        super.onConfigurationChanged(newConfig);
-    }
+
 
     public void initData() {
         stu_sid.setText(projectDetail.getSid());
@@ -271,8 +271,6 @@ public class ProMessageActivity extends AppCompatActivity implements View.OnClic
 
         setSpinnerData(level,projectDetail.getLevel());
         setSpinnerData(achievement_type, projectDetail.getAchievementType());
-
-
         submit.setText("更改");
     }
 
@@ -290,14 +288,113 @@ public class ProMessageActivity extends AppCompatActivity implements View.OnClic
         spinner.setClickable(false);
     }
 
+    @Override //横竖屏切换时调用
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        if (newConfig.orientation==Configuration.ORIENTATION_LANDSCAPE){
+            //如果是横屏了，在这里设置横屏的UI
+            Log.println(Log.DEBUG,"ProMessageActivity","onConfigurationChanged-Landscape");
+            scrollViewParams = scrollView.getLayoutParams();
+            scrollViewParams.width = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 700, getResources().getDisplayMetrics());
+        }else {
+            //否则，在这里设置竖屏的UI
+            Log.println(Log.DEBUG,"ProMessageActivity","onConfigurationChanged-Portrait");
+            scrollViewParams = scrollView.getLayoutParams();
+            scrollViewParams.width=ViewGroup.LayoutParams.MATCH_PARENT;
+        }
+        scrollView.setLayoutParams(scrollViewParams);
+        super.onConfigurationChanged(newConfig);
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.detail_FinalCheck_btn:
                 Log.println(Log.DEBUG,"detail","final-check button clicked!");
+                final OperationDialog finalScoreDialog = new OperationDialog(this);
+                finalScoreDialog.setMessage("请输入答辩分数")
+                        .setTitle("请确认结题答辩结果")
+                        .setImageResId(R.mipmap.teacher)
+                        .setSingle(false).setEditText(true)//设置两个按钮且需要编辑框
+                        .setPositive("通过").setNegtive("不通过")
+                        .setOnClickBottomListener(new OperationDialog.OnClickBottomListener() {
+                            @Override
+                            public void onPositiveClick() {
+                                finalScoreDialog.dismiss();
+                                new Thread() {
+                                    @Override
+                                    public void run() {
+                                        super.run();
+                                        Project project = projectDao.getProject(projectDetail.getPid());
+                                        project.setState(12);
+                                        String score = dialogEditView.getText().toString();//TODO 获取到的分数字符串为空
+                                        project.setExistingCondition(score);
+                                        projectDetail.setState(12);
+                                        projectDao.updateProject(project);
+                                    }
+                                }.start();
+                                setViewByState(12);
+                                Toast.makeText(ProMessageActivity.this,"操作成功：项目"+projectDetail.getPid()+"结项通过",Toast.LENGTH_SHORT).show();
+                            }
+                            @Override
+                            public void onNegtiveClick() {
+                                finalScoreDialog.dismiss();
+                                new Thread() {
+                                    @Override
+                                    public void run() {
+                                        super.run();
+                                        Project project = projectDao.getProject(projectDetail.getPid());
+                                        project.setState(11);
+                                        project.setExistingCondition(dialogEditView.getText().toString());
+                                        projectDetail.setState(11);
+                                        projectDao.updateProject(project);
+                                    }
+                                }.start();
+                                setViewByState(11);
+                                Toast.makeText(ProMessageActivity.this,"操作成功："+projectDetail.getPid()+"结项未通过",Toast.LENGTH_SHORT).show();
+                            }
+                        }).show();
                 break;
             case R.id.detail_midReviewCheck_btn:
                 Log.println(Log.DEBUG,"detail","midterm review button clicked!");
+                final OperationDialog midReviewDialog = new OperationDialog(this);
+                midReviewDialog.setTitle("请确认中期检查结果")
+                        .setImageResId(R.mipmap.teacher)
+                        .setSingle(false).setEditText(false)//设置是否启用两个按钮和编辑框
+                        .setPositive("通过").setNegtive("不通过")
+                        .setOnClickBottomListener(new OperationDialog.OnClickBottomListener() {
+                            @Override
+                            public void onPositiveClick() {
+                                midReviewDialog.dismiss();
+                                new Thread() {
+                                    @Override
+                                    public void run() {
+                                        super.run();
+                                        Project project = projectDao.getProject(projectDetail.getPid());
+                                        project.setState(9);
+                                        projectDetail.setState(9);
+                                        projectDao.updateProject(project);
+                                    }
+                                }.start();
+                                setViewByState(9);
+                                Toast.makeText(ProMessageActivity.this,"操作成功：项目"+projectDetail.getPid()+"中期通过",Toast.LENGTH_SHORT).show();
+                            }
+                            @Override
+                            public void onNegtiveClick() {
+                                midReviewDialog.dismiss();
+                                new Thread() {
+                                    @Override
+                                    public void run() {
+                                        super.run();
+                                        Project project = projectDao.getProject(projectDetail.getPid());
+                                        project.setState(8);
+                                        projectDetail.setState(8);
+                                        projectDao.updateProject(project);
+                                    }
+                                }.start();
+                                setViewByState(8);
+                                Toast.makeText(ProMessageActivity.this,"操作成功："+projectDetail.getPid()+"中期未通过",Toast.LENGTH_SHORT).show();
+                            }
+                        }).show();
                 break;
             case R.id.detail_approve_btn:
                 Log.println(Log.DEBUG,"detail","approve button clicked!");
@@ -381,6 +478,8 @@ public class ProMessageActivity extends AppCompatActivity implements View.OnClic
                 break;
             case R.id.detail_modify_btn:
                 Log.println(Log.DEBUG,"detail","modify button clicked!");
+                for (EditText et : editTexts) { et.setEnabled(true);}//编辑框设置为可编辑
+                //TODO 配置成员列表和Adapter 切换按钮可用状态
                 break;
             case R.id.detail_delete_btn:
                 Log.println(Log.DEBUG,"detail","delete button clicked!");

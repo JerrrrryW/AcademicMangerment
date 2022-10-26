@@ -146,10 +146,12 @@
                 android:gravity="center_vertical"
                 android:id="@+id/name"
                 android:inputType="text"/>
+
             <TextView
-                style="@style/itemMessage"
                 android:id="@+id/proLevel"
-                android:text="项目等级："/>
+                style="@style/itemMessage"
+                android:text="项目等级：" />
+
             <Spinner
                 style="@style/itemMessageInter"
                 android:id="@+id/level"

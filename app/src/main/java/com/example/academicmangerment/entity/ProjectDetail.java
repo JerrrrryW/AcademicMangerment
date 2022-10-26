@@ -29,6 +29,8 @@ public class ProjectDetail implements Serializable {
     String college;
     String subject;
     String economicAnalysis;
+
+    String existingCondition;
     String purpose;
     String viableAnalysis;
     @Ignore
@@ -177,5 +179,13 @@ public class ProjectDetail implements Serializable {
 
     public void setCollege(String college) {
         this.college = college;
+    }
+
+    public String getExistingCondition() {
+        return existingCondition;
+    }
+
+    public void setExistingCondition(String existingCondition) {
+        this.existingCondition = existingCondition;
     }
 }
