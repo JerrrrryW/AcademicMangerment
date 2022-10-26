@@ -1,5 +1,7 @@
 package com.example.academicmangerment.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -44,7 +46,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProMessageActivity extends AppCompatActivity implements View.OnClickListener /*implements Stu04.SendProject*/ {
-    Project project;//接收Stu04的数据
+
     private EditText stu_sid, stu_name, stu_phone, proName;
     private TextView stateText,tec_name;
 
@@ -138,6 +140,10 @@ public class ProMessageActivity extends AppCompatActivity implements View.OnClic
         delete.setOnClickListener(this);
         upload.setOnClickListener(this);
         save.setOnClickListener(this);
+        findViewById(R.id.detail_return_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { finish();  }
+        });
 
         //选择器监听
         achievement_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -230,6 +236,8 @@ public class ProMessageActivity extends AppCompatActivity implements View.OnClic
                 break;
             case 7:
                 stateText.setText("中期检查已开启");
+                if(queryType==0)
+                    upload.setVisibility(View.VISIBLE);
                 if(queryType==2)
                     midReview.setVisibility(View.VISIBLE);
                 break;
@@ -241,6 +249,8 @@ public class ProMessageActivity extends AppCompatActivity implements View.OnClic
                 break;
             case 10:
                 stateText.setText("结题答辩已开启");
+                if(queryType==0)
+                    upload.setVisibility(View.VISIBLE);
                 if(queryType==2)
                     finalCheck.setVisibility(View.VISIBLE);
                 break;
@@ -399,89 +409,134 @@ public class ProMessageActivity extends AppCompatActivity implements View.OnClic
                 break;
             case R.id.detail_approve_btn:
                 Log.println(Log.DEBUG,"detail","approve button clicked!");
-                new Thread(){
-                    @Override
-                    public void run() {
-                        super.run();
-                        Project project=projectDao.getProject(projectDetail.getPid());
-                        //教师审核
-                        if(queryType==1){
-                            project.setState(4);
-                            projectDetail.setState(4);
-
-                        }else{
-                            project.setState(6);
-                            projectDetail.setState(6);
-                        }
-                        projectDao.updateProject(project);
-                    }
-                }.start();
+                final OperationDialog approveDialog = new OperationDialog(this);
+                approveDialog.setTitle("请确认审核结果")
+                        .setImageResId(R.mipmap.teacher)
+                        .setPositive("审核通过")
+                        .setSingle(true).setEditText(false)//设置是否启用两个按钮和编辑框
+                        .setOnClickBottomListener(new OperationDialog.OnClickBottomListener() {
+                            @Override
+                            public void onPositiveClick() {
+                                approveDialog.dismiss();
+                                new Thread(){
+                                    @Override
+                                    public void run() {
+                                        super.run();
+                                        Project project=projectDao.getProject(projectDetail.getPid());
+                                        //教师审核
+                                        if(queryType==1){
+                                            project.setState(4);
+                                            projectDetail.setState(4);
+                                        }else{
+                                            project.setState(6);
+                                            projectDetail.setState(6);
+                                        }
+                                        projectDao.updateProject(project);
+                                    }
+                                }.start();
+                                if(queryType==1) setViewByState(4); else setViewByState(6);
+                                Toast.makeText(ProMessageActivity.this,"操作成功：项目"+projectDetail.getPid()+"审核通过",Toast.LENGTH_SHORT).show();
+                            }
+                            @Override
+                            public void onNegtiveClick() {
+                                approveDialog.dismiss();
+                            }
+                        }).show();
                 break;
             case R.id.detail_reject_btn:
                 Log.println(Log.DEBUG,"detail","reject button clicked!");
-                new Thread(){
-                    @Override
-                    public void run() {
-                        super.run();
-                        Project project=projectDao.getProject(projectDetail.getPid());
-                        //教师审核
-                        if(queryType==1){
-                            project.setState(3);
-                            projectDetail.setState(3);
-                        }else{
-                            project.setState(5);
-                            projectDetail.setState(5);
-                        }
-                        projectDao.updateProject(project);
-                    }
-                }.start();
+                final OperationDialog rejectDialog = new OperationDialog(this);
+                rejectDialog.setTitle("请确认审核结果")
+                        .setImageResId(R.mipmap.teacher)
+                        .setPositive("审核不通过")
+                        .setMessage("修改意见")
+                        .setSingle(true).setEditText(true)//设置是否启用两个按钮和编辑框
+                        .setOnClickBottomListener(new OperationDialog.OnClickBottomListener() {
+                            @Override
+                            public void onPositiveClick() {
+                                rejectDialog.dismiss();
+                                new Thread(){
+                                    @Override
+                                    public void run() {
+                                        super.run();
+                                        Project project=projectDao.getProject(projectDetail.getPid());
+                                        //教师审核
+                                        if(queryType==1){
+                                            project.setState(3);
+                                            projectDetail.setState(3);
+                                        }else{
+                                            project.setState(5);
+                                            projectDetail.setState(5);
+                                        }
+                                        projectDao.updateProject(project);
+                                    }
+                                }.start();
+                                if(queryType==1) setViewByState(3); else setViewByState(5);
+                                Toast.makeText(ProMessageActivity.this,"操作成功：项目"+projectDetail.getPid()+"审核通过",Toast.LENGTH_SHORT).show();
+                            }
+                            @Override
+                            public void onNegtiveClick() {
+                                rejectDialog.dismiss();
+                            }
+                        }).show();
+                break;
             case R.id.detail_submit_btn:
                 Log.println(Log.DEBUG,"detail","submit button clicked!");
-                Project project=new Project();
-                project.setPid(projectDetail.getPid());
-                project.setAchievementType(selectType);
-                project.setBudget(Double.parseDouble(budget.getText().toString()));
-                project.setEconomicAnalysis(economic_analysis.getText().toString());
-                project.setExpectResult(purpose.getText().toString());
-                project.setLevel(selectLevel);
-                project.setName(proName.getText().toString());
-                project.setSubject(projectDetail.getSubject());
-                project.setViableAnalysis(viable_analysis.getText().toString());
-                project.setState(1);
-
-                @SuppressLint("HandlerLeak") final Handler handler = new Handler() {
-                    @Override
-                    public void handleMessage(@NonNull Message msg) {
-                        super.handleMessage(msg);
-                        if(msg.what==1){
-                            //清空所有内容
-                            clearAll();
-                            Toast.makeText(getApplicationContext(),"提交成功",Toast.LENGTH_SHORT);
-                            //跳转到项目管理
-                            getSupportFragmentManager().beginTransaction().replace(R.id.stu_fragments, Stu02.newInstance(student))
-                                    .addToBackStack(null).commit();
-
-                        }
-                    }
-                };
-                new Thread(){
-                    @Override
-                    public void run() {
-                        super.run();
-                        projectDao.updateProject(project);
-                        Message msg=Message.obtain();
-                        msg.what=1;
-                        handler.sendMessage(msg);
-                    }
-                }.start();
+                final OperationDialog submitDialog = new OperationDialog(this);
+                submitDialog.setTitle("确认提交项目审核")
+                        .setImageResId(R.mipmap.teacher)
+                        .setPositive("提交项目")
+                        .setSingle(true).setEditText(false)//设置是否启用两个按钮和编辑框
+                        .setOnClickBottomListener(new OperationDialog.OnClickBottomListener() {
+                            @Override
+                            public void onPositiveClick() {
+                                submitDialog.dismiss();
+                                new Thread(){
+                                    @Override
+                                    public void run() {
+                                        super.run();
+                                        //TODO 提交项目信息 本界面修改提交后跳转至状态2
+                                    }
+                                }.start();
+                                setViewByState(2);
+                                Toast.makeText(ProMessageActivity.this,"操作成功：项目"+projectDetail.getPid()+"已提交",Toast.LENGTH_SHORT).show();
+                            }
+                            @Override
+                            public void onNegtiveClick() {
+                            }
+                        }).show();
                 break;
             case R.id.detail_modify_btn:
                 Log.println(Log.DEBUG,"detail","modify button clicked!");
                 for (EditText et : editTexts) { et.setEnabled(true);}//编辑框设置为可编辑
-                //TODO 配置成员列表和Adapter 切换按钮可用状态
+                setViewByState(0);
+                //TODO 配置成员列表和 Adapter 切换按钮可用状态
                 break;
             case R.id.detail_delete_btn:
                 Log.println(Log.DEBUG,"detail","delete button clicked!");
+                final OperationDialog deleteDialog = new OperationDialog(this);
+                deleteDialog.setTitle("确定要删除这个项目吗")
+                        .setImageResId(R.mipmap.teacher)
+                        .setPositive("删除项目")
+                        .setSingle(true).setEditText(false)//设置是否启用两个按钮和编辑框
+                        .setOnClickBottomListener(new OperationDialog.OnClickBottomListener() {
+                            @Override
+                            public void onPositiveClick() {
+                                deleteDialog.dismiss();
+                                new Thread(){
+                                    @Override
+                                    public void run() {
+                                        super.run();
+                                        //TODO 数据删除该项目
+                                    }
+                                }.start();
+                                finish();
+                                Toast.makeText(ProMessageActivity.this,"操作成功：项目"+projectDetail.getPid()+"删除",Toast.LENGTH_SHORT).show();
+                            }
+                            @Override
+                            public void onNegtiveClick() {
+                            }
+                        }).show();
                 @SuppressLint("HandlerLeak") final Handler handler2 = new Handler() {
                     @Override
                     public void handleMessage(@NonNull Message msg) {
@@ -510,9 +565,31 @@ public class ProMessageActivity extends AppCompatActivity implements View.OnClic
                 break;
             case R.id.detail_upload_btn:
                 Log.println(Log.DEBUG,"detail","upload button clicked!");
+                new AlertDialog.Builder(this)
+                        .setTitle("请选择成果上传方式")
+                        .setIcon(R.mipmap.student)
+                        .setItems(new String[]{"上传图片", "上传文件", "使用相机拍摄"}, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                switch (which){
+                                    case 0:
+                                        //打开相册
+
+                                        break;
+                                    case 1:
+                                        //打开文件管理器
+                                        break;
+                                    case 2:
+                                        //打开相机
+                                        break;
+                                }
+                            }
+                        }).show();
                 break;
             case R.id.detail_save_btn:
                 Log.println(Log.DEBUG,"detail","detail button clicked!");
+                //TODO 保存项目
+                Toast.makeText(ProMessageActivity.this,"操作成功：项目"+projectDetail.getPid()+"保存",Toast.LENGTH_SHORT).show();
                 break;
             default:
                 break;

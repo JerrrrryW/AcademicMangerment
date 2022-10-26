@@ -41,7 +41,6 @@
         android:lineSpacingMultiplier="1.2"
         android:textSize="20dp"
         android:textColor="#999999"
-        android:inputType="numberDecimal"
         tools:text="驳回理由或答辩分数" />
     <TextView
         android:layout_width="match_parent"

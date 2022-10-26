@@ -1,6 +1,7 @@
 package com.example.academicmangerment.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -61,7 +62,7 @@ public class Stu04Adapter extends RecyclerView.Adapter<Stu04Adapter.MyViewHolder
         //holder.is_final_checked.setText(project.getFinalChecked());
     }
     //设置状态
-    public void examine(MyViewHolder holder,int state,int position){
+    public void examine(MyViewHolder holder, int state, int position){
         switch (state){
             case 0:
                 holder.is_submitted.setText("未提交");
@@ -86,7 +87,9 @@ public class Stu04Adapter extends RecyclerView.Adapter<Stu04Adapter.MyViewHolder
                 break;
             case 3:
                 holder.is_submitted.setText("待修改");
+                holder.is_submitted.setTextColor(Color.RED);
                 holder.is_approved_teacher.setText("教师驳回");
+                holder.is_approved_teacher.setTextColor(Color.RED);
                 holder.is_approved_college.setText("待审核");
                 holder.is_midterm_checked.setText("未开启");
                 holder.is_final_checked.setText("未开启");
@@ -100,8 +103,10 @@ public class Stu04Adapter extends RecyclerView.Adapter<Stu04Adapter.MyViewHolder
                 break;
             case 5:
                 holder.is_submitted.setText("待修改");
+                holder.is_submitted.setTextColor(Color.RED);
                 holder.is_approved_teacher.setText("审核通过");
                 holder.is_approved_college.setText("学院驳回");
+                holder.is_approved_college.setTextColor(Color.RED);
                 holder.is_midterm_checked.setText("未开启");
                 holder.is_final_checked.setText("未开启");
                 break;
@@ -117,6 +122,7 @@ public class Stu04Adapter extends RecyclerView.Adapter<Stu04Adapter.MyViewHolder
                 holder.is_approved_teacher.setText("审核通过");
                 holder.is_approved_college.setText("审核通过");
                 holder.is_midterm_checked.setText("已开启");
+                holder.is_midterm_checked.setTextColor(Color.GREEN);
                 holder.is_final_checked.setText("未开启");
                 break;
             case 8:
@@ -124,6 +130,7 @@ public class Stu04Adapter extends RecyclerView.Adapter<Stu04Adapter.MyViewHolder
                 holder.is_approved_teacher.setText("审核通过");
                 holder.is_approved_college.setText("审核通过");
                 holder.is_midterm_checked.setText("未通过");
+                holder.is_midterm_checked.setTextColor(Color.RED);
                 holder.is_final_checked.setText("未开启");
                 break;
             case 9:
@@ -139,6 +146,7 @@ public class Stu04Adapter extends RecyclerView.Adapter<Stu04Adapter.MyViewHolder
                 holder.is_approved_college.setText("审核通过");
                 holder.is_midterm_checked.setText("检查通过");
                 holder.is_final_checked.setText("已开启");
+                holder.is_final_checked.setTextColor(Color.GREEN);
                 break;
             case 11:
                 holder.is_submitted.setText("已结项");
@@ -146,6 +154,7 @@ public class Stu04Adapter extends RecyclerView.Adapter<Stu04Adapter.MyViewHolder
                 holder.is_approved_college.setText("审核通过");
                 holder.is_midterm_checked.setText("检查通过");
                 holder.is_final_checked.setText("答辩未通过");
+                holder.is_final_checked.setTextColor(Color.RED);
                 break;
             case 12:
                 holder.is_submitted.setText("已结项");
