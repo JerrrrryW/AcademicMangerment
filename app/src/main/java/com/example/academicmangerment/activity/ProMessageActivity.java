@@ -512,6 +512,9 @@ public class ProMessageActivity extends AppCompatActivity implements View.OnClic
                                             clearAll();
                                             Toast.makeText(getApplicationContext(),"提交成功",Toast.LENGTH_SHORT);
                                             Intent intent=new Intent(ProMessageActivity.this,StuActivity.class);
+                                            Bundle bundle=new Bundle();
+                                            bundle.putSerializable("student",student);
+                                            intent.putExtras(bundle);
                                             intent.putExtra("id",1);
                                             startActivity(intent);
                                             finish();
@@ -564,7 +567,12 @@ public class ProMessageActivity extends AppCompatActivity implements View.OnClic
                                             //跳转到项目管理
                                             Intent intent=new Intent(ProMessageActivity.this,StuActivity.class);
                                             intent.putExtra("id",1);
+                                            Bundle bundle=new Bundle();
+                                            bundle.putSerializable("student",student);
+                                            intent.putExtras(bundle);
                                             startActivity(intent);
+                                            /*getSupportFragmentManager().beginTransaction().replace(R.id.stu_fragments, Stu02.newInstance(student))
+                                                    .addToBackStack(null).commit();*/
                                             finish();
                                         }
                                     }
