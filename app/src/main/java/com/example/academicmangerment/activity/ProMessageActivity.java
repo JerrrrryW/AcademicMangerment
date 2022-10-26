@@ -1,24 +1,28 @@
 package com.example.academicmangerment.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.util.TypedValue;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
@@ -26,7 +30,10 @@ import com.example.academicmangerment.R;
 import com.example.academicmangerment.adapter.MemberListAdapter;
 import com.example.academicmangerment.entity.Project;
 import com.example.academicmangerment.entity.ProjectDetail;
+import com.example.academicmangerment.entity.StuProject;
 import com.example.academicmangerment.entity.Student;
+import com.example.academicmangerment.fragment.Stu02;
+import com.example.academicmangerment.fragment.Stu04;
 import com.example.academicmangerment.persistence.AppDatabase;
 import com.example.academicmangerment.persistence.ProjectDao;
 
@@ -35,12 +42,12 @@ import java.util.List;
 
 public class ProMessageActivity extends AppCompatActivity implements View.OnClickListener /*implements Stu04.SendProject*/ {
     Project project;//接收Stu04的数据
-    private EditText stu_sid, stu_name, stu_phone, name;
-    private TextView stateText;
+    private EditText stu_sid, stu_name, stu_phone, proName;
+    private TextView stateText,tec_name;
     private Spinner level, achievement_type;
-    private EditText subject, budget, economic_analysis, purpose, viable_analysis;
+    private EditText subject, budget, economic_analysis, purpose, viable_analysis,tec_tid;
     private RecyclerView member_list;
-    private Button submit,member_add,approve,reject,midReview,finalCheck,modify,delete,upload,save;
+    private Button submit,member_add,approve,reject,midReview,finalCheck,modify,delete,upload,save,tec_add;
     private Button[] btnBar;
     private ScrollView scrollView;
     private ViewGroup.LayoutParams scrollViewParams;
@@ -49,9 +56,13 @@ public class ProMessageActivity extends AppCompatActivity implements View.OnClic
 
     private List<Student> studentList;
     private ProjectDetail projectDetail;
+    private Student student;
 
     private AppDatabase db;
     private ProjectDao projectDao;
+
+    private String selectType;
+    private String selectLevel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +72,7 @@ public class ProMessageActivity extends AppCompatActivity implements View.OnClic
         Intent intent=getIntent();
         projectDetail=(ProjectDetail) intent.getExtras().getSerializable("projectDetail");
         queryType=intent.getExtras().getInt("queryType");
+        student=(Student) intent.getExtras().getSerializable("student");
         initView();
         setViewByState(projectDetail.getState());
         initData();
@@ -71,7 +83,7 @@ public class ProMessageActivity extends AppCompatActivity implements View.OnClic
         stu_name = (EditText) findViewById(R.id.stu_name);
         stu_phone = (EditText) findViewById(R.id.stu_phone);
         //stu_member = (EditText) findViewById(R.id.stu_member);//参与成员
-        name = (EditText) findViewById(R.id.name);
+        proName = (EditText) findViewById(R.id.name);
         level = (Spinner) findViewById(R.id.level);
         achievement_type = (Spinner) findViewById(R.id.achievement_type);
         subject = (EditText) findViewById(R.id.subject);
@@ -80,6 +92,9 @@ public class ProMessageActivity extends AppCompatActivity implements View.OnClic
         purpose = (EditText) findViewById(R.id.purpose);
         viable_analysis = (EditText) findViewById(R.id.viable_analysis);
         stateText = findViewById(R.id.detail_project_state);
+        tec_tid=findViewById(R.id.edit_ProMsg_tec_tid);
+        tec_name=findViewById(R.id.ProMsg_tec_name);
+        tec_add=findViewById(R.id.ProMsg_tec_add_btn);
 
         //member_add = (Button) findViewById(R.id.member_add_btn);
         scrollView = (ScrollView) findViewById(R.id.scrollView1);
@@ -108,6 +123,30 @@ public class ProMessageActivity extends AppCompatActivity implements View.OnClic
         delete.setOnClickListener(this);
         upload.setOnClickListener(this);
         save.setOnClickListener(this);
+
+        //选择器监听
+        achievement_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                selectType=ProMessageActivity.this.getResources().getStringArray(R.array.projectTypeList)[i];
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        level.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                selectLevel= ProMessageActivity.this.getResources().getStringArray(R.array.projectLevelList)[i];
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         DividerItemDecoration mDivider = new DividerItemDecoration(this,DividerItemDecoration.VERTICAL);
         member_list.addItemDecoration(mDivider);
@@ -222,7 +261,7 @@ public class ProMessageActivity extends AppCompatActivity implements View.OnClic
         stu_sid.setText(projectDetail.getSid());
         stu_name.setText(projectDetail.getRealName());
         stu_phone.setText(projectDetail.getPhone());
-        name.setText(projectDetail.getName());
+        proName.setText(projectDetail.getName());
 
         subject.setText(projectDetail.getSubject());
         budget.setText(""+projectDetail.getBudget());
@@ -232,6 +271,8 @@ public class ProMessageActivity extends AppCompatActivity implements View.OnClic
 
         setSpinnerData(level,projectDetail.getLevel());
         setSpinnerData(achievement_type, projectDetail.getAchievementType());
+
+
         submit.setText("更改");
     }
 
@@ -298,6 +339,45 @@ public class ProMessageActivity extends AppCompatActivity implements View.OnClic
                 }.start();
             case R.id.detail_submit_btn:
                 Log.println(Log.DEBUG,"detail","submit button clicked!");
+                Project project=new Project();
+                project.setPid(projectDetail.getPid());
+                project.setAchievementType(selectType);
+                project.setBudget(Double.parseDouble(budget.getText().toString()));
+                project.setEconomicAnalysis(economic_analysis.getText().toString());
+                project.setExpectResult(purpose.getText().toString());
+                project.setLevel(selectLevel);
+                project.setName(proName.getText().toString());
+                project.setSubject(projectDetail.getSubject());
+                project.setViableAnalysis(viable_analysis.getText().toString());
+                project.setState(1);
+                List<StuProject> stuProjectList=new ArrayList<>();
+
+                for(Student s:studentList){
+                    StuProject stuProject=new StuProject(s.getSid(),project.getPid(),"2");
+                    stuProjectList.add(stuProject);
+                }
+                @SuppressLint("HandlerLeak") final Handler handler = new Handler() {
+                    @Override
+                    public void handleMessage(@NonNull Message msg) {
+                        super.handleMessage(msg);
+                        if(msg.what==1){
+                            //清空所有内容
+                            clearAll();
+                            Toast.makeText(getApplicationContext(),"提交成功",Toast.LENGTH_SHORT);
+                            //跳转到项目管理
+                            getSupportFragmentManager().beginTransaction().replace(R.id.stu_fragments, Stu02.newInstance(student))
+                                    .addToBackStack(null).commit();
+
+                        }
+                    }
+                };
+                new Thread(){
+                    @Override
+                    public void run() {
+                        super.run();
+                        projectDao.updateProject(project);
+                    }
+                }.start();
                 break;
             case R.id.detail_modify_btn:
                 Log.println(Log.DEBUG,"detail","modify button clicked!");
@@ -314,5 +394,16 @@ public class ProMessageActivity extends AppCompatActivity implements View.OnClic
             default:
                 break;
         }
+    }
+    public void clearAll(){
+
+        proName.setText("");
+        subject.setText("");
+        budget.setText("0");
+        economic_analysis.setText("");
+        purpose.setText("");
+        viable_analysis.setText("");
+        tec_name.setText("");
+        tec_tid.setText("");
     }
 }
