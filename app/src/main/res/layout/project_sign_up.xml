@@ -110,10 +110,12 @@
                 android:text="指导老师："/>
             <LinearLayout
                 android:layout_width="match_parent"
+                android:visibility="gone"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <EditText
                     android:id="@+id/edit_ProMsg_tec_tid"
+                    android:visibility="gone"
                     android:layout_height="48dp"
                     android:layout_width="0dp"
                     android:layout_weight="1"
@@ -126,6 +128,7 @@
                     android:inputType="number"/>
                 <Button
                     android:id="@+id/ProMsg_tec_add_btn"
+                    android:visibility="gone"
                     android:layout_marginLeft="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"

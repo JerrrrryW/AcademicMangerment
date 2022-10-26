@@ -48,7 +48,7 @@ public class ProMessageActivity extends AppCompatActivity implements View.OnClic
     private EditText stu_sid, stu_name, stu_phone, proName;
     private TextView stateText,tec_name;
 
-    private EditText  name, subject, budget, economic_analysis, purpose, viable_analysis,dialogEditView;
+    private EditText   subject, budget, economic_analysis, purpose, viable_analysis,dialogEditView;
     private EditText[] editTexts;
 
     private Spinner level, achievement_type;
@@ -102,7 +102,7 @@ public class ProMessageActivity extends AppCompatActivity implements View.OnClic
         tec_tid=findViewById(R.id.edit_ProMsg_tec_tid);
         tec_name=findViewById(R.id.ProMsg_tec_name);
         tec_add=findViewById(R.id.ProMsg_tec_add_btn);
-        editTexts = new EditText[]{stu_sid, stu_name, stu_phone, name, subject, budget, economic_analysis, purpose, viable_analysis};
+        editTexts = new EditText[]{stu_sid, stu_name, stu_phone,  subject, budget, economic_analysis, purpose, viable_analysis};
         for (EditText et : editTexts) { et.setEnabled(false);}//编辑框设置为不可编辑
 
         //绑定弹窗中的EditView组件
@@ -268,7 +268,8 @@ public class ProMessageActivity extends AppCompatActivity implements View.OnClic
         economic_analysis.setText(projectDetail.getEconomicAnalysis());
         purpose.setText(projectDetail.getPurpose());
         viable_analysis.setText(projectDetail.getViableAnalysis());
-
+       /* tec_tid.setText(projectDetail.getTecName());*/
+        tec_name.setText(projectDetail.getTecName());
         setSpinnerData(level,projectDetail.getLevel());
         setSpinnerData(achievement_type, projectDetail.getAchievementType());
         submit.setText("更改");
@@ -447,12 +448,7 @@ public class ProMessageActivity extends AppCompatActivity implements View.OnClic
                 project.setSubject(projectDetail.getSubject());
                 project.setViableAnalysis(viable_analysis.getText().toString());
                 project.setState(1);
-                List<StuProject> stuProjectList=new ArrayList<>();
 
-                for(Student s:studentList){
-                    StuProject stuProject=new StuProject(s.getSid(),project.getPid(),"2");
-                    stuProjectList.add(stuProject);
-                }
                 @SuppressLint("HandlerLeak") final Handler handler = new Handler() {
                     @Override
                     public void handleMessage(@NonNull Message msg) {
@@ -473,6 +469,9 @@ public class ProMessageActivity extends AppCompatActivity implements View.OnClic
                     public void run() {
                         super.run();
                         projectDao.updateProject(project);
+                        Message msg=Message.obtain();
+                        msg.what=1;
+                        handler.sendMessage(msg);
                     }
                 }.start();
                 break;
@@ -483,6 +482,31 @@ public class ProMessageActivity extends AppCompatActivity implements View.OnClic
                 break;
             case R.id.detail_delete_btn:
                 Log.println(Log.DEBUG,"detail","delete button clicked!");
+                @SuppressLint("HandlerLeak") final Handler handler2 = new Handler() {
+                    @Override
+                    public void handleMessage(@NonNull Message msg) {
+                        super.handleMessage(msg);
+                        if(msg.what==1){
+                            //清空所有内容
+                            clearAll();
+                            Toast.makeText(getApplicationContext(),"删除成功",Toast.LENGTH_SHORT);
+                            //跳转到项目管理
+                            getSupportFragmentManager().beginTransaction().replace(R.id.stu_fragments, Stu02.newInstance(student))
+                                    .addToBackStack(null).commit();
+
+                        }
+                    }
+                };
+                new Thread(){
+                    @Override
+                    public void run() {
+                        super.run();
+                        projectDao.deleteProject(projectDetail.getPid());
+                        Message msg=Message.obtain();
+                        msg.what=1;
+                        handler2.sendMessage(msg);
+                    }
+                }.start();
                 break;
             case R.id.detail_upload_btn:
                 Log.println(Log.DEBUG,"detail","upload button clicked!");

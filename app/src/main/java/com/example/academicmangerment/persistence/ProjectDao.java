@@ -1,6 +1,7 @@
 package com.example.academicmangerment.persistence;
 
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
@@ -77,4 +78,10 @@ public interface ProjectDao {
 
     @Update
     void updateProject(Project project);
+
+    @Query("delete from project where project.pid=:pid")
+    void deleteProject(String pid);
+
+    @Query("delete from stuproject where stuproject.pid=:pid and stuproject.sid=:sid")
+    void deleteStuProject(String pid,String sid);
 }
