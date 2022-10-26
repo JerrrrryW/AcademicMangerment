@@ -53,11 +53,11 @@ import java.util.List;
  */
 public class Stu03 extends Fragment /*implements View.OnClickListener*/ {
 
-    // TODO: Rename parameter arguments, choose names that match
+
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "student";
 
-    // TODO: Rename and change types of parameters
+
     private Student student;
     private Teacher teacher;
     private String selectType;
@@ -95,7 +95,7 @@ public class Stu03 extends Fragment /*implements View.OnClickListener*/ {
      *
      * @return A new instance of fragment Stu03.
      */
-    // TODO: Rename and change types and number of parameters
+
     public static Stu03 newInstance(Student student) {
         Stu03 fragment = new Stu03();
         Bundle args = new Bundle();
@@ -156,7 +156,7 @@ public class Stu03 extends Fragment /*implements View.OnClickListener*/ {
         member_list.setLayoutManager(new GridLayoutManager(getContext(), 1));
         memberListAdapter = new MemberListAdapter(getContext());
         //member_list.setVisibility(View.GONE); //复用至上传一个全新项目时默认没有成员，取消此注释
-        //TODO 在此处将项目成员放入studentList
+
         studentList = new ArrayList<Student>();
         memberListAdapter.setData(studentList);
         member_list.setAdapter(memberListAdapter);
@@ -345,7 +345,7 @@ public class Stu03 extends Fragment /*implements View.OnClickListener*/ {
         System.out.println("点击");
         switch (v.getId()){
             case R.id.stu03_member_add_btn:
-                //TODO
+
                 String sid=stu_member.getText().toString();
                 Student student=studentDao.getStudent(sid);
                 if(student!=null){
@@ -356,10 +356,10 @@ public class Stu03 extends Fragment /*implements View.OnClickListener*/ {
                 }
                 break;
             case R.id.stu03_save_btn:
-                //TODO
+
                 break;
             case R.id.stu03_submit_btn:
-                //TODO
+
                 break;
             default:
                 break;

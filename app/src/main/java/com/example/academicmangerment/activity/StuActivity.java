@@ -52,7 +52,7 @@ public class StuActivity extends AppCompatActivity implements View.OnClickListen
     private TextView college;
     private static final String TAG = "StuActivity";
     private CusSlidingPaneLayout mSlidingPaneLayout;
-
+    private int id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +64,11 @@ public class StuActivity extends AppCompatActivity implements View.OnClickListen
         initView();
         initSlidingPaneLayout();
         initFragment();
+        id=getIntent().getIntExtra("id",0);
+        if(id==1){
+            getSupportFragmentManager().beginTransaction().replace(R.id.stu_fragments, Stu02.newInstance(student))
+                    .addToBackStack(null).commit();
+        }
         /*test();*/
         /*数据库测试*/
        /* test();*/
@@ -183,7 +188,6 @@ public class StuActivity extends AppCompatActivity implements View.OnClickListen
                 Toast.makeText(this,"登出成功！",Toast.LENGTH_SHORT).show();
                 Intent intent=new Intent(StuActivity.this,LoginActivity.class);
                 startActivity(intent);
-                //TODO 跳转回登录
                 finish();
                 break;
             case R.id.btn_pop:

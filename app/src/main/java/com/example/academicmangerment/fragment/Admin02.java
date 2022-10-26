@@ -49,7 +49,7 @@ public class Admin02 extends Fragment {
      *
      * @return A new instance of fragment Admin02.
      */
-    // TODO: Rename and change types and number of parameters
+
     public static Admin02 newInstance() {
         Admin02 fragment = new Admin02();
         return fragment;

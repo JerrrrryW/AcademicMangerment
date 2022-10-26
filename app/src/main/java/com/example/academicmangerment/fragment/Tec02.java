@@ -24,11 +24,11 @@ import com.example.academicmangerment.persistence.TeacherDao;
  */
 public class Tec02 extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
+
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "teacher";
 
-    // TODO: Rename and change types of parameters
+
     private Teacher teacher;
     ImageView imageView;
     EditText editName;
@@ -49,7 +49,7 @@ public class Tec02 extends Fragment {
      * this fragment using the provided parameters.
      * @return A new instance of fragment Tec02.
      */
-    // TODO: Rename and change types and number of parameters
+
     public static Tec02 newInstance(Teacher teacher) {
         Tec02 fragment = new Tec02();
         Bundle args = new Bundle();

@@ -491,11 +491,41 @@ public class ProMessageActivity extends AppCompatActivity implements View.OnClic
                             @Override
                             public void onPositiveClick() {
                                 submitDialog.dismiss();
+                                Project project=new Project();
+                                project.setPid(projectDetail.getPid());
+                                project.setAchievementType(selectType);
+                                project.setBudget(Double.parseDouble(budget.getText().toString()));
+                                project.setEconomicAnalysis(economic_analysis.getText().toString());
+                                project.setExpectResult(purpose.getText().toString());
+                                project.setLevel(selectLevel);
+                                project.setName(proName.getText().toString());
+                                project.setSubject(projectDetail.getSubject());
+                                project.setViableAnalysis(viable_analysis.getText().toString());
+                                project.setState(1);
+
+                                @SuppressLint("HandlerLeak") final Handler handler = new Handler() {
+                                    @Override
+                                    public void handleMessage(@NonNull Message msg) {
+                                        super.handleMessage(msg);
+                                        if(msg.what==1){
+                                            //清空所有内容
+                                            clearAll();
+                                            Toast.makeText(getApplicationContext(),"提交成功",Toast.LENGTH_SHORT);
+                                            Intent intent=new Intent(ProMessageActivity.this,StuActivity.class);
+                                            intent.putExtra("id",1);
+                                            startActivity(intent);
+                                            finish();
+                                        }
+                                    }
+                                };
                                 new Thread(){
                                     @Override
                                     public void run() {
                                         super.run();
-                                        //TODO 提交项目信息 本界面修改提交后跳转至状态2
+                                        projectDao.updateProject(project);
+                                        Message msg=Message.obtain();
+                                        msg.what=1;
+                                        handler.sendMessage(msg);
                                     }
                                 }.start();
                                 setViewByState(2);
@@ -523,11 +553,30 @@ public class ProMessageActivity extends AppCompatActivity implements View.OnClic
                             @Override
                             public void onPositiveClick() {
                                 deleteDialog.dismiss();
+                                @SuppressLint("HandlerLeak") final Handler handler2 = new Handler() {
+                                    @Override
+                                    public void handleMessage(@NonNull Message msg) {
+                                        super.handleMessage(msg);
+                                        if(msg.what==1){
+                                            //清空所有内容
+                                            clearAll();
+                                            Toast.makeText(getApplicationContext(),"删除成功",Toast.LENGTH_SHORT);
+                                            //跳转到项目管理
+                                            Intent intent=new Intent(ProMessageActivity.this,StuActivity.class);
+                                            intent.putExtra("id",1);
+                                            startActivity(intent);
+                                            finish();
+                                        }
+                                    }
+                                };
                                 new Thread(){
                                     @Override
                                     public void run() {
                                         super.run();
-                                        //TODO 数据删除该项目
+                                        projectDao.deleteProject(projectDetail.getPid());
+                                        Message msg=Message.obtain();
+                                        msg.what=1;
+                                        handler2.sendMessage(msg);
                                     }
                                 }.start();
                                 finish();
@@ -588,7 +637,43 @@ public class ProMessageActivity extends AppCompatActivity implements View.OnClic
                 break;
             case R.id.detail_save_btn:
                 Log.println(Log.DEBUG,"detail","detail button clicked!");
-                //TODO 保存项目
+                Project project=new Project();
+                project.setPid(projectDetail.getPid());
+                project.setAchievementType(selectType);
+                project.setBudget(Double.parseDouble(budget.getText().toString()));
+                project.setEconomicAnalysis(economic_analysis.getText().toString());
+                project.setExpectResult(purpose.getText().toString());
+                project.setLevel(selectLevel);
+                project.setName(proName.getText().toString());
+                project.setSubject(projectDetail.getSubject());
+                project.setViableAnalysis(viable_analysis.getText().toString());
+                project.setState(0);
+
+                @SuppressLint("HandlerLeak") final Handler handler = new Handler() {
+                    @Override
+                    public void handleMessage(@NonNull Message msg) {
+                        super.handleMessage(msg);
+                        if(msg.what==1){
+                            //清空所有内容
+                            clearAll();
+                            Toast.makeText(getApplicationContext(),"保存成功",Toast.LENGTH_SHORT);
+                            //跳转到项目管理
+                            getSupportFragmentManager().beginTransaction().replace(R.id.stu_fragments, Stu02.newInstance(student))
+                                    .addToBackStack(null).commit();
+
+                        }
+                    }
+                };
+                new Thread(){
+                    @Override
+                    public void run() {
+                        super.run();
+                        projectDao.updateProject(project);
+                        Message msg=Message.obtain();
+                        msg.what=1;
+                        handler.sendMessage(msg);
+                    }
+                }.start();
                 Toast.makeText(ProMessageActivity.this,"操作成功：项目"+projectDetail.getPid()+"保存",Toast.LENGTH_SHORT).show();
                 break;
             default:

@@ -41,11 +41,11 @@ import java.util.List;
  */
 public class Stu04 extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
+
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "student";
 
-    // TODO: Rename and change types of parameters
+
     private Student student;
 
     private ProjectDao projectDao;
@@ -68,7 +68,7 @@ public class Stu04 extends Fragment {
      * this fragment using the provided parameters.
      * @return A new instance of fragment Stu04.
      */
-    // TODO: Rename and change types and number of parameters
+
     public static Stu04 newInstance(Student student) {
         Stu04 fragment = new Stu04();
         Bundle args = new Bundle();

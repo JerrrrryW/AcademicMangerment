@@ -28,12 +28,12 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
  */
 public class Stu02 extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
+
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "student";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
+
     private Student student;
 
     private AppDatabase db;
@@ -67,7 +67,7 @@ public class Stu02 extends Fragment {
      *
      * @return A new instance of fragment Stu02.
      */
-    // TODO: Rename and change types and number of parameters
+
     public static Stu02 newInstance(Student student) {
         Stu02 fragment = new Stu02();
         Bundle args = new Bundle();

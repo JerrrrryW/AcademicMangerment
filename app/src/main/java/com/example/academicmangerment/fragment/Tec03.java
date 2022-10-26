@@ -40,13 +40,13 @@ import java.util.List;
  */
 public class Tec03 extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
+
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "teacher";
 
     private ProjectDao projectDao;
     private AppDatabase db;
-    // TODO: Rename and change types of parameters
+
     private Teacher teacher;
     private View view;
     public RecyclerView mRecyclerView;
@@ -65,7 +65,7 @@ public class Tec03 extends Fragment {
      * this fragment using the provided parameters.
      * @return A new instance of fragment Tec01.
      */
-    // TODO: Rename and change types and number of parameters
+
     public static Tec03 newInstance(Teacher teacher) {
         Tec03 fragment = new Tec03();
         Bundle args = new Bundle();
