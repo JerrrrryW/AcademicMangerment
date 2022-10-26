@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,12 +35,13 @@ import java.util.List;
 
 public class ProMessageActivity extends AppCompatActivity implements View.OnClickListener /*implements Stu04.SendProject*/ {
     Project project;//接收Stu04的数据
-    private EditText stu_sid, stu_name, stu_phone, stu_member;
-    private EditText name;
+    private EditText stu_sid, stu_name, stu_phone, name;
+    private TextView stateText;
     private Spinner level, achievement_type;
     private EditText subject, budget, economic_analysis, purpose, viable_analysis;
     private RecyclerView member_list;
     private Button submit,member_add,approve,reject,midReview,finalCheck,modify,delete,upload,save;
+    private Button[] btnBar;
     private ScrollView scrollView;
     private ViewGroup.LayoutParams scrollViewParams;
     private int queryType;
@@ -60,6 +62,7 @@ public class ProMessageActivity extends AppCompatActivity implements View.OnClic
         projectDetail=(ProjectDetail) intent.getExtras().getSerializable("projectDetail");
         queryType=intent.getExtras().getInt("queryType");
         initView();
+        setViewByState(projectDetail.getState());
         initData();
     }
 
@@ -76,6 +79,7 @@ public class ProMessageActivity extends AppCompatActivity implements View.OnClic
         economic_analysis = (EditText) findViewById(R.id.economic_analysis);
         purpose = (EditText) findViewById(R.id.purpose);
         viable_analysis = (EditText) findViewById(R.id.viable_analysis);
+        stateText = findViewById(R.id.detail_project_state);
 
         //member_add = (Button) findViewById(R.id.member_add_btn);
         scrollView = (ScrollView) findViewById(R.id.scrollView1);
@@ -93,6 +97,7 @@ public class ProMessageActivity extends AppCompatActivity implements View.OnClic
         delete = findViewById(R.id.detail_delete_btn);
         upload = findViewById(R.id.detail_upload_btn);
         save = findViewById(R.id.detail_save_btn);
+        btnBar = new Button[]{submit,approve,reject,midReview,finalCheck,modify,delete,upload,save};
         //按钮监听
         finalCheck.setOnClickListener(this);
         midReview.setOnClickListener(this);
@@ -113,6 +118,87 @@ public class ProMessageActivity extends AppCompatActivity implements View.OnClic
         studentList = projectDetail.getStudentList();
         memberListAdapter.setData(studentList);
         member_list.setAdapter(memberListAdapter);
+    }
+    public void setViewByState(int state){//根据状态设置布局
+        for (Button btn : btnBar){//所有按钮变为不可见
+            btn.setVisibility(View.GONE);
+        }
+        switch (state){
+            case 0:
+                stateText.setText("未提交");
+                if(queryType==0) {//学生端
+                    save.setVisibility(View.VISIBLE);
+                    submit.setVisibility(View.VISIBLE);
+                    delete.setVisibility(View.VISIBLE);
+                }
+                break;
+            case 1:
+                stateText.setText("等待教师审核");
+                if(queryType==0) {//学生端
+                    modify.setVisibility(View.VISIBLE);
+                    delete.setVisibility(View.VISIBLE);
+                }
+                if(queryType==1) {//教师端
+                    reject.setVisibility(View.VISIBLE);
+                    approve.setVisibility(View.VISIBLE);
+                }
+                break;
+            case 2:
+                stateText.setText("等待教师重新审核");
+                if(queryType==0) {//学生端
+                    modify.setVisibility(View.VISIBLE);
+                    delete.setVisibility(View.VISIBLE);
+                }
+                break;
+            case 3:
+                stateText.setText("已被指导教师驳回");
+                if(queryType==0) {//学生端
+                    modify.setVisibility(View.VISIBLE);
+                    delete.setVisibility(View.VISIBLE);
+                }
+                break;
+            case 4:
+                stateText.setText("等待学院审核");
+                if(queryType==2) {//管理员端
+                    reject.setVisibility(View.VISIBLE);
+                    approve.setVisibility(View.VISIBLE);
+                }
+                break;
+            case 5:
+                stateText.setText("已被学院驳回");
+                if(queryType==0) {//学生端
+                    modify.setVisibility(View.VISIBLE);
+                    delete.setVisibility(View.VISIBLE);
+                }
+                break;
+            case 6:
+                stateText.setText("已立项");
+                break;
+            case 7:
+                stateText.setText("中期检查已开启");
+                if(queryType==2)
+                    midReview.setVisibility(View.VISIBLE);
+                break;
+            case 8:
+                stateText.setText("中期检查未通过");
+                break;
+            case 9:
+                stateText.setText("中期检查通过");
+                break;
+            case 10:
+                stateText.setText("结题答辩已开启");
+                if(queryType==2)
+                    finalCheck.setVisibility(View.VISIBLE);
+                break;
+            case 11:
+                stateText.setText("结项答辩未通过");
+                break;
+            case 12:
+                stateText.setText("结项答辩已通过");
+                break;
+            default:
+                break;
+        }
     }
 
     @Override //横竖屏切换时调用

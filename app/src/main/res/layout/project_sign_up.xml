@@ -207,6 +207,7 @@
             android:paddingLeft="20dp"
             android:textStyle="bold"/>
         <TextView
+            android:id="@+id/detail_project_state"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="通过教师审核"
