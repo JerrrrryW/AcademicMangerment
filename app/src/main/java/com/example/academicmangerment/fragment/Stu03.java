@@ -247,6 +247,21 @@ public class Stu03 extends Fragment /*implements View.OnClickListener*/ {
                 }
                 stuProjectList.add(new StuProject(student.getSid(),project.getPid(),"1"));
 
+                @SuppressLint("HandlerLeak") final Handler handler = new Handler() {
+                    @Override
+                    public void handleMessage(@NonNull Message msg) {
+                        super.handleMessage(msg);
+                        if(msg.what==1){
+                            //清空所有内容
+                            clearAll();
+                            Toast.makeText(getContext(),"提交成功",Toast.LENGTH_SHORT);
+                            //跳转到项目管理
+                            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.stu_fragments,Stu04.newInstance(student))
+                                    .addToBackStack(null).commit();
+
+                        }
+                    }
+                };
                 new Thread(){
                     @Override
                     public void run() {
@@ -255,6 +270,9 @@ public class Stu03 extends Fragment /*implements View.OnClickListener*/ {
                         /*Toast.makeText(getContext(),"提交成功",Toast.LENGTH_SHORT);*/
                         teachProjectDao.insertTeachPro(new TeachProject(teacher.tid,project.getPid(),"0"));
                         stuProjectDao.insertStuProjects(stuProjectList);
+                        Message msg=Message.obtain();
+                        msg.what=1;
+                        handler.sendMessage(msg);
                     }
                 }.start();
             }
@@ -310,6 +328,18 @@ public class Stu03 extends Fragment /*implements View.OnClickListener*/ {
         super.onConfigurationChanged(newConfig);
     }
 
+    //clear
+    public void clearAll(){
+        stu_member.setText("");
+        proName.setText("");
+        subject.setText("");
+        budget.setText("0");
+        economic_analysis.setText("");
+        purpose.setText("");
+        viable_analysis.setText("");
+        tec_name.setText("");
+        tec_tid.setText("");
+    }
     /*@Override
     public void onClick(View v) {
         System.out.println("点击");
