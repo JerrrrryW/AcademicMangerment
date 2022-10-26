@@ -32,14 +32,14 @@ import com.example.academicmangerment.persistence.ProjectDao;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProMessageActivity extends AppCompatActivity /*implements View.OnClickListener implements Stu04.SendProject*/ {
+public class ProMessageActivity extends AppCompatActivity implements View.OnClickListener /*implements Stu04.SendProject*/ {
     Project project;//接收Stu04的数据
     private EditText stu_sid, stu_name, stu_phone, stu_member;
     private EditText name;
     private Spinner level, achievement_type;
     private EditText subject, budget, economic_analysis, purpose, viable_analysis;
     private RecyclerView member_list;
-    private Button submit,member_add,detail_approve_btn,detail_reject_btn;
+    private Button submit,member_add,approve,reject,midReview,finalCheck,modify,delete,upload,save;
     private ScrollView scrollView;
     private ViewGroup.LayoutParams scrollViewParams;
     private int queryType;
@@ -77,68 +77,39 @@ public class ProMessageActivity extends AppCompatActivity /*implements View.OnCl
         purpose = (EditText) findViewById(R.id.purpose);
         viable_analysis = (EditText) findViewById(R.id.viable_analysis);
 
-        submit = (Button) findViewById(R.id.submit);
-        detail_approve_btn=(Button) findViewById(R.id.detail_approve_btn);
-        detail_reject_btn=(Button) findViewById(R.id.detail_reject_btn);
-
         //member_add = (Button) findViewById(R.id.member_add_btn);
         scrollView = (ScrollView) findViewById(R.id.scrollView1);
         member_list = (RecyclerView) findViewById(R.id.member_list);
 
         db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class,"dataBase").build();
         projectDao=db.projectDao();
-        //审核通过按钮
-        detail_approve_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-               new Thread(){
-                   @Override
-                   public void run() {
-                       super.run();
-                       Project project=projectDao.getProject(projectDetail.getPid());
-                       //教师审核
-                       if(queryType==1){
-                           project.setState(4);
-                           projectDetail.setState(4);
+        finalCheck = findViewById(R.id.detail_FinalCheck_btn);
+        midReview = findViewById(R.id.detail_midReviewCheck_btn);
+        approve= (Button) findViewById(R.id.detail_approve_btn);
+        reject= (Button) findViewById(R.id.detail_reject_btn);
+        submit = (Button) findViewById(R.id.detail_submit_btn);
+        modify = findViewById(R.id.detail_modify_btn);
+        delete = findViewById(R.id.detail_delete_btn);
+        upload = findViewById(R.id.detail_upload_btn);
+        save = findViewById(R.id.detail_save_btn);
+        //按钮监听
+        finalCheck.setOnClickListener(this);
+        midReview.setOnClickListener(this);
+        approve.setOnClickListener(this);
+        reject.setOnClickListener(this);
+        submit.setOnClickListener(this);
+        modify.setOnClickListener(this);
+        delete.setOnClickListener(this);
+        upload.setOnClickListener(this);
+        save.setOnClickListener(this);
 
-                       }else{
-                           project.setState(6);
-                           projectDetail.setState(6);
-                       }
-                       projectDao.updateProject(project);
-                   }
-               }.start();
-            }
-        });
-        //驳回按钮监听
-        detail_reject_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                new Thread(){
-                    @Override
-                    public void run() {
-                        super.run();
-                        Project project=projectDao.getProject(projectDetail.getPid());
-                        //教师审核
-                        if(queryType==1){
-                            project.setState(3);
-                            projectDetail.setState(3);
-                        }else{
-                            project.setState(5);
-                            projectDetail.setState(5);
-                        }
-                        projectDao.updateProject(project);
-                    }
-                }.start();
-            }
-        });
         DividerItemDecoration mDivider = new DividerItemDecoration(this,DividerItemDecoration.VERTICAL);
         member_list.addItemDecoration(mDivider);
         member_list.setLayoutManager(new GridLayoutManager(this,1));
         memberListAdapter = new MemberListAdapter(this);
         //member_list.setVisibility(View.GONE); //复用至上传一个全新项目时默认没有成员，取消此注释
-        //TODO 在此处将项目成员放入studentList
+        //在此处将项目成员放入studentList
         studentList = projectDetail.getStudentList();
         memberListAdapter.setData(studentList);
         member_list.setAdapter(memberListAdapter);
@@ -192,14 +163,68 @@ public class ProMessageActivity extends AppCompatActivity /*implements View.OnCl
         spinner.setClickable(false);
     }
 
-/*    @Override
+    @Override
     public void onClick(View v) {
         switch (v.getId()){
-//            case R.id.member_add_btn:
-//                //TODO
-//                break;
+            case R.id.detail_FinalCheck_btn:
+
+                break;
+            case R.id.detail_midReviewCheck_btn:
+
+                break;
+            case R.id.detail_approve_btn:
+                new Thread(){
+                    @Override
+                    public void run() {
+                        super.run();
+                        Project project=projectDao.getProject(projectDetail.getPid());
+                        //教师审核
+                        if(queryType==1){
+                            project.setState(4);
+                            projectDetail.setState(4);
+
+                        }else{
+                            project.setState(6);
+                            projectDetail.setState(6);
+                        }
+                        projectDao.updateProject(project);
+                    }
+                }.start();
+                break;
+            case R.id.detail_reject_btn:
+                new Thread(){
+                    @Override
+                    public void run() {
+                        super.run();
+                        Project project=projectDao.getProject(projectDetail.getPid());
+                        //教师审核
+                        if(queryType==1){
+                            project.setState(3);
+                            projectDetail.setState(3);
+                        }else{
+                            project.setState(5);
+                            projectDetail.setState(5);
+                        }
+                        projectDao.updateProject(project);
+                    }
+                }.start();
+            case R.id.detail_submit_btn:
+
+                break;
+            case R.id.detail_modify_btn:
+
+                break;
+            case R.id.detail_delete_btn:
+
+                break;
+            case R.id.detail_upload_btn:
+
+                break;
+            case R.id.detail_save_btn:
+
+                break;
             default:
                 break;
         }
-    }*/
+    }
 }

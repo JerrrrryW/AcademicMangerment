@@ -185,18 +185,6 @@
                 android:gravity="top"
                 android:layout_height="200dp"
                 android:inputType="textMultiLine"/>
-            <Button
-                android:layout_gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/submit"
-                android:background="@color/purple_500"
-                android:textSize="30dp"
-                android:textColor="@color/white"
-                android:contextClickable="true"
-                android:text="提交"
-                android:layout_marginBottom="30dp"/>
-
 
         </LinearLayout>
 
@@ -248,18 +236,7 @@
             style="@style/detail_btn"
             android:backgroundTint="@color/space_blue"
             android:textColor="@color/white"/>
-        <Button
-            android:id="@+id/detail_openFinal_btn"
-            android:text="开启\n结题"
-            style="@style/detail_btn"
-            android:backgroundTint="@color/space_blue"
-            android:textColor="@color/white"/>
-        <Button
-            android:id="@+id/detail_openMidReview_btn"
-            android:text="开启\n中期"
-            style="@style/detail_btn"
-            android:backgroundTint="@color/space_blue"
-            android:textColor="@color/white"/>
+
         <Button
             android:id="@+id/detail_approve_btn"
             android:text="通过"
