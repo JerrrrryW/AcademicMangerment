@@ -20,7 +20,7 @@ public class FinalScoreDialog extends Dialog {
 
     private ImageView imageIv ;
     private TextView titleTv ;
-    private EditText scoreEt ;
+    private EditText editText ;
     private Button negtiveBn ,positiveBn;
     private View columnLineView ;
     public FinalScoreDialog(Context context) {
@@ -39,13 +39,14 @@ public class FinalScoreDialog extends Dialog {
      * 底部是否只有一个按钮
      */
     private boolean isSingle = false;
+    private boolean haveEditView = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dialog_final_score);
         //按空白处不能取消动画
-        setCanceledOnTouchOutside(false);
+        setCanceledOnTouchOutside(true);
         //初始化界面控件
         initView();
         //初始化界面数据
@@ -90,7 +91,7 @@ public class FinalScoreDialog extends Dialog {
             titleTv.setVisibility(View.GONE);
         }
         if (!TextUtils.isEmpty(message)) {
-            scoreEt.setText(message);
+            editText.setHint(message);
         }
         //如果设置按钮的文字
         if (!TextUtils.isEmpty(positive)) {
@@ -120,6 +121,10 @@ public class FinalScoreDialog extends Dialog {
             negtiveBn.setVisibility(View.VISIBLE);
             columnLineView.setVisibility(View.VISIBLE);
         }
+
+        if(haveEditView)
+            editText.setVisibility(View.VISIBLE);
+        else editText.setVisibility(View.GONE);
     }
 
     @Override
@@ -135,7 +140,7 @@ public class FinalScoreDialog extends Dialog {
         negtiveBn = (Button) findViewById(R.id.negtive);
         positiveBn = (Button) findViewById(R.id.positive);
         titleTv = (TextView) findViewById(R.id.title);
-        scoreEt = (EditText) findViewById(R.id.score_editText);
+        editText = (EditText) findViewById(R.id.editText);
         imageIv = (ImageView) findViewById(R.id.image);
         columnLineView = findViewById(R.id.column_line);
     }
@@ -211,6 +216,11 @@ public class FinalScoreDialog extends Dialog {
     public FinalScoreDialog setImageResId(int imageResId) {
         this.imageResId = imageResId;
         return this ;
+    }
+
+    public FinalScoreDialog setEditText(boolean haveEditView){
+        this.haveEditView=haveEditView;
+        return this;
     }
 
 }

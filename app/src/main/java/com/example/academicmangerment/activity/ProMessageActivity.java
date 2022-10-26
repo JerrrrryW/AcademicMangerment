@@ -13,6 +13,7 @@ import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,6 +25,7 @@ import androidx.room.Room;
 
 import com.example.academicmangerment.R;
 import com.example.academicmangerment.adapter.MemberListAdapter;
+import com.example.academicmangerment.custom.FinalScoreDialog;
 import com.example.academicmangerment.entity.Project;
 import com.example.academicmangerment.entity.ProjectDetail;
 import com.example.academicmangerment.entity.Student;
@@ -34,13 +36,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProMessageActivity extends AppCompatActivity implements View.OnClickListener /*implements Stu04.SendProject*/ {
-    Project project;//接收Stu04的数据
-    private EditText stu_sid, stu_name, stu_phone, name;
+
+    private EditText stu_sid, stu_name, stu_phone, name, subject, budget, economic_analysis, purpose, viable_analysis;
+    private EditText[] editTexts;
     private TextView stateText;
     private Spinner level, achievement_type;
-    private EditText subject, budget, economic_analysis, purpose, viable_analysis;
     private RecyclerView member_list;
-    private Button submit,member_add,approve,reject,midReview,finalCheck,modify,delete,upload,save;
+    private Button submit,approve,reject,midReview,finalCheck,modify,delete,upload,save;
     private Button[] btnBar;
     private ScrollView scrollView;
     private ViewGroup.LayoutParams scrollViewParams;
@@ -80,6 +82,9 @@ public class ProMessageActivity extends AppCompatActivity implements View.OnClic
         purpose = (EditText) findViewById(R.id.purpose);
         viable_analysis = (EditText) findViewById(R.id.viable_analysis);
         stateText = findViewById(R.id.detail_project_state);
+        editTexts = new EditText[]{stu_sid, stu_name, stu_phone, name, subject, budget, economic_analysis, purpose, viable_analysis};
+        for (EditText et : editTexts) { et.setEnabled(false);}//编辑框设置为不可编辑
+
 
         //member_add = (Button) findViewById(R.id.member_add_btn);
         scrollView = (ScrollView) findViewById(R.id.scrollView1);
@@ -98,6 +103,7 @@ public class ProMessageActivity extends AppCompatActivity implements View.OnClic
         upload = findViewById(R.id.detail_upload_btn);
         save = findViewById(R.id.detail_save_btn);
         btnBar = new Button[]{submit,approve,reject,midReview,finalCheck,modify,delete,upload,save};
+
         //按钮监听
         finalCheck.setOnClickListener(this);
         midReview.setOnClickListener(this);
@@ -201,23 +207,6 @@ public class ProMessageActivity extends AppCompatActivity implements View.OnClic
         }
     }
 
-    @Override //横竖屏切换时调用
-    public void onConfigurationChanged(@NonNull Configuration newConfig) {
-        if (newConfig.orientation==Configuration.ORIENTATION_LANDSCAPE){
-            //如果是横屏了，在这里设置横屏的UI
-            Log.println(Log.DEBUG,"ProMessageActivity","onConfigurationChanged-Landscape");
-            scrollViewParams = scrollView.getLayoutParams();
-            scrollViewParams.width = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 700, getResources().getDisplayMetrics());
-        }else {
-            //否则，在这里设置竖屏的UI
-            Log.println(Log.DEBUG,"ProMessageActivity","onConfigurationChanged-Portrait");
-            scrollViewParams = scrollView.getLayoutParams();
-            scrollViewParams.width=ViewGroup.LayoutParams.MATCH_PARENT;
-        }
-        scrollView.setLayoutParams(scrollViewParams);
-        super.onConfigurationChanged(newConfig);
-    }
-
     public void initData() {
         stu_sid.setText(projectDetail.getSid());
         stu_name.setText(projectDetail.getRealName());
@@ -235,8 +224,6 @@ public class ProMessageActivity extends AppCompatActivity implements View.OnClic
         submit.setText("更改");
     }
 
-
-
     public void setSpinnerData(Spinner spinner, String s) {
         SpinnerAdapter adapter = spinner.getAdapter();
         int k = adapter.getCount();
@@ -249,11 +236,68 @@ public class ProMessageActivity extends AppCompatActivity implements View.OnClic
         spinner.setClickable(false);
     }
 
+    @Override //横竖屏切换时调用
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        if (newConfig.orientation==Configuration.ORIENTATION_LANDSCAPE){
+            //如果是横屏了，在这里设置横屏的UI
+            Log.println(Log.DEBUG,"ProMessageActivity","onConfigurationChanged-Landscape");
+            scrollViewParams = scrollView.getLayoutParams();
+            scrollViewParams.width = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 700, getResources().getDisplayMetrics());
+        }else {
+            //否则，在这里设置竖屏的UI
+            Log.println(Log.DEBUG,"ProMessageActivity","onConfigurationChanged-Portrait");
+            scrollViewParams = scrollView.getLayoutParams();
+            scrollViewParams.width=ViewGroup.LayoutParams.MATCH_PARENT;
+        }
+        scrollView.setLayoutParams(scrollViewParams);
+        super.onConfigurationChanged(newConfig);
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.detail_FinalCheck_btn:
                 Log.println(Log.DEBUG,"detail","final-check button clicked!");
+                final FinalScoreDialog finalScoreDialog = new FinalScoreDialog(this);
+                finalScoreDialog.setMessage("请输入答辩分数")
+                        .setTitle("请确认结题答辩结果")
+                        .setImageResId(R.mipmap.teacher)
+                        .setSingle(false).setEditText(true)//设置两个按钮且需要编辑框
+                        .setPositive("通过").setNegtive("不通过")
+                        .setOnClickBottomListener(new FinalScoreDialog.OnClickBottomListener() {
+                            @Override
+                            public void onPositiveClick() {
+                                finalScoreDialog.dismiss();
+                                new Thread() {
+                                    @Override
+                                    public void run() {
+                                        super.run();
+                                        Project project = projectDao.getProject(projectDetail.getPid());
+                                        project.setState(12);
+                                        projectDetail.setState(12);
+                                        projectDao.updateProject(project);
+                                    }
+                                }.start();
+                                setViewByState(12);
+                                Toast.makeText(ProMessageActivity.this,"操作成功：项目"+projectDetail.getPid()+"结项通过",Toast.LENGTH_SHORT).show();
+                            }
+                            @Override
+                            public void onNegtiveClick() {
+                                finalScoreDialog.dismiss();
+                                new Thread() {
+                                    @Override
+                                    public void run() {
+                                        super.run();
+                                        Project project = projectDao.getProject(projectDetail.getPid());
+                                        project.setState(11);
+                                        projectDetail.setState(11);
+                                        projectDao.updateProject(project);
+                                    }
+                                }.start();
+                                setViewByState(11);
+                                Toast.makeText(ProMessageActivity.this,"操作成功："+projectDetail.getPid()+"结项未通过",Toast.LENGTH_SHORT).show();
+                            }
+                        }).show();
                 break;
             case R.id.detail_midReviewCheck_btn:
                 Log.println(Log.DEBUG,"detail","midterm review button clicked!");
@@ -298,15 +342,19 @@ public class ProMessageActivity extends AppCompatActivity implements View.OnClic
                 }.start();
             case R.id.detail_submit_btn:
                 Log.println(Log.DEBUG,"detail","submit button clicked!");
+
                 break;
             case R.id.detail_modify_btn:
                 Log.println(Log.DEBUG,"detail","modify button clicked!");
+                for (EditText et : editTexts) { et.setEnabled(true);}//编辑框设置为可编辑
+                //TODO 配置成员列表和Adapter 切换按钮可用状态
                 break;
             case R.id.detail_delete_btn:
                 Log.println(Log.DEBUG,"detail","delete button clicked!");
                 break;
             case R.id.detail_upload_btn:
                 Log.println(Log.DEBUG,"detail","upload button clicked!");
+
                 break;
             case R.id.detail_save_btn:
                 Log.println(Log.DEBUG,"detail","detail button clicked!");
