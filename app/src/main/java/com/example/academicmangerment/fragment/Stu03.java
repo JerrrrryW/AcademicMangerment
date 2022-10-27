@@ -239,7 +239,7 @@ public class Stu03 extends Fragment /*implements View.OnClickListener*/ {
                 project.setSubject(subject.getText().toString());
                 project.setState(1);
                 project.setViableAnalysis(viable_analysis.getText().toString());
-
+                project.setPurpose(purpose.getText().toString());
                 List<StuProject> stuProjectList=new ArrayList<>();
                 for(Student s:studentList){
                     StuProject stuProject=new StuProject(s.getSid(),project.getPid(),"2");
