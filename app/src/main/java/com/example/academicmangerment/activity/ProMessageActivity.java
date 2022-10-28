@@ -587,7 +587,6 @@ public class ProMessageActivity extends AppCompatActivity implements View.OnClic
                                         handler2.sendMessage(msg);
                                     }
                                 }.start();
-                                finish();
                                 Toast.makeText(ProMessageActivity.this,"操作成功：项目"+projectDetail.getPid()+"删除",Toast.LENGTH_SHORT).show();
                             }
                             @Override

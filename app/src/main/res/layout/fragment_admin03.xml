@@ -7,21 +7,36 @@
     tools:context=".fragment.Admin03">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <Button
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="20dp"
+        android:id="@+id/open_midReview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="25dp"
+        android:text="统一开启中期"
+        android:backgroundTint="@color/space_blue" />
+
+    <Button
+        app:layout_constraintLeft_toRightOf="@id/open_midReview"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="20dp"
+        android:id="@+id/open_fincheck"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="25dp"
+        android:text="统一开启结题"
+        android:backgroundTint="@color/space_blue" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        app:layout_constraintTop_toBottomOf="@id/open_midReview"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:gravity="center"
-        android:id="@+id/adm03NoProject"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
-    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/adm03_projectsRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="202dp"
-        tools:layout_editor_absoluteY="61dp"/>
+        android:layout_height="wrap_content"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
